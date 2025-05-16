@@ -232,13 +232,6 @@ def list_branch_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//small[@class='text-danger']")))
 
 
-# def save_branch():
-#     # Wait until the overlay (spinner) is no longer visible
-#     # overlay_spinner()
-#     # Wait for the button to be clickable
-#     # progress_spinner()
-#     button = wait.until(EC.element_to_be_clickable((By.XPATH,"(//button[contains(@class, 'md-button') and .//div[normalize-space()='Save']])[1]")))
-#     return button
 def save_branch():
     # Wait until the overlay (spinner) is no longer visible
     overlay_spinner()
