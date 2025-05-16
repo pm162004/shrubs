@@ -53,13 +53,13 @@ def pass_blank_validation():
     passw = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Password is required')]")))
     return passw
 
-def exist_username_test_validation():
+def exist_username_suggestion1_validation():
     # return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Username taken. Please choose another or try test8')]")))
     return wait.until(EC.visibility_of_element_located(
         (By.XPATH, "//span[contains(text(),'Username taken. Please choose another or try test8')]")
     ))
 
-def exist_username_admin_validation():
+def exist_username_suggestion2_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Username taken. Please choose another or try admin16')]")))
 
 def exist_email_validation():
@@ -92,23 +92,23 @@ class TestSignup:
         assert email_blank_validation().text == validation_assert.ENTER_SIGNUP_EMAIL
         assert pass_blank_validation().text == validation_assert.ENTER_SIGNUP_PASSWORD
 
-    def test_exist_uname_test(self):
-        username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_TEST)
+    def test_exist_uname_suggestion_1(self):
+        username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_SUGGESION1)
         time.sleep(1)
         email_input_field().send_keys(input_field.VALID_EMAIL)
         password_input_field().send_keys(input_field.SIGNUP_PASSWORD)
-        assert exist_username_test_validation().text == error.EXIST_USERNAME_TEST_ERROR
+        assert exist_username_suggestion1_validation().text == error.EXIST_USERNAME_SUGGESION1_ERROR
         action = ActionChains(driver)
         action.move_to_element(register_btn()).click().perform()
 
-    def test_exist_uname_admin(self):
+    def test_exist_uname_suggestion_2(self):
         refresh_page()
-        username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_ADMIN)
+        username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_SUGGESION2)
         time.sleep(1)
         email_input_field().send_keys(input_field.VALID_EMAIL)
         password_input_field().send_keys(input_field.SIGNUP_PASSWORD)
         time.sleep(1)
-        assert exist_username_admin_validation().text == error.EXIST_USERNAME_ADMIN_ERROR
+        assert exist_username_suggestion2_validation().text == error.EXIST_USERNAME_SUGGESION2_ERROR
         action = ActionChains(driver)
         action.move_to_element(register_btn()).click().perform()
 
