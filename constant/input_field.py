@@ -1,4 +1,4 @@
-from Shrubs_Automation.shrubs_setup import randomeString
+from shrubs_setup import randomeString
 
 INCORRECT_EMAIL = "abc"
 INVALID_EMAIL = "modip89@gmail.com"

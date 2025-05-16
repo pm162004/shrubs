@@ -1,26 +1,19 @@
 import time
-
 from selenium.common import TimeoutException
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from Shrubs_Automation.shrubs_setup.config import config
-from Shrubs_Automation.constant import creds,validation_assert,input_field
-from Shrubs_Automation.constant import error
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
-from selenium.webdriver.chrome.service import Service as ChromeService
+from shrubs_setup.config import config
+from constant import creds,validation_assert,input_field
+from constant import error
+
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
-# Only run with the latest Chrome version
 driver = webdriver.Chrome()
-# driver.set_window_size(1920, 1080)
 driver.maximize_window()
 driver.get(config.WEB_URL)
 email = config.CORRECT_EMAIL
@@ -53,35 +46,25 @@ def resend_link_button():
     return btn
 
 def open_new_tab():
-
-    # return driver.execute_script("window.open('https://www.mailinator.com/');")
     return driver.get("https://www.mailinator.com/")
 
 
 def yopmail_email_input_field():
-
-        # Wait for the email input field to be clickable inside the iframe
        return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@id='search']")))
 
 
 def select_mail():
-    # Wait for the email input field to be clickable inside the iframe
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//td[contains(text(),'🛠️ Did You Lose Your Password… Again?')]")))
 
 def select_reset_btn():
-    # Switch to the iframe with the specified id
     driver.switch_to.frame("html_msg_body")
-
-    # Wait until the reset button is present and clickable
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(),'🔗 Reset My Password')]")))
 
 
 def reset_password_link():
     try:
         driver.refresh()
-        # If a new tab is opened, switch to the new tab
-        driver.switch_to.window(driver.window_handles[-1])  # Switch to the latest tab
-
+        driver.switch_to.window(driver.window_handles[-1])
         return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
     except TimeoutException:
         print("Reset password link not found.")
@@ -100,21 +83,9 @@ def refresh_page():
     driver.refresh()
     wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))  # Wait for the body to load after refresh
 
-# def btn_login():
-#     return wait.until(EC.presence_of_element_located((By.ID, "btn-login")))
-#
-# def forget_password():
-#     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='flex items-center ml-3']//*[name()='svg']")))
-#
-# def change_password():
-#     return wait.until(EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'Change Password')]")))
-#
 def back_to_login():
     return wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[name='btn-reset'][type='button']")))
 
-# def current_password_validation():
-#     return wait.until(EC.presence_of_element_located((By.ID, "error-password")))
-#
 def new_password_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'New Password is required')]")))
 
@@ -129,19 +100,9 @@ def password_special_validation():
 def MyFilesPage():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//b[@class='text-active text-xs font-bold sidebar-menu'][normalize-space()='My Files']")))
 
-#
-# def valid_new_password():
-#     return wait.until(EC.presence_of_element_located((By.ID, "new-password")))
-#
-# def invalid_confirm_password():
-#     return wait.until(EC.presence_of_element_located((By.ID, "confirm-password")))
-#
 def error_confirm_password():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='md-error'][normalize-space()='Repeat New Password field does not match New Password']")))
 
-# def same_password():
-#     return wait.until(EC.presence_of_element_located((By.ID, "error-msg")))
-#
 def hide_password():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//*[name()='path' and contains(@d,'M12 7c2.76')]")))
 
@@ -149,27 +110,14 @@ def password_validation():
     email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Invalid credentials')]")))
     return email
 
-# def success_message():
-#     return wait.until(EC.presence_of_element_located((By.XPATH, "//p[contains(text(),'Your password has been changed')]")))
-#
-# def close_popup():
-#     return wait.until(EC.element_to_be_clickable((By.ID, "close-popup")))
-#
-# def logout_validation():
-#     return wait.until(EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'Logout')]")))
-#
-
 
 class TestChangePassword:
 
-    # def test_login_case(self):
-    #  forgot_password_button().click()
 
     def test_blank_field_validation(self):
      forgot_password_button().click()
      time.sleep(3)
      resend_link_button().click()
-
      assert email_blank_validation().text == validation_assert.ENTER_EMAIL
      time.sleep(3)
 
@@ -179,6 +127,7 @@ class TestChangePassword:
       email_input_field().send_keys(input_field.INCORRECT_PASSWORD)
       resend_link_button().click()
       assert email_validation().text == error.EMAIL_VALIDATION
+
 
     def test_nonexist_email(self):
         refresh_page()
@@ -214,17 +163,13 @@ class TestChangePassword:
     def test_confirm_validation(self):
         valid_password().send_keys(password)
         valid_confirm_password().send_keys(new_password)
-        # invalid_confirm_password().send_keys(password)
         assert error_confirm_password().text == error.CONFIRM_PASSWORD_VALIDATION
-
-        # time.sleep(1)
 
     reset_password_link().click()
     def test_character_pass(self):
         refresh_page()
         valid_password().send_keys(input_field.INVALID_PASSWORD)
         valid_confirm_password().send_keys(input_field.INVALID_PASSWORD)
-        # time.sleep(1)
         assert password_char_validation().text == error.CHARACTER_8_NEW_PASSWORD
         reset_password_link().click()
 
@@ -248,12 +193,9 @@ class TestChangePassword:
         driver.refresh()
         valid_password().send_keys(password)
         valid_confirm_password().send_keys(password)
-
         reset_password_link().click()
         back_to_login().click()
 
-        # assert success_message().text == error.PASSWORD_SUCCESS_MESSAGE
-        # close_popup().click()
     def test_old_login(self):
         driver.refresh()
         email_input_field().send_keys(email)
@@ -269,17 +211,3 @@ class TestChangePassword:
         btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
         btn_login.click()
         assert MyFilesPage().text == validation_assert.MY_FILES
-    # def test_sign_out_login_case(self):
-    #     forget_password().click()
-    #     logout_validation().click()
-    #     valid_mobile().send_keys(creds.CHANGE_MOBILE)
-    #     valid_password().send_keys(new_password)
-    #     btn_login().click()
-    #     forget_password().click()
-    #     change_password().click()
-    #     valid_password().send_keys(new_password)
-    #     valid_new_password().send_keys(password)
-    #     invalid_confirm_password().send_keys(password)
-    #     btn_change_password().click()
-    #     close_popup().click()
-    #     driver.quit()

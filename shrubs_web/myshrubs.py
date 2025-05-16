@@ -1,30 +1,18 @@
 import time
-from tkinter import Button
-
 from selenium.common import TimeoutException
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from shrubs_setup.config import config
+from constant import creds,validation_assert,input_field
+from constant import error
 
-# from Evalution.Task13 import alert
-from Shrubs_Automation.shrubs_setup.config import config
-from Shrubs_Automation.constant import creds,validation_assert,input_field
-# from Shrubs_Automation.shrubs_web.myShrubs import shrubs_ALREADY_EXIST_validation
-from Shrubs_Automation.constant import error
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
-from selenium.webdriver.chrome.service import Service as ChromeService
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
-# Only run with the latest Chrome version
 driver = webdriver.Chrome()
-# driver.set_window_size(1920, 1080)
 driver.maximize_window()
 driver.get(config.WEB_URL)
 email = config.CORRECT_EMAIL
@@ -60,19 +48,12 @@ def shrubs_title_validation():
 
 def shrubs_background_color():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
+
 def shrubs_icon_color():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='center cursor-pointer flex items-center box-square-50']//img[@alt='thumbnail']")))
+
 def shrubs_icon_type():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Color:#BD10E0']")))
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.alert import Alert
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 
 def overlay_spinner():
     btn =  WebDriverWait(driver, 10).until(
@@ -84,43 +65,31 @@ def progress_spinner():
         EC.invisibility_of_element_located((By.ID, "progress-spinner"))  # Wait for the spinner to disappear
     )
     return btn
-# Wait until the overlay (spinner) is no longer visible
 
-def shrubs_ALREADY_EXIST_validation():
 
-    # progress_spinner()
+def shrubs_already_exits_validation():
+
     try:
-        # Click the save button
         driver.find_element(By.NAME, "btn-save").click()
-
-        # Wait for the error message or modal to appear
-        # Check for a modal or error message on the page
         error_message = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located(
                 (By.XPATH, "//span[normalize-space()='Project already exist with the given slug']"))
         )
 
         if error_message:
-            print("Error message found:", error_message.text)
-            return error_message.text
+         print("Error message found:", error_message.text)
+        return error_message.text
 
     except TimeoutException:
         print("No error message found within the timeout period.")
-        return None
-        # Switch to the alert
-        alert = driver.switch_to.alert
-        msg = alert.text
-        print("Alert box contains the following message," + msg)
+        try:
+            alert = driver.switch_to.alert
+            msg = alert.text
+            print("Alert box contains the following message," + msg)
+            return msg
+        except:
+            print("Alert not found, checking for modal or error message.")
 
-
-
-        return msg
-
-    except TimeoutException:
-        # If alert is not found, check if a modal or error message is present on the page
-        print("Alert not found, checking for modal or error message.")
-
-        # Optional: Check for modal or error message if alert isn't found
         try:
             error_message = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Project already exist with the given slug']"))
@@ -128,20 +97,21 @@ def shrubs_ALREADY_EXIST_validation():
 
             if error_message:
                 print("Modal error message found:", error_message.text)
-                return error_message.text
+            return error_message.text
         except TimeoutException:
             print("No modal or error message found.")
             return None
 
-def shrubs_Permissions_validation():
+def shrubs_permissions_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Permissions field is required']")))
 
-def shrubs_Thumbnail_validation():
+def shrubs_thumbnail_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Thumbnail type field is required']")))
 
 def new_branch():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-new-branch']")))
+
 def shrubs_btn():
     # Wait until the overlay (spinner) is no longer visible
     WebDriverWait(driver, 10).until(
@@ -214,10 +184,6 @@ def back_branch():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Back')]")))
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 
 def link_save_msg(driver):
     try:
@@ -256,8 +222,8 @@ def test_myShrubs():
 def test_blank_shrubs():
     shrubs_btn().click()
     assert shrubs_title_validation().text == validation_assert.ENTER_SHRUBS_TITLE
-    assert shrubs_Permissions_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
-    assert shrubs_Thumbnail_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
+    assert shrubs_permissions_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
+    assert shrubs_thumbnail_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
 
 
 def test_already_exist_shrubs():
@@ -271,26 +237,22 @@ def test_already_exist_shrubs():
     close_btn().click()
     # shrubs_btn().click()
     time.sleep(2)
-    assert shrubs_ALREADY_EXIST_validation()== validation_assert.EXISTS_SHRUBS_TITLE
+    assert shrubs_already_exits_validation()== validation_assert.EXISTS_SHRUBS_TITLE
 
 def test_valid_shrubs():
     refresh_page()
     shrubs_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    # show_title().click()
     shrubs_btn().click()
     shrubs_view_only().click()
-    # hide_thumbnail().click()
     select_type().click()
     select_icon().click()
     close_btn().click()
     shrubs_btn().click()
-    # time.sleep(10)
 
 def test_background():
     shrubs_background_color().click()
     shrubs_icon_color().click()
     shrubs_icon_type().click()
-
     save_style().click()
     save_header().click()
     new_branch().click()
@@ -298,9 +260,7 @@ def test_background():
     save_branch().click()
     assert list_branch_validation().text == validation_assert.ENTER_LIST_BRANCH
     list_branch_list().send_keys(input_field.VALID_SHRUBS)
-
     save_branch().click()
-
 
 def test_link():
     add_link().click()
@@ -308,29 +268,20 @@ def test_link():
     time.sleep(2)
     link_save_btn().click()
     time.sleep(2)
-
     assert link_validation().text == validation_assert.ENTER_LINK
-
     link_input_field().send_keys(input_field.VALID_SHRUBS)
     time.sleep(2)
     link_save_btn().click()
     time.sleep(2)
-
     assert link_error().text == error.LINK_ERROR
-
     link_input_field().send_keys(Keys.CONTROL, "a")
     link_input_field().send_keys(Keys.DELETE)
     link_input_field().send_keys(input_field.LINK)
     link_input_field().send_keys(Keys.ENTER)
-
     time.sleep(5)
     link_save_btn().click()
     time.sleep(5)
-
-    # Now wait for the success message and assert it
     success_msg = link_save_msg(driver)
-
-
     assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
     time.sleep(2)
     back_link().click()
@@ -340,4 +291,3 @@ def test_link():
     back_branch().click()
     time.sleep(2)
 
-        # You can add more error handling here if necessary
