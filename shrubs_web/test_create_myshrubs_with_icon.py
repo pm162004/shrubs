@@ -118,7 +118,7 @@ def shrubs_btn():
         EC.invisibility_of_element_located((By.ID, "overlay-spinner"))  # Adjust ID if necessary
     )
 
-    # Wait for the button to be clickable
+
     button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.NAME, "btn-save"))
     )

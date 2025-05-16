@@ -13,7 +13,6 @@ from shrubs_setup.randomeString import random_string_generator
 import constant
 from constant import creds, validation_assert,input_field
 from constant import error
-
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 # Only run with the latest Chrome version

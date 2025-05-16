@@ -48,7 +48,6 @@ def resend_link_button():
 def open_new_tab():
     return driver.get("https://www.mailinator.com/")
 
-
 def yopmail_email_input_field():
        return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@id='search']")))
 
@@ -131,7 +130,6 @@ class TestChangePassword:
 
     def test_nonexist_email(self):
         refresh_page()
-
         email_input_field().send_keys(creds.EXISTING_EMAIL)
         resend_link_button().click()
         time.sleep(1)
@@ -139,7 +137,6 @@ class TestChangePassword:
 
     def test_valid_email(self):
         refresh_page()
-
         email_input_field().send_keys(email)
         resend_link_button().click()
         open_new_tab()
@@ -156,7 +153,6 @@ class TestChangePassword:
     def test_password_validation(self):
         time.sleep(3)
         reset_password_link().click()
-
         assert new_password_validation().text == validation_assert.ENTER_NEW_PASSWORD
         assert confirm_password_validation().text == validation_assert.ENTER_CONFIRM_PASSWORD
 
@@ -164,8 +160,8 @@ class TestChangePassword:
         valid_password().send_keys(password)
         valid_confirm_password().send_keys(new_password)
         assert error_confirm_password().text == error.CONFIRM_PASSWORD_VALIDATION
-
     reset_password_link().click()
+
     def test_character_pass(self):
         refresh_page()
         valid_password().send_keys(input_field.INVALID_PASSWORD)
