@@ -23,7 +23,7 @@ wait = WebDriverWait(driver, 25)
 def email_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "email")))
 
-def login_password():
+def password_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "password")))
 
 def refresh_page():
@@ -48,7 +48,7 @@ class TestMyProfile:
 
   def test_login(self):
      email_input_field().send_keys(email)
-     login_password().send_keys(password)
+     password_input_field().send_keys(password)
      btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
      btn_login.click()
      time.sleep(5)

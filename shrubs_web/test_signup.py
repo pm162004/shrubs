@@ -45,7 +45,7 @@ def username_blank_validation():
     username = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Username is required')]")))
     return username
 
-def email_blank_validation():
+def check_blank_email():
     email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is required')]")))
     return email
 
@@ -68,10 +68,10 @@ def exist_email_validation():
 def email_invalid_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is not valid.')]")))
 
-def password_char_validation():
+def check_password_length_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'The Password field must be at least 8 characters')]")))
 
-def password_special_validation():
+def check_strong_password_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'The Password Must include uppercase, lowercase, number, and special character')]")))
 
 def success_signup():
@@ -89,7 +89,7 @@ class TestSignup:
         action = ActionChains(driver)
         action.move_to_element(register_btn()).click().perform()
         assert username_blank_validation().text == validation_assert.ENTER_SIGNUP_USERNAME
-        assert email_blank_validation().text == validation_assert.ENTER_SIGNUP_EMAIL
+        assert check_blank_email().text == validation_assert.ENTER_SIGNUP_EMAIL
         assert pass_blank_validation().text == validation_assert.ENTER_SIGNUP_PASSWORD
 
     def test_exist_uname_suggestion_1(self):
@@ -133,25 +133,25 @@ class TestSignup:
         action = ActionChains(driver)
         action.move_to_element(register_btn()).click().perform()
 
-    def test_character_pass(self):
+    def test_password_length_validation(self):
         refresh_page()
         username_input_field().send_keys(input_field.VALID_UNAME)
         time.sleep(1)
         email_input_field().send_keys(input_field.VALID_EMAIL)
         password_input_field().send_keys(input_field.INVALID_PASSWORD)
         time.sleep(1)
-        assert password_char_validation().text == error.CHARACTER_8_PASSWORD
+        assert check_password_length_validation().text == error.CHARACTER_8_PASSWORD
         time.sleep(1)
         action = ActionChains(driver)
         action.move_to_element(register_btn()).click().perform()
 
-    def test_invalid_pass(self):
+    def test_strong_validation_password(self):
         refresh_page()
         username_input_field().send_keys(input_field.VALID_UNAME)
         time.sleep(1)
         email_input_field().send_keys(input_field.VALID_EMAIL)
         password_input_field().send_keys(input_field.WRONG_PASSWORD[1])
-        assert password_special_validation().text == error.LOWERCASE_PASSWORD
+        assert check_strong_password_validation().text == error.LOWERCASE_PASSWORD
         time.sleep(1)
         action = ActionChains(driver)
         action.move_to_element(register_btn()).click().perform()

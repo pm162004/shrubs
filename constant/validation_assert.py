@@ -1,5 +1,5 @@
 MY_FILES = "My Files"
-ENTER_EMAIL = "Email address is required"
+EMAIL_IS_REQUIRED = "Email address is required"
 ENTER_PASSWORD = "Password is required"
 
 ENTER_SIGNUP_EMAIL = "Email address is required"
