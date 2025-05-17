@@ -25,7 +25,7 @@ driver.get(config.WEB_URL)
 time.sleep(3)
 wait = WebDriverWait(driver, 25)
 
-def MyFilesPage():
+def display_myfiles_after_login():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//b[@class='text-active text-xs font-bold sidebar-menu'][normalize-space()='My Files']")))
 
 def email_input_field():
@@ -110,7 +110,7 @@ class TestLogin:
         password_input_field().send_keys(config.CORRECT_PASSWORD)
         password_mask_button().click()
         login_button().click()
-        assert MyFilesPage().text == validation_assert.MY_FILES
+        assert display_myfiles_after_login().text == validation_assert.MY_FILES
 
 
 

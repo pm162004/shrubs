@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
 from constant import creds, validation_assert, input_field
-# from Shrubs_Automation.shrubs_web.myShrubs import shrubs_ALREADY_EXIST_validation
+# from Shrubs_Automation.shrubs_web.get_my_shrubs import shrubs_ALREADY_EXIST_validation
 from constant import error
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
@@ -39,32 +39,32 @@ def refresh_page():
     driver.refresh()
     wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))  # Wait for the body to load after refresh
 
-def MyFilesPage():
+def display_myfiles_after_login():
     return wait.until(EC.presence_of_element_located(
         (By.XPATH, "//b[@class='text-active text-xs font-bold sidebar-menu'][normalize-space()='My Files']")))
 
-def myShrubs():
+def get_my_shrubs():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//p[normalize-space()='My Shrubs']")))
 
-def new_shrub():
+def get_new_shrub():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content']")))
 
-def shrubs_title_input_field():
+def shrub_title_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "shrub-name")))
 
-def shrubs_title_validation():
+def shrub_title_blank_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Shrub Title is required']")))
 
-def shrubs_background_color():
+def background_color_dropdown():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
 
-def shrubs_icon_color():
+def select_color_picker_btn():
     return wait.until(EC.element_to_be_clickable(
         (By.XPATH, "//div[@class='center cursor-pointer flex items-center box-square-50']//img[@alt='thumbnail']")))
 
-def shrubs_icon_type():
+def select_color_from_color_picker():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Color:#BD10E0']")))
 
@@ -81,7 +81,7 @@ def progress_spinner():
     return btn
 
 
-def shrubs_already_exits_validation():
+def shrub_title_already_exists_validation():
 
     try:
         driver.find_element(By.NAME, "btn-save").click()
@@ -117,22 +117,22 @@ def shrubs_already_exits_validation():
             return None
 
 
-def shrubs_permissions_validation():
+def permissions_field_validation():
     return wait.until(
         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Permissions field is required']")))
 
 
-def shrubs_thumbnail_validation():
+def thumbnail_type_field_validation():
     return wait.until(
         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Thumbnail type field is required']")))
 
 
-def new_branch():
+def get_new_branch():
 
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-new-branch']")))
 
 
-def shrubs_btn():
+def save_new_shrub_btn():
     WebDriverWait(driver, 10).until(
         EC.invisibility_of_element_located((By.ID, "overlay-spinner"))  # Adjust ID if necessary
     )
@@ -148,7 +148,7 @@ def show_title():
         EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Do you want to show the title?']")))
 
 
-def shrubs_view_only():
+def select_view_only_permissions():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='View Only']")))
 
 
@@ -157,7 +157,7 @@ def hide_thumbnail():
         EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Do you want to show thumbnail?']")))
 
 
-def select_type():
+def shrub_project_icon_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Thumbnail Image']")))
 
 def select_thumbnail():
@@ -197,10 +197,10 @@ def next_btn():
 def save_media():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='button']//div[@class='md-button-content'][normalize-space()='Save']")))
 
-def close_btn():
+def thumbnail_icon_cancel_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
 
-def save_style():
+def save_style_btn():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH,
                                                   "(//button[contains(@class, 'md-button') and .//div[normalize-space()='Save']])[2]")))
@@ -209,7 +209,7 @@ def save_shrubs():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@class='md-button all-button-height br6 font-size-16 md-theme-default md-ripple-off md-primary h50']//div[@class='md-button-content'][normalize-space()='Save']")))
 
-def save_header():
+def save_header_style_btn():
     # Wait until the overlay (spinner) is no longer visible
     WebDriverWait(driver, 10).until(
         EC.invisibility_of_element_located((By.ID, "overlay-spinner"))  # Adjust ID if necessary
@@ -309,24 +309,24 @@ def test_login():
     btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
     btn_login.click()
     time.sleep(5)
-    assert MyFilesPage().text == validation_assert.MY_FILES
+    assert display_myfiles_after_login().text == validation_assert.MY_FILES
 
 def test_myShrubs():
-    myShrubs().click()
+    get_my_shrubs().click()
     time.sleep(10)
-    new_shrub().click()
+    get_new_shrub().click()
 
 def test_blank_shrubs():
-    shrubs_btn().click()
-    assert shrubs_title_validation().text == validation_assert.ENTER_SHRUBS_TITLE
-    assert shrubs_permissions_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
-    assert shrubs_thumbnail_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
+    save_new_shrub_btn().click()
+    assert shrub_title_blank_validation().text == validation_assert.ENTER_SHRUBS_TITLE
+    assert permissions_field_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
+    assert thumbnail_type_field_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
 
 def test_already_exist_shrubs():
     refresh_page()  # Ensure this function is implemented correctly
-    shrubs_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
-    shrubs_view_only().click()
-    select_type().click()
+    shrub_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
+    select_view_only_permissions().click()
+    shrub_project_icon_btn().click()
     upload_images()
     keep_both().click()
     ok_btn().click()
@@ -334,27 +334,27 @@ def test_already_exist_shrubs():
     save_media().click()
     # wait.until(EC.presence_of_element_located((By.XPATH, "//element-that-indicates-completion")))
     save_shrubs().click()
-    assert shrubs_already_exits_validation() == validation_assert.EXISTS_SHRUBS_TITLE
+    assert shrub_title_already_exists_validation() == validation_assert.EXISTS_SHRUBS_TITLE
 
 def test_valid_shrubs():
     refresh_page()
-    shrubs_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    shrubs_btn().click()
-    shrubs_view_only().click()
-    select_type().click()
+    shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    save_new_shrub_btn().click()
+    select_view_only_permissions().click()
+    shrub_project_icon_btn().click()
     upload_images()
     keep_both().click()
     ok_btn().click()
     next_btn().click()
     save_media().click()
-    shrubs_btn().click()
+    save_new_shrub_btn().click()
     time.sleep(10)
 
 
 def test_background():
-    shrubs_background_color().click()
-    shrubs_icon_color().click()
-    shrubs_icon_type().click()
+    background_color_dropdown().click()
+    select_color_picker_btn().click()
+    select_color_from_color_picker().click()
     select_thumbnail().click()
     upload_images()
     keep_both().click()
@@ -370,10 +370,10 @@ def test_background():
     add_style_input_field().send_keys(input_field.VALID_SHRUBS)
     add_style_input_field().send_keys(Keys.ENTER)
     time.sleep(5)
-    save_style().click()
-    save_header().click()
+    save_style_btn().click()
+    save_header_style_btn().click()
     time.sleep(5)
-    new_branch().click()
+    get_new_branch().click()
     create_link().click()
     time.sleep(5)
     save_branch().click()

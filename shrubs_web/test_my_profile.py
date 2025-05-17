@@ -30,7 +30,7 @@ def refresh_page():
     driver.refresh()
     wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))  # Wait for the body to load after refresh
 
-def MyFilesPage():
+def display_myfiles_after_login():
     return wait.until(EC.presence_of_element_located(
         (By.XPATH, "//b[@class='text-active text-xs font-bold sidebar-menu'][normalize-space()='My Files']")))
 
@@ -52,7 +52,7 @@ class TestMyProfile:
      btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
      btn_login.click()
      time.sleep(5)
-     assert MyFilesPage().text == validation_assert.MY_FILES
+     assert display_myfiles_after_login().text == validation_assert.MY_FILES
 
   def test_my_profile(self):
       droppable_area().click()
