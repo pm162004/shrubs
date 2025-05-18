@@ -1,26 +1,18 @@
 import time
-
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
 from constant import creds, validation_assert, input_field
-# from Shrubs_Automation.shrubs_web.get_my_shrubs import shrubs_ALREADY_EXIST_validation
 from constant import error
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
-from selenium.webdriver.chrome.service import Service as ChromeService
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
-# Only run with the latest Chrome version
 driver = webdriver.Chrome()
-# driver.set_window_size(1920, 1080)
 driver.maximize_window()
 driver.get(config.WEB_URL)
 email = config.CORRECT_EMAIL
