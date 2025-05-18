@@ -16,8 +16,8 @@ driver = webdriver.Chrome()
 driver.maximize_window()
 driver.get(config.WEB_URL)
 email = config.CORRECT_EMAIL
-password = config.PASSWORD
-new_password = config.RESET_PASSWORD
+password = config.CORRECT_PASSWORD
+new_password = config.NEW_PASSWORD
 wait = WebDriverWait(driver, 35)
 wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "body")))
 
@@ -143,17 +143,9 @@ def show_title():
 def select_view_only_permissions():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='View Only']")))
 
-
-def hide_thumbnail():
-    return wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Do you want to show thumbnail?']")))
-
-
-def shrub_project_icon_btn():
+def shrub_project_thumbnail_image_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Thumbnail Image']")))
 
-def select_thumbnail():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='cursor-pointer relative box-square-50 profile-bg br6']")))
 
 image_paths = [
      "/home/web-h-028/PycharmProjects/TrainingAutomation/Shrubs_Automation/shrubs_web/image/image1.png"
@@ -161,7 +153,7 @@ image_paths = [
 ]
 
 
-def upload_images():
+def upload_image():
     overlay_spinner()
     wait.until(
         EC.element_to_be_clickable((By.XPATH, "//div[@class='white-action-icon font-size-16 font-weight-700']")))
@@ -180,26 +172,31 @@ def upload_images():
 
 
 
-def keep_both():
+def keep_both_files_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH,"//label[normalize-space()='Keep both files']")))
+
 def ok_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='button-base demo w-full theme-solid']")))
+
 def next_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Next')]")))
-def save_media():
+
+def save_upload_media():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='button']//div[@class='md-button-content'][normalize-space()='Save']")))
+
+
+
+def select_thumbnail_image_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='cursor-pointer relative box-square-50 profile-bg br6']")))
+
 
 def thumbnail_icon_cancel_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
 
 def save_style_btn():
     overlay_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH,
-                                                  "(//button[contains(@class, 'md-button') and .//div[normalize-space()='Save']])[2]")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH,"(//button[contains(@class, 'md-button') and .//div[normalize-space()='Save']])[2]")))
 
-def save_shrubs():
-    overlay_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@class='md-button all-button-height br6 font-size-16 md-theme-default md-ripple-off md-primary h50']//div[@class='md-button-content'][normalize-space()='Save']")))
 
 def save_header_style_btn():
     # Wait until the overlay (spinner) is no longer visible
@@ -282,14 +279,14 @@ def back_branch_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@class='md-button all-button-height br6 md-theme-default md-ripple-off md-danger h50 w-100 font-size-16 mr1']//div[@class='md-ripple md-disabled']")))
 
-def save_as_template():
+def save_as_template_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Save As Template')]")))
 
-def add_style_validation():
+def template_name_validation():
     overlay_spinner()
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Template Name is required']")))
 
-def add_style_input_field():
+def template_name_input_field():
     return wait.until(EC.presence_of_element_located((By.XPATH, "(//input[contains(@id, 'md-input')])[5]")))
 
 def remove_background():
@@ -318,27 +315,27 @@ def test_shrub_title_already_exists():
     refresh_page()  # Ensure this function is implemented correctly
     shrub_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
     select_view_only_permissions().click()
-    shrub_project_icon_btn().click()
-    upload_images()
-    keep_both().click()
+    shrub_project_thumbnail_image_btn().click()
+    upload_image()
+    keep_both_files_btn().click()
     ok_btn().click()
     next_btn().click()
-    save_media().click()
+    save_upload_media().click()
     # wait.until(EC.presence_of_element_located((By.XPATH, "//element-that-indicates-completion")))
-    save_shrubs().click()
+    save_new_shrub_btn().click()
     assert shrub_title_already_exists_validation() == validation_assert.EXISTS_SHRUBS_TITLE
 
 def test_valid_shrubs():
     refresh_page()
     shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    save_new_shrub_btn().click()
+    # save_new_shrub_btn().click()
     select_view_only_permissions().click()
-    shrub_project_icon_btn().click()
-    upload_images()
-    keep_both().click()
+    shrub_project_thumbnail_image_btn().click()
+    upload_image()
+    keep_both_files_btn().click()
     ok_btn().click()
     next_btn().click()
-    save_media().click()
+    save_upload_media().click()
     save_new_shrub_btn().click()
     time.sleep(10)
 
@@ -347,24 +344,30 @@ def test_shrub_style():
     background_color_dropdown().click()
     select_color_picker_btn().click()
     select_color_from_color_picker().click()
-    select_thumbnail().click()
-    upload_images()
-    keep_both().click()
+    select_thumbnail_image_btn().click()
+    upload_image()
+    keep_both_files_btn().click()
     ok_btn().click()
     next_btn().click()
-    save_media().click()
+    save_upload_media().click()
     time.sleep(2)
     remove_background().click()
-    save_as_template().click()
-    add_style_input_field().send_keys(Keys.ENTER)
+
+def test_template_flow():
+    save_as_template_btn().click()
+    template_name_input_field().send_keys(Keys.ENTER)
     time.sleep(5)
-    assert add_style_validation().text == validation_assert.ENTER_TEMPLATE_NAME
-    add_style_input_field().send_keys(input_field.VALID_SHRUBS)
-    add_style_input_field().send_keys(Keys.ENTER)
+    assert template_name_validation().text == validation_assert.ENTER_TEMPLATE_NAME
+    template_name_input_field().send_keys(input_field.VALID_SHRUBS)
+    template_name_input_field().send_keys(Keys.ENTER)
     time.sleep(5)
+
+def test_save_style():
     save_style_btn().click()
     save_header_style_btn().click()
     time.sleep(5)
+
+def test_shrub_branch():
     get_new_branch().click()
     create_links_btn().click()
     time.sleep(5)
