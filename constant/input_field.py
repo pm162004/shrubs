@@ -2,6 +2,7 @@ from shrubs_setup import randomeString
 
 INCORRECT_EMAIL = "abc"
 INVALID_EMAIL = "modip89gmail.com"
+INVALID_PASSWORD = "modi"
 INCORRECT_PASSWORD = "00"
 LENGTH_INVALID_PASSWORD = "TEST"
 SIGNUP_PASSWORD = "Test@123"

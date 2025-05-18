@@ -49,7 +49,7 @@ def check_blank_email():
     email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is required')]")))
     return email
 
-def pass_blank_validation():
+def check_blank_password():
     passw = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Password is required')]")))
     return passw
 
@@ -90,7 +90,7 @@ class TestSignup:
         action.move_to_element(register_btn()).click().perform()
         assert username_blank_validation().text == validation_assert.ENTER_SIGNUP_USERNAME
         assert check_blank_email().text == validation_assert.ENTER_SIGNUP_EMAIL
-        assert pass_blank_validation().text == validation_assert.ENTER_SIGNUP_PASSWORD
+        assert check_blank_password().text == validation_assert.ENTER_SIGNUP_PASSWORD
 
     def test_exist_uname_suggestion_1(self):
         username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_SUGGESION1)

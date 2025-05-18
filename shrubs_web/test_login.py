@@ -38,24 +38,24 @@ def login_button():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-signin']")))
 
 def check_blank_email():
-    email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is required')]")))
-    return email
+    email_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is required')]")))
+    return email_variable
 
-def pass_blank_validation():
-    passw = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Password is required')]")))
-    return passw
+def check_blank_password():
+    password_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Password is required')]")))
+    return password_variable
 
 def check_valid_email():
-    email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is not valid.')]")))
-    return email
+    email_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is not valid.')]")))
+    return email_variable
 
 def check_nonexist_email():
-    email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'The selected email is invalid.')]")))
-    return email
+    email_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'The selected email is invalid.')]")))
+    return email_variable
 
 def check_invalid_password():
-    email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Invalid credentials')]")))
-    return email
+    password_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Invalid credentials')]")))
+    return password_variable
 
 def refresh_page():
     return driver.refresh()
@@ -67,7 +67,7 @@ class TestLogin:
     def test_blank_field_validation(self):
         login_button().click()
         assert check_blank_email().text == validation_assert.EMAIL_IS_REQUIRED
-        assert pass_blank_validation().text == validation_assert.ENTER_PASSWORD
+        assert check_blank_password().text == validation_assert.ENTER_PASSWORD
 
     def test_invalid_email(self):
         refresh_page()
@@ -98,13 +98,13 @@ class TestLogin:
         login_button().click()
         assert check_invalid_password().text == error.PASSWORD_VALIDATION
 
-    def test_both_invalid(self):
+    def test_invalid_login_flow(self):
         refresh_page()
         email_input_field().send_keys(config.EMAIL)
         password_input_field().send_keys(config.PASSWORD)
         login_button().click()
 
-    def test_valid(self):
+    def test_valid_login_flow(self):
         refresh_page()
         email_input_field().send_keys(config.CORRECT_EMAIL)
         password_input_field().send_keys(config.CORRECT_PASSWORD)
