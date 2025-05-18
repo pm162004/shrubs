@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
 from shrubs_setup import randomeString
-from shrubs_setup.randomeString import random_string_generator
+from shrubs_setup.randomeString import random_email_generator
 import constant
 from constant import creds, validation_assert,input_field
 from constant import error
@@ -17,7 +17,6 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 # Only run with the latest Chrome version
 driver = webdriver.Chrome()
-# driver.set_window_size(1920, 1080)
 driver.maximize_window()
 driver.get(config.WEB_URL)
 # email = config.EMAIL
@@ -26,7 +25,7 @@ wait = WebDriverWait(driver, 30)
 driver.implicitly_wait(30)
 
 
-def register():
+def create_an_account():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//a[normalize-space()='Create Account']")))
 
 def username_input_field():
@@ -38,28 +37,28 @@ def email_input_field():
 def password_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "password")))
 
-def register_btn():
+def signup_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-signup']")))
 
-def username_blank_validation():
+def check_blank_username():
     username = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Username is required')]")))
     return username
 
 def check_blank_email():
-    email = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is required')]")))
-    return email
+    email_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Email address is required')]")))
+    return email_variable
 
 def check_blank_password():
-    passw = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Password is required')]")))
-    return passw
+    password_variable = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Password is required')]")))
+    return password_variable
 
-def exist_username_suggestion1_validation():
+def username1_exists_validation():
     # return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Username taken. Please choose another or try test8')]")))
     return wait.until(EC.visibility_of_element_located(
         (By.XPATH, "//span[contains(text(),'Username taken. Please choose another or try test8')]")
     ))
 
-def exist_username_suggestion2_validation():
+def username2_exists_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Username taken. Please choose another or try admin16')]")))
 
 def exist_email_validation():
@@ -74,7 +73,7 @@ def check_password_length_validation():
 def check_strong_password_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'The Password Must include uppercase, lowercase, number, and special character')]")))
 
-def success_signup():
+def success_signup_message():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//p[contains(text(),'Congratulations! Your new account has been successfully created!')]")))
 
 def refresh_page():
@@ -85,32 +84,32 @@ def quit():
 
 class TestSignup:
     def test_blank_field_validation(self):
-        register().click()
+        create_an_account().click()
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
-        assert username_blank_validation().text == validation_assert.ENTER_SIGNUP_USERNAME
+        action.move_to_element(signup_btn()).click().perform()
+        assert check_blank_username().text == validation_assert.ENTER_SIGNUP_USERNAME
         assert check_blank_email().text == validation_assert.ENTER_SIGNUP_EMAIL
         assert check_blank_password().text == validation_assert.ENTER_SIGNUP_PASSWORD
 
-    def test_exist_uname_suggestion_1(self):
-        username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_SUGGESION1)
+    def test_already_exist_username1(self):
+        username_input_field().send_keys(input_field.ALREADY_REGISTERED_USERNAME1)
         time.sleep(1)
         email_input_field().send_keys(input_field.VALID_EMAIL)
         password_input_field().send_keys(input_field.SIGNUP_PASSWORD)
-        assert exist_username_suggestion1_validation().text == error.EXIST_USERNAME_SUGGESION1_ERROR
+        assert username1_exists_validation().text == error.EXIST_USERNAME_SUGGESION1_ERROR
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
 
-    def test_exist_uname_suggestion_2(self):
+    def test_already_exist_username2(self):
         refresh_page()
-        username_input_field().send_keys(input_field.ALREADY_REGISTERED_UNAME_SUGGESION2)
+        username_input_field().send_keys(input_field.ALREADY_REGISTERED_USERNAME1)
         time.sleep(1)
         email_input_field().send_keys(input_field.VALID_EMAIL)
         password_input_field().send_keys(input_field.SIGNUP_PASSWORD)
         time.sleep(1)
-        assert exist_username_suggestion2_validation().text == error.EXIST_USERNAME_SUGGESION2_ERROR
+        assert username2_exists_validation().text == error.EXIST_USERNAME_SUGGESION2_ERROR
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
 
     def test_exist_email(self):
         refresh_page()
@@ -120,7 +119,7 @@ class TestSignup:
         password_input_field().send_keys(input_field.SIGNUP_PASSWORD)
         time.sleep(1)
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
         time.sleep(1)
 
     def test_invalid_email(self):
@@ -131,7 +130,7 @@ class TestSignup:
         password_input_field().send_keys(input_field.SIGNUP_PASSWORD)
         assert email_invalid_validation().text == error.EMAIL_VALIDATION
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
 
     def test_password_length_validation(self):
         refresh_page()
@@ -143,7 +142,7 @@ class TestSignup:
         assert check_password_length_validation().text == error.CHARACTER_8_PASSWORD
         time.sleep(1)
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
 
     def test_strong_validation_password(self):
         refresh_page()
@@ -154,7 +153,7 @@ class TestSignup:
         assert check_strong_password_validation().text == error.LOWERCASE_PASSWORD
         time.sleep(1)
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
 
     def test_valid_signup(self):
         refresh_page()
@@ -164,4 +163,4 @@ class TestSignup:
         print(em)
         password_input_field().send_keys(randomeString.random_password)
         action = ActionChains(driver)
-        action.move_to_element(register_btn()).click().perform()
+        action.move_to_element(signup_btn()).click().perform()
