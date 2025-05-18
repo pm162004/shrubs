@@ -220,40 +220,40 @@ def save_header_style_btn():
     return button
 
 
-def create_link():
+def create_links_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//p[normalize-space()='Create Links']")))
 
 
-def list_branch_list():
+def link_branch_title_input_field():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Branch Title']")))
 
 
-def list_branch_validation():
+def link_branch_title_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//small[@class='text-danger']")))
 
 
-def save_branch():
+def save_new_branch_btn():
     # Wait until the overlay (spinner) is no longer visible
     overlay_spinner()
     # Wait for the button to be clickable
     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='md-button all-button-height br6 md-theme-default md-ripple-off md-primary h50 w-100 font-size-16']//div[@class='md-ripple md-disabled']")))
     return button
 
-def add_link():
+def branch_add_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-upload-image']//div[@class='md-ripple md-disabled']")))
 
 
-def link_input_field():
+def add_link_input_field():
     progress_spinner()
     return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Link']")))
 
 
-def link_validation():
+def blank_link_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='md-error']")))
 
 
-def link_error():
+def invalid_link_error():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='md-error']")))
 
 
@@ -262,13 +262,13 @@ def link_save_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@class='md-button all-button-height br6 md-theme-default md-ripple-off md-primary h50 w-100 font-size-16']")))
 
 
-def back_branch():
+def back_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Back')]")))
 
 
 
-def link_save_msg(driver):
+def save_link_message(driver):
     try:
         # Wait until the success message with class 'text-success' is visible
         success_message = WebDriverWait(driver, 60).until(
@@ -286,7 +286,7 @@ def link_save_msg(driver):
         return None
 
 
-def back_link():
+def back_branch_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@class='md-button all-button-height br6 md-theme-default md-ripple-off md-danger h50 w-100 font-size-16 mr1']//div[@class='md-ripple md-disabled']")))
 
@@ -311,18 +311,18 @@ def test_login():
     time.sleep(5)
     assert display_myfiles_after_login().text == validation_assert.MY_FILES
 
-def test_myShrubs():
+def test_my_shrubs():
     get_my_shrubs().click()
     time.sleep(10)
     get_new_shrub().click()
 
-def test_blank_shrubs():
+def test_blank_input_field_shrubs():
     save_new_shrub_btn().click()
     assert shrub_title_blank_validation().text == validation_assert.ENTER_SHRUBS_TITLE
     assert permissions_field_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
     assert thumbnail_type_field_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
 
-def test_already_exist_shrubs():
+def test_shrub_title_already_exists():
     refresh_page()  # Ensure this function is implemented correctly
     shrub_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
     select_view_only_permissions().click()
@@ -351,7 +351,7 @@ def test_valid_shrubs():
     time.sleep(10)
 
 
-def test_background():
+def test_shrub_style():
     background_color_dropdown().click()
     select_color_picker_btn().click()
     select_color_from_color_picker().click()
@@ -374,41 +374,41 @@ def test_background():
     save_header_style_btn().click()
     time.sleep(5)
     get_new_branch().click()
-    create_link().click()
+    create_links_btn().click()
     time.sleep(5)
-    save_branch().click()
+    save_new_branch_btn().click()
     time.sleep(5)
-    assert list_branch_validation().text == validation_assert.ENTER_LIST_BRANCH
-    list_branch_list().send_keys(input_field.VALID_SHRUBS)
+    assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
+    link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
     time.sleep(5)
-    save_branch().click()
+    save_new_branch_btn().click()
 
-def test_link():
-    add_link().click()
-    link_input_field().send_keys(Keys.ENTER)
+def test_add_link():
+    branch_add_link_btn().click()
+    add_link_input_field().send_keys(Keys.ENTER)
     time.sleep(2)
     link_save_btn().click()
     time.sleep(2)
-    assert link_validation().text == validation_assert.ENTER_LINK
-    link_input_field().send_keys(input_field.VALID_SHRUBS)
+    assert blank_link_validation().text == validation_assert.ENTER_LINK
+    add_link_input_field().send_keys(input_field.VALID_SHRUBS)
     time.sleep(2)
     link_save_btn().click()
     time.sleep(2)
-    assert link_error().text == error.LINK_ERROR
-    link_input_field().send_keys(Keys.CONTROL, "a")
-    link_input_field().send_keys(Keys.DELETE)
-    link_input_field().send_keys(input_field.LINK)
-    link_input_field().send_keys(Keys.ENTER)
+    assert invalid_link_error().text == error.LINK_ERROR
+    add_link_input_field().send_keys(Keys.CONTROL, "a")
+    add_link_input_field().send_keys(Keys.DELETE)
+    add_link_input_field().send_keys(input_field.LINK)
+    add_link_input_field().send_keys(Keys.ENTER)
     time.sleep(5)
     link_save_btn().click()
     time.sleep(5)
-    success_msg = link_save_msg(driver)
+    success_msg = save_link_message(driver)
     assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
     time.sleep(2)
-    back_link().click()
+    back_branch_link_btn().click()
     time.sleep(2)
     link_save_btn().click()
     time.sleep(2)
-    back_branch().click()
+    back_link_btn().click()
     time.sleep(2)
 
