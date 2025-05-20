@@ -157,6 +157,8 @@ def zip_code_input_field():
 def bio_input_field():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//div[p[@data-placeholder='Enter text here']]")))
 
+def save_my_profile_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save']")))
 class TestMyProfile:
 
     def test_login(self):
@@ -215,3 +217,5 @@ class TestMyProfile:
         zip_code_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         zip_code_input_field().send_keys(input_field.ZIPCODE)
         bio_input_field().send_keys(input_field.BIO)
+        save_my_profile_btn().click()
+        assert check_success_message_for_my_profile().text == validation_assert.SUCCESS_MESSAGE_FOR_MY_PROFILE
