@@ -1,3 +1,5 @@
+
+
 from shrubs_setup import randomeString
 
 INCORRECT_EMAIL = "abc"
@@ -16,3 +18,18 @@ VALID_UNAME = "Admin34"
 VALID_SHRUBS = randomeString.get_random_word_from_api()
 EXISTING_SHRUBS = "NEWS 3"
 LINK = "https://www.google.com"
+FIRSTNAME = "Tester"
+LASTNAME = "Test"
+INVALID_DATE_OF_BIRTH = "05/15/2026"
+INVALID_PHONE_NUMBER = ["909","909090909090909090","@567"]
+INVALID_POSTAL_CODE = "1234567890"
+INVALID_STATE="@3"
+INVALID_CITY = "9@"
+DATE_OF_BIRTH = "01/01/1990"
+PHONE_NUMBER = "9090909090"
+ADDRESS = "Test Address"
+CITY = "Test City"
+STATE = "Test State"
+COUNTRY = "Test Country"
+ZIPCODE = "123456"
+BIO = "Test Bio"
