@@ -170,21 +170,21 @@ class TestMyProfile:
         time.sleep(5)
         assert check_invalid_card_number().text == error.INVALID_CARD_NUMBER
 
-    # def test_input_my_wallet(self):
-    #     overlay_spinner()
-    #     driver.switch_to.frame(check_switch_to_iframe_for_card_number())
-    #     check_card_number_input().send_keys(input_field.CARD_NUMBER)
-    #     driver.switch_to.default_content()
-    #     # driver.switch_to.frame(check_switch_to_iframe_for_name_on_card())
-    #     check_name_on_card_input().send_keys(input_field.CARD_NAME)
-    #     # driver.switch_to.default_content()
-    #     driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
-    #     check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)  # MMYY format or whatever your app expects
-    #     driver.switch_to.default_content()
-    #     driver.switch_to.frame(check_switch_to_iframe_for_cvv())
-    #     check_cvv_input().send_keys(input_field.CVV_NUMBER)
-    #     driver.switch_to.default_content()
-    #     click_save_card_btn().click()
-    #
-    # # Validate toaster message
-    # assert check_toaster_message_for_my_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET
+    def test_input_my_wallet(self):
+        overlay_spinner()
+        driver.switch_to.frame(check_switch_to_iframe_for_card_number())
+        check_card_number_input().send_keys(input_field.CARD_NUMBER)
+        driver.switch_to.default_content()
+        # driver.switch_to.frame(check_switch_to_iframe_for_name_on_card())
+        check_name_on_card_input().send_keys(input_field.CARD_NAME)
+        # driver.switch_to.default_content()
+        driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
+        check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)  # MMYY format or whatever your app expects
+        driver.switch_to.default_content()
+        driver.switch_to.frame(check_switch_to_iframe_for_cvv())
+        check_cvv_input().send_keys(input_field.CVV_NUMBER)
+        driver.switch_to.default_content()
+        click_save_card_btn().click()
+
+    # Validate toaster message
+    assert check_toaster_message_for_my_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET
