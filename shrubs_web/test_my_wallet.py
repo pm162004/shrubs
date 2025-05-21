@@ -21,7 +21,8 @@ driver.get(config.WEB_URL)
 email = config.CORRECT_EMAIL
 password = config.CORRECT_PASSWORD
 wait = WebDriverWait(driver, 25)
-
+wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
 def email_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "email")))
@@ -46,16 +47,20 @@ def droppable_area():
 
 
 def my_profile():
+    overlay_spinner()
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()[normalize-space()='My Profile']]")))
 
 
 def my_wallet():
-    return wait.until(EC.presence_of_element_located((By.XPATH, "//div[text()[normalize-space()='Wallet']]")))
+    time.sleep(2)
+    overlay_spinner()
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//button[.//div[contains(text(), 'Wallet')]]")))
 
 def check_toaster_message_for_my_wallet():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card number is incomplete.']")))
 
 def click_save_card_btn():
+    overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[text()='Save']]")))
 
 def overlay_spinner():
@@ -64,6 +69,14 @@ def overlay_spinner():
     )
     time.sleep(1)
     return spinner
+def click_login_btn():
+    overlay_spinner()
+    btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
+    return btn_login
+
+def check_card_number_input():
+    card_number_input = wait.until(EC.presence_of_element_located((By.NAME, "cardNumber")))
+    return card_number_input
 class TestMyProfile:
 
     def test_login(self):
@@ -80,5 +93,19 @@ class TestMyProfile:
         my_wallet().click()
         click_save_card_btn().click()
         assert check_toaster_message_for_my_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET
+
+    def test_input_my_wallet(self):
+        check_card_number_input().send_keys("4242424242424242")
+
+
+        # name_on_card_input = wait.until(EC.presence_of_element_located((By.NAME, "cardName")))
+        # expiry_input = wait.until(EC.presence_of_element_located((By.NAME, "expiryDate")))
+        # cvv_input = wait.until(EC.presence_of_element_located((By.NAME, "cvv")))
+        #
+        # # Do not enter anything to simulate blank card save attempt
+        # click_save_card_btn().click()
+        #
+        # # Validate toaster message
+        # assert check_toaster_message_for_my_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET
 
 
