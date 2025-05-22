@@ -1,11 +1,9 @@
 MY_FILES = "My Files"
 EMAIL_IS_REQUIRED = "Email address is required"
 ENTER_PASSWORD = "Password is required"
-
 ENTER_SIGNUP_EMAIL = "Email address is required"
 ENTER_SIGNUP_PASSWORD = "Password is required"
 ENTER_SIGNUP_USERNAME = "Username is required"
-
 ENTER_NEW_PASSWORD = "New Password is required"
 ENTER_CONFIRM_PASSWORD = "Repeat New Password is required"
 ENTER_SHRUBS_TITLE = "Shrub Title is required"

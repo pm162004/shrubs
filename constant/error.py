@@ -1,5 +1,3 @@
-from constant.input_field import INVALID_CARD_NUMBER
-
 EMAIL_VALIDATION = "Email address is not valid."
 PASSWORD_VALIDATION = "Invalid credentials"
 NON_EXIST_EMAIL = "The selected email is invalid."
@@ -20,3 +18,4 @@ CITY_VALIDATION = "City may only contain alphabetic characters"
 DATE_OF_BIRTH_VALIDATION = "Date of birth cannot be in the future"
 PHONE_VALIDATION = "Phone number is not valid"
 INVALID_CARD_NUMBER_ERROR = "Your card number is invalid."
+INCOMPLETE_CARD_NUMBER_ERROR = "Your card number is incomplete."

@@ -18,7 +18,7 @@ chrome_options.add_argument('--headless')
 driver = webdriver.Chrome()
 driver.maximize_window()
 email = config.EMAIL
-password = config.PASSWORD
+password = config.NEW_PASSWORD
 
 
 driver.get(config.WEB_URL)

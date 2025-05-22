@@ -188,18 +188,17 @@ def back_link_btn():
 
 def save_link_message(driver):
     try:
-        # Wait until the success message with class 'text-success' is visible
+
         success_message = WebDriverWait(driver, 60).until(
             EC.visibility_of_element_located((By.XPATH, "//span[@class='text-success']"))
         )
         return success_message
     except TimeoutException:
         print("Timeout: Success message with class 'text-success' not found!")
-        # Log the page source for debugging
+
         print(driver.page_source)
         return None
     except Exception as e:
-        # Catch any other unexpected exceptions and log the error
         print(f"An error occurred: {e}")
         return None
 
