@@ -19,3 +19,6 @@ DATE_OF_BIRTH_VALIDATION = "Date of birth cannot be in the future"
 PHONE_VALIDATION = "Phone number is not valid"
 INVALID_CARD_NUMBER_ERROR = "Your card number is invalid."
 INCOMPLETE_CARD_NUMBER_ERROR = "Your card number is incomplete."
+PAST_EXPIRY_DATE_ERROR = "Your card’s expiration year is in the past."
+INVALID_EXPIRY_DATE_ERROR = "Your card’s expiration year is invalid."
+
