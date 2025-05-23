@@ -26,11 +26,11 @@ wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
 
 def email_input_field():
-    return wait.until(EC.presence_of_element_located((By.NAME, "email")))
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter your email']")))
 
 
 def password_input_field():
-    return wait.until(EC.presence_of_element_located((By.NAME, "password")))
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter your password']")))
 
 
 def refresh_page():
@@ -58,14 +58,16 @@ def my_wallet():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//button[.//div[contains(text(), 'Wallet')]]")))
 
 
-def check_toaster_message_for_my_wallet():
+def check_for_incomplete_wallet():
     return wait.until(
         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card number is incomplete.']")))
 
-# def check_success_toaster_message_for_my_wallet():
-#     return wait.until(
-#         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card number is incomplete.']")))
+def check_success_toaster_message_for_my_wallet():
+    return wait.until(
+        EC.presence_of_element_located((By.XPATH, "(//h2[contains(text(),'Would you like to add this card as your primary method of payment?')])[1]")))
 
+def check_yes_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Yes']")))
 
 def click_save_card_btn():
     overlay_spinner()
@@ -137,9 +139,21 @@ def check_invalid_card_number():
     return wait.until(
         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card number is invalid.']")))
 
+def check_declined_card_number():
+    return wait.until(
+        EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing.']")))
+
+def check_incorrect_card_number():
+    return wait.until(
+        EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card number is incorrect.']")))
+
 def check_incomplete_card_number():
     return wait.until(
         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card number is incomplete.']")))
+
+def check_incomplete_cvv():
+    return wait.until(
+        EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Your card’s security code is incomplete.']")))
 
 def check_past_expiry_date():
     return wait.until(
@@ -152,8 +166,8 @@ def check_invalid_expiry_date():
 class TestMyProfile:
 
     def test_login(self):
-        email_input_field().send_keys(config.CORRECT_EMAIL)
-        password_input_field().send_keys(config.CORRECT_EMAIL)
+        email_input_field().send_keys(email)
+        password_input_field().send_keys(password)
         btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
         btn_login.click()
         time.sleep(5)
@@ -164,7 +178,7 @@ class TestMyProfile:
         my_profile().click()
         my_wallet().click()
         click_save_card_btn().click()
-        assert check_toaster_message_for_my_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET
+        assert check_for_incomplete_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET
 
 
     def test_input_my_wallet_with_incomplete_card_number(self):
@@ -199,8 +213,40 @@ class TestMyProfile:
         overlay_spinner()
         assert check_invalid_card_number().text == error.INVALID_CARD_NUMBER_ERROR
 
+    def test_input_my_wallet_with_declined_card_number(self):
+        overlay_spinner()
+        driver.switch_to.frame(check_switch_to_iframe_for_card_number())
+        check_card_number_input().send_keys(input_field.DECLINED_CARD_NUMBER)
+        driver.switch_to.default_content()
+        check_name_on_card_input().send_keys(input_field.CARD_NAME)
+        driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
+        check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)
+        driver.switch_to.default_content()
+        driver.switch_to.frame(check_switch_to_iframe_for_cvv())
+        check_cvv_input().send_keys(input_field.CVV_NUMBER)
+        driver.switch_to.default_content()
+        click_save_card_btn().click()
+        overlay_spinner()
+        assert check_declined_card_number().text == error.DECLINED_CARD_NUMBER_ERROR
+
+    def test_input_my_wallet_with_incorrect_card_number(self):
+        overlay_spinner()
+        driver.switch_to.frame(check_switch_to_iframe_for_card_number())
+        check_card_number_input().send_keys(input_field.INCORRECT_CARD_NUMBER)
+        driver.switch_to.default_content()
+        check_name_on_card_input().send_keys(input_field.CARD_NAME)
+        driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
+        check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)
+        driver.switch_to.default_content()
+        driver.switch_to.frame(check_switch_to_iframe_for_cvv())
+        check_cvv_input().send_keys(input_field.CVV_NUMBER)
+        driver.switch_to.default_content()
+        click_save_card_btn().click()
+        overlay_spinner()
+        assert check_incorrect_card_number().text == error.INCORRECT_CARD_NUMBER_ERROR
+
     def test_input_my_wallet_with_past_expiry_date(self):
-        refresh_page()
+
         overlay_spinner()
         driver.switch_to.frame(check_switch_to_iframe_for_card_number())
         check_card_number_input().send_keys(input_field.CARD_NUMBER)
@@ -213,10 +259,10 @@ class TestMyProfile:
         check_cvv_input().send_keys(input_field.CVV_NUMBER)
         driver.switch_to.default_content()
         click_save_card_btn().click()
+        overlay_spinner()
         assert  check_past_expiry_date().text == error.PAST_EXPIRY_DATE_ERROR
 
     def test_input_my_wallet_with_invalid_expiry_date(self):
-        refresh_page()
         overlay_spinner()
         driver.switch_to.frame(check_switch_to_iframe_for_card_number())
         check_card_number_input().send_keys(input_field.CARD_NUMBER)
@@ -229,25 +275,38 @@ class TestMyProfile:
         check_cvv_input().send_keys(input_field.CVV_NUMBER)
         driver.switch_to.default_content()
         click_save_card_btn().click()
+        overlay_spinner()
         assert  check_invalid_expiry_date().text == error.INVALID_EXPIRY_DATE_ERROR
 
+    def test_input_my_wallet_with_incomplete_cvv(self):
+        overlay_spinner()
+        driver.switch_to.frame(check_switch_to_iframe_for_card_number())
+        check_card_number_input().send_keys(input_field.CARD_NUMBER)
+        driver.switch_to.default_content()
+        check_name_on_card_input().send_keys(input_field.CARD_NAME)
+        driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
+        check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)
+        driver.switch_to.default_content()
+        driver.switch_to.frame(check_switch_to_iframe_for_cvv())
+        check_cvv_input().send_keys(input_field.INCOMPLETE_CVV_NUMBER)
+        driver.switch_to.default_content()
+        click_save_card_btn().click()
+        overlay_spinner()
+        assert check_incomplete_cvv().text == error.INCOMPLETE_CVV_ERROR
 
+    def test_input_my_wallet(self):
+        overlay_spinner()
+        driver.switch_to.frame(check_switch_to_iframe_for_card_number())
+        check_card_number_input().send_keys(input_field.CARD_NUMBER)
+        driver.switch_to.default_content()
+        check_name_on_card_input().send_keys(input_field.CARD_NAME)
+        driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
+        check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)
+        driver.switch_to.default_content()
+        driver.switch_to.frame(check_switch_to_iframe_for_cvv())
+        check_cvv_input().send_keys(input_field.CVV_NUMBER)
+        driver.switch_to.default_content()
+        click_save_card_btn().click()
+        assert check_success_toaster_message_for_my_wallet().text == validation_assert.POP_UP_FOR_WALLET
+        check_yes_btn().click()
 
-    # def test_input_my_wallet(self):
-    #     overlay_spinner()
-    #     driver.switch_to.frame(check_switch_to_iframe_for_card_number())
-    #     check_card_number_input().send_keys(input_field.CARD_NUMBER)
-    #     driver.switch_to.default_content()
-    #     # driver.switch_to.frame(check_switch_to_iframe_for_name_on_card())
-    #     check_name_on_card_input().send_keys(input_field.CARD_NAME)
-    #     # driver.switch_to.default_content()
-    #     driver.switch_to.frame(check_switch_to_iframe_for_expiry_date())
-    #     check_expiry_date_input().send_keys(input_field.EXPIRY_DATE)  # MMYY format or whatever your app expects
-    #     driver.switch_to.default_content()
-    #     driver.switch_to.frame(check_switch_to_iframe_for_cvv())
-    #     check_cvv_input().send_keys(input_field.CVV_NUMBER)
-    #     driver.switch_to.default_content()
-    #     click_save_card_btn().click()
-    #
-    # Validate toaster message
-    assert check_toaster_message_for_my_wallet().text == validation_assert.TOASTER_MESSAGE_FOR_BLANK_WALLET

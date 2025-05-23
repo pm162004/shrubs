@@ -1,3 +1,5 @@
+from constant.input_field import DECLINED_CARD_NUMBER
+
 EMAIL_VALIDATION = "Email address is not valid."
 PASSWORD_VALIDATION = "Invalid credentials"
 NON_EXIST_EMAIL = "The selected email is invalid."
@@ -21,4 +23,6 @@ INVALID_CARD_NUMBER_ERROR = "Your card number is invalid."
 INCOMPLETE_CARD_NUMBER_ERROR = "Your card number is incomplete."
 PAST_EXPIRY_DATE_ERROR = "Your card’s expiration year is in the past."
 INVALID_EXPIRY_DATE_ERROR = "Your card’s expiration year is invalid."
-
+DECLINED_CARD_NUMBER_ERROR = "Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing."
+INCORRECT_CARD_NUMBER_ERROR = "Your card number is incorrect."
+INCOMPLETE_CVV_ERROR = "Your card’s security code is incomplete."
