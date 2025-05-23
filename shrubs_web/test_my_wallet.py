@@ -152,8 +152,8 @@ def check_invalid_expiry_date():
 class TestMyProfile:
 
     def test_login(self):
-        email_input_field().send_keys(email)
-        password_input_field().send_keys(password)
+        email_input_field().send_keys(config.CORRECT_EMAIL)
+        password_input_field().send_keys(config.CORRECT_EMAIL)
         btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
         btn_login.click()
         time.sleep(5)
