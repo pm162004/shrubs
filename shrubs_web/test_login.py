@@ -63,6 +63,9 @@ def refresh_page():
 def password_mask_button():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//*[name()='path' and contains(@d,'M12 7c2.76')]")))
 
+def check_logout_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH,"//span[text()='Logout' and contains(@class, 'user-menu')]")))
+
 class TestLogin:
     def test_blank_field_validation(self):
         login_button().click()

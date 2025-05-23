@@ -1,3 +1,4 @@
+from constant.creds import OLD_PASSWORD
 from constant.input_field import DECLINED_CARD_NUMBER
 
 EMAIL_VALIDATION = "Email address is not valid."
@@ -9,6 +10,10 @@ EXIST_EMAIL_ERROR = "The email has already been taken."
 CHARACTER_8_PASSWORD = "The Password field must be at least 8 characters"
 LOWERCASE_PASSWORD = "The Password Must include uppercase, lowercase, number, and special character"
 LENGTH_VALIDATION_PASSWORD= "The New Password field must be at least 8 characters"
+CURRENT_LENGTH_VALIDATION_PASSWORD= "The Current password field must be at least 8 characters"
+NEW_LENGTH_VALIDATION_PASSWORD= "The New password field must be at least 8 characters"
+CURRENT_STRONG_PASSWORD  = "The Current password Must include uppercase, lowercase, number, and special character"
+NEW_STRONG_PASSWORD = "The New password Must include uppercase, lowercase, number, and special character"
 STRONG_NEW_PASSWORD = "The New Password Must include uppercase, lowercase, number, and special character"
 CONFIRM_PASSWORD_VALIDATION = "Repeat New Password field does not match New Password"
 LINK_ERROR = "The Link is not valid"
@@ -26,3 +31,6 @@ INVALID_EXPIRY_DATE_ERROR = "Your card’s expiration year is invalid."
 DECLINED_CARD_NUMBER_ERROR = "Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing."
 INCORRECT_CARD_NUMBER_ERROR = "Your card number is incorrect."
 INCOMPLETE_CVV_ERROR = "Your card’s security code is incomplete."
+INCORRECT_CURRENT_PASSWORD_ERROR = "The current password is incorrect."
+OLD_PASSWORD_ERROR = "New password cannot be the same as the current password. Please choose a different password."
+DIFFERENT_PASSWORD_ERROR = "Confirm new password field does not match New Password"
