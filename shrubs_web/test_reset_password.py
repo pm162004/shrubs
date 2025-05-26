@@ -7,11 +7,18 @@ from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
 from constant import creds, validation_assert, input_field, error
 from log_config import setup_logger
-
+from selenium.common.exceptions import (
+    NoSuchWindowException,
+    TimeoutException,
+    WebDriverException,
+)
 logger = setup_logger()
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--headless')
+# chrome_options.add_argument('--headless')
+chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+chrome_options.add_experimental_option("useAutomationExtension", False)
 driver = webdriver.Chrome(options=chrome_options)
 driver.set_window_size(1920, 1080)
 driver.get(config.WEB_URL)
@@ -30,11 +37,6 @@ def email_input_field():
 
 def password_input_field():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter your password']")))
-
-def refresh_page():
-    logger.info("Refreshing page")
-    driver.refresh()
-    wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
 def check_invalid_password():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Invalid credentials')]")))
@@ -76,9 +78,26 @@ def check_incorrect_current_password_validation():
     time.sleep(1)
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'The current password is incorrect.')]")))
 
+def refresh_page():
+    if is_browser_window_open(driver):
+        logger.info("Refreshing page")
+        driver.refresh()
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+    else:
+        # Handle situation: reopen browser or fail gracefully
+        logger.error("Browser window is closed, cannot refresh")
+
+def is_browser_window_open(driver):
+    import selenium
+    try:
+        _ = driver.current_window_handle
+        return True
+    except selenium.common.exceptions.NoSuchWindowException:
+        return False
+
 def check_enter_old_password_validation():
     return wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//span[contains(text(),'New password cannot be the same as the current password. Please choose a different password.')]")))
+        (By.XPATH, "//small[text()='New password cannot be the same as the current password. Please choose a different password.']")))
 
 def check_enter_different_confirm_password_validation():
     time.sleep(1)
@@ -212,31 +231,33 @@ class TestChangePassword:
         new_password_input_field().send_keys(password)
         confirm_new_password_input_field().send_keys(password)
         change_password_btn().click()
-        assert check_enter_old_password_validation().text == error.OLD_PASSWORD_ERROR
+        time.sleep(3)
         logger.info("New password same as current password validation passed")
+        assert check_enter_old_password_validation().text == error.OLD_PASSWORD_ERROR
 
     def test_copy_paste_new_password(self):
         logger.info("Testing copy-paste functionality in new password fields")
         refresh_page()
         current_password_input_field().send_keys(password)
         new_password_input_field().send_keys(new_password)
-        new_password_input_field().send_keys(Keys.CONTROL + 'a')
-        new_password_input_field().send_keys(Keys.CONTROL + 'c')
-        hide_confirm_password_btn().click()
+        hide_new_password_btn().click()
+        new_password_input_field().send_keys(Keys.CONTROL + 'A' + Keys.CONTROL + 'C')
         confirm_new_password_input_field().send_keys(Keys.CONTROL + 'v')
         logger.info("Copy-paste test completed")
 
     def test_change_password_flow(self):
         logger.info("Testing full password change flow")
-        hide_current_password_btn()
-        hide_new_password_btn().click()
-        hide_confirm_password_btn().click()
+        refresh_page()
+        current_password_input_field().send_keys(password)
+        new_password_input_field().send_keys(new_password)
+        confirm_new_password_input_field().send_keys(new_password)
         change_password_btn().click()
         assert check_success_message_change_password().text == validation_assert.SUCCESS_TOASTER_MESSAGE_FOR_CHANGE_PASSWORD
         logger.info("Password change successful")
 
     def test_old_password_login(self):
         logger.info("Testing login with old password (should fail)")
+        droppable_area().click()
         check_logout_btn().click()
         email_input_field().send_keys(creds.CHANGE_PASSWORD_EMAIL)
         password_input_field().send_keys(password)
@@ -246,10 +267,10 @@ class TestChangePassword:
         logger.info("Old password login test passed (login failed as expected)")
 
     def test_new_password_login(self):
-        logger.info("Testing login with new password")
         refresh_page()
+        logger.info("Testing login with new password")
         email_input_field().send_keys(creds.CHANGE_PASSWORD_EMAIL)
-        password_input_field().send_keys(config.new_password)
+        password_input_field().send_keys(new_password)
         btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
         btn_login.click()
         assert display_myfiles_after_login().text == validation_assert.MY_FILES

@@ -1105,3 +1105,190 @@
 2025-05-26 16:36:27,259 - INFO - Testing login with new password
 2025-05-26 16:36:27,260 - INFO - Refreshing page
 2025-05-26 16:46:24,872 - INFO - Running test: Login with valid credentials
+2025-05-26 16:46:37,763 - INFO - Login successful, 'My Files' visible
+2025-05-26 16:46:37,766 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 16:47:01,541 - INFO - Testing blank field validation in change password form
+2025-05-26 16:47:03,746 - INFO - Blank field validations passed
+2025-05-26 16:47:03,748 - INFO - Testing confirm password mismatch validation
+2025-05-26 16:47:05,310 - INFO - Confirm password mismatch validation passed
+2025-05-26 16:47:05,315 - INFO - Testing current password validation rules
+2025-05-26 16:47:08,521 - INFO - Current password validation passed
+2025-05-26 16:47:08,522 - INFO - Testing new password validation rules
+2025-05-26 16:47:11,879 - INFO - New password validation passed
+2025-05-26 16:47:11,880 - INFO - Testing validation for incorrect current password
+2025-05-26 16:47:11,880 - INFO - Refreshing page
+2025-05-26 16:47:33,348 - INFO - Incorrect current password validation passed
+2025-05-26 16:47:33,353 - INFO - Testing validation when new password is same as current password
+2025-05-26 16:47:33,353 - INFO - Refreshing page
+2025-05-26 16:48:11,299 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 16:48:11,299 - INFO - Refreshing page
+2025-05-26 16:50:06,071 - INFO - Running test: Login with valid credentials
+2025-05-26 16:50:30,272 - INFO - Login successful, 'My Files' visible
+2025-05-26 16:50:30,274 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 16:50:55,270 - INFO - Testing blank field validation in change password form
+2025-05-26 16:50:56,404 - INFO - Blank field validations passed
+2025-05-26 16:50:56,409 - INFO - Testing confirm password mismatch validation
+2025-05-26 16:50:58,175 - INFO - Confirm password mismatch validation passed
+2025-05-26 16:50:58,182 - INFO - Testing current password validation rules
+2025-05-26 16:51:01,559 - INFO - Current password validation passed
+2025-05-26 16:51:01,561 - INFO - Testing new password validation rules
+2025-05-26 16:51:04,554 - INFO - New password validation passed
+2025-05-26 16:51:04,559 - INFO - Testing validation for incorrect current password
+2025-05-26 16:51:04,559 - INFO - Refreshing page
+2025-05-26 16:51:45,613 - INFO - Incorrect current password validation passed
+2025-05-26 16:51:45,617 - INFO - Testing validation when new password is same as current password
+2025-05-26 16:51:45,617 - INFO - Refreshing page
+2025-05-26 16:52:11,720 - INFO - New password same as current password validation passed
+2025-05-26 16:52:37,069 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 16:52:37,069 - INFO - Refreshing page
+2025-05-26 16:52:51,797 - INFO - Testing full password change flow
+2025-05-26 16:52:51,846 - INFO - Testing login with old password (should fail)
+2025-05-26 16:52:51,904 - INFO - Testing login with new password
+2025-05-26 16:52:51,904 - INFO - Refreshing page
+2025-05-26 17:03:59,686 - INFO - Running test: Login with valid credentials
+2025-05-26 17:04:14,144 - INFO - Login successful, 'My Files' visible
+2025-05-26 17:04:14,157 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 17:04:44,711 - INFO - Testing blank field validation in change password form
+2025-05-26 17:04:47,288 - INFO - Blank field validations passed
+2025-05-26 17:04:47,289 - INFO - Testing confirm password mismatch validation
+2025-05-26 17:04:49,116 - INFO - Confirm password mismatch validation passed
+2025-05-26 17:04:49,120 - INFO - Testing current password validation rules
+2025-05-26 17:04:51,973 - INFO - Current password validation passed
+2025-05-26 17:04:51,976 - INFO - Testing new password validation rules
+2025-05-26 17:04:54,962 - INFO - New password validation passed
+2025-05-26 17:04:54,963 - INFO - Testing validation for incorrect current password
+2025-05-26 17:04:54,965 - INFO - Refreshing page
+2025-05-26 17:05:30,033 - INFO - Incorrect current password validation passed
+2025-05-26 17:05:30,038 - INFO - Testing validation when new password is same as current password
+2025-05-26 17:05:30,044 - INFO - Refreshing page
+2025-05-26 17:05:46,071 - INFO - New password same as current password validation passed
+2025-05-26 17:05:51,737 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:05:51,738 - INFO - Refreshing page
+2025-05-26 17:06:00,594 - INFO - Copy-paste test completed
+2025-05-26 17:06:00,595 - INFO - Testing full password change flow
+2025-05-26 17:06:13,414 - INFO - Testing login with old password (should fail)
+2025-05-26 17:06:13,461 - INFO - Testing login with new password
+2025-05-26 17:07:03,588 - INFO - Running test: Login with valid credentials
+2025-05-26 17:07:17,617 - INFO - Login successful, 'My Files' visible
+2025-05-26 17:07:17,621 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 17:07:42,740 - INFO - Testing blank field validation in change password form
+2025-05-26 17:07:43,871 - INFO - Blank field validations passed
+2025-05-26 17:07:43,872 - INFO - Testing confirm password mismatch validation
+2025-05-26 17:07:45,553 - INFO - Confirm password mismatch validation passed
+2025-05-26 17:07:45,556 - INFO - Testing current password validation rules
+2025-05-26 17:07:48,842 - INFO - Current password validation passed
+2025-05-26 17:07:48,843 - INFO - Testing new password validation rules
+2025-05-26 17:07:52,041 - INFO - New password validation passed
+2025-05-26 17:07:52,043 - INFO - Testing validation for incorrect current password
+2025-05-26 17:07:52,043 - INFO - Refreshing page
+2025-05-26 17:08:17,916 - INFO - Incorrect current password validation passed
+2025-05-26 17:08:17,921 - INFO - Testing validation when new password is same as current password
+2025-05-26 17:08:17,925 - INFO - Refreshing page
+2025-05-26 17:08:34,357 - INFO - New password same as current password validation passed
+2025-05-26 17:08:38,852 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:08:38,853 - INFO - Refreshing page
+2025-05-26 17:08:50,277 - INFO - Copy-paste test completed
+2025-05-26 17:08:50,279 - INFO - Testing full password change flow
+2025-05-26 17:09:16,084 - INFO - Testing login with old password (should fail)
+2025-05-26 17:09:41,334 - INFO - Testing login with new password
+2025-05-26 17:09:41,337 - INFO - Refreshing page
+2025-05-26 17:12:11,994 - INFO - Running test: Login with valid credentials
+2025-05-26 17:12:35,611 - INFO - Login successful, 'My Files' visible
+2025-05-26 17:12:35,613 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 17:13:11,645 - INFO - Testing blank field validation in change password form
+2025-05-26 17:13:12,690 - INFO - Blank field validations passed
+2025-05-26 17:13:12,691 - INFO - Testing confirm password mismatch validation
+2025-05-26 17:13:14,509 - INFO - Confirm password mismatch validation passed
+2025-05-26 17:13:14,515 - INFO - Testing current password validation rules
+2025-05-26 17:13:17,918 - INFO - Current password validation passed
+2025-05-26 17:13:17,920 - INFO - Testing new password validation rules
+2025-05-26 17:13:21,114 - INFO - New password validation passed
+2025-05-26 17:13:21,116 - INFO - Testing validation for incorrect current password
+2025-05-26 17:13:21,117 - INFO - Refreshing page
+2025-05-26 17:13:44,268 - INFO - Incorrect current password validation passed
+2025-05-26 17:13:44,275 - INFO - Testing validation when new password is same as current password
+2025-05-26 17:13:44,281 - INFO - Refreshing page
+2025-05-26 17:14:01,717 - INFO - New password same as current password validation passed
+2025-05-26 17:14:06,238 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:14:06,239 - INFO - Refreshing page
+2025-05-26 17:14:18,254 - INFO - Copy-paste test completed
+2025-05-26 17:14:18,256 - INFO - Testing full password change flow
+2025-05-26 17:14:43,670 - INFO - Testing login with old password (should fail)
+2025-05-26 17:15:08,844 - INFO - Testing login with new password
+2025-05-26 17:15:08,845 - INFO - Refreshing page
+2025-05-26 17:16:21,520 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:16:21,521 - INFO - Refreshing page
+2025-05-26 17:18:24,868 - INFO - Running test: Login with valid credentials
+2025-05-26 17:18:46,851 - INFO - Login successful, 'My Files' visible
+2025-05-26 17:18:46,854 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 17:19:22,148 - INFO - Testing blank field validation in change password form
+2025-05-26 17:19:24,504 - INFO - Blank field validations passed
+2025-05-26 17:19:24,505 - INFO - Testing confirm password mismatch validation
+2025-05-26 17:19:26,181 - INFO - Confirm password mismatch validation passed
+2025-05-26 17:19:26,186 - INFO - Testing current password validation rules
+2025-05-26 17:19:29,657 - INFO - Current password validation passed
+2025-05-26 17:19:29,659 - INFO - Testing new password validation rules
+2025-05-26 17:19:33,010 - INFO - New password validation passed
+2025-05-26 17:19:33,012 - INFO - Testing validation for incorrect current password
+2025-05-26 17:19:33,012 - INFO - Refreshing page
+2025-05-26 17:19:57,251 - INFO - Incorrect current password validation passed
+2025-05-26 17:19:57,257 - INFO - Testing validation when new password is same as current password
+2025-05-26 17:19:57,262 - INFO - Refreshing page
+2025-05-26 17:20:18,462 - INFO - New password same as current password validation passed
+2025-05-26 17:20:26,227 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:20:26,230 - INFO - Refreshing page
+2025-05-26 17:20:36,644 - INFO - Copy-paste test completed
+2025-05-26 17:20:36,646 - INFO - Testing full password change flow
+2025-05-26 17:20:36,647 - INFO - Refreshing page
+2025-05-26 17:20:52,600 - INFO - Password change successful
+2025-05-26 17:20:52,605 - INFO - Testing login with old password (should fail)
+2025-05-26 17:21:25,007 - INFO - Old password login test passed (login failed as expected)
+2025-05-26 17:21:25,009 - INFO - Testing login with new password
+2025-05-26 17:21:25,010 - INFO - Refreshing page
+2025-05-26 17:22:44,503 - INFO - Running test: Login with valid credentials
+2025-05-26 17:23:07,612 - INFO - Login successful, 'My Files' visible
+2025-05-26 17:23:07,621 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 17:23:25,911 - INFO - Testing blank field validation in change password form
+2025-05-26 17:23:26,961 - INFO - Blank field validations passed
+2025-05-26 17:23:26,962 - INFO - Testing confirm password mismatch validation
+2025-05-26 17:23:28,717 - INFO - Confirm password mismatch validation passed
+2025-05-26 17:23:28,718 - INFO - Testing current password validation rules
+2025-05-26 17:23:31,587 - INFO - Current password validation passed
+2025-05-26 17:23:31,588 - INFO - Testing new password validation rules
+2025-05-26 17:23:34,518 - INFO - New password validation passed
+2025-05-26 17:23:34,522 - INFO - Testing validation for incorrect current password
+2025-05-26 17:23:34,523 - INFO - Refreshing page
+2025-05-26 17:24:05,360 - INFO - Testing validation when new password is same as current password
+2025-05-26 17:24:05,406 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:24:05,450 - INFO - Testing full password change flow
+2025-05-26 17:24:05,490 - INFO - Testing login with old password (should fail)
+2025-05-26 17:24:13,457 - INFO - Running test: Login with valid credentials
+2025-05-26 17:24:26,992 - INFO - Login successful, 'My Files' visible
+2025-05-26 17:24:26,998 - INFO - Navigating to Reset Password page via My Profile
+2025-05-26 17:24:53,507 - INFO - Testing blank field validation in change password form
+2025-05-26 17:24:54,458 - INFO - Blank field validations passed
+2025-05-26 17:24:54,460 - INFO - Testing confirm password mismatch validation
+2025-05-26 17:24:56,106 - INFO - Confirm password mismatch validation passed
+2025-05-26 17:24:56,111 - INFO - Testing current password validation rules
+2025-05-26 17:24:58,968 - INFO - Current password validation passed
+2025-05-26 17:24:58,970 - INFO - Testing new password validation rules
+2025-05-26 17:25:01,865 - INFO - New password validation passed
+2025-05-26 17:25:01,867 - INFO - Testing validation for incorrect current password
+2025-05-26 17:25:01,868 - INFO - Refreshing page
+2025-05-26 17:25:14,445 - INFO - Incorrect current password validation passed
+2025-05-26 17:25:14,447 - INFO - Testing validation when new password is same as current password
+2025-05-26 17:25:14,448 - INFO - Refreshing page
+2025-05-26 17:25:24,769 - INFO - New password same as current password validation passed
+2025-05-26 17:25:25,972 - INFO - Testing copy-paste functionality in new password fields
+2025-05-26 17:25:25,981 - INFO - Refreshing page
+2025-05-26 17:25:31,856 - INFO - Copy-paste test completed
+2025-05-26 17:25:31,859 - INFO - Testing full password change flow
+2025-05-26 17:25:31,859 - INFO - Refreshing page
+2025-05-26 17:25:41,510 - INFO - Password change successful
+2025-05-26 17:25:41,520 - INFO - Testing login with old password (should fail)
+2025-05-26 17:25:55,325 - INFO - Old password login test passed (login failed as expected)
+2025-05-26 17:25:55,329 - INFO - Refreshing page
+2025-05-26 17:25:57,017 - INFO - Testing login with new password
+2025-05-26 17:26:04,179 - INFO - New password login successful, 'My Files' visible
+2025-05-26 17:26:18,099 - INFO - Quitting browser
+2025-05-26 17:26:18,240 - INFO - Password reset to original and browser closed
