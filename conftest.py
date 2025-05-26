@@ -1,9 +1,12 @@
 def pytest_collection_modifyitems(session, config, items):
     class_order = [
-        "TestOrangeHrmLogin",
-        "TestAddNewCandidate",
-        "TestSearchCandidate",
-        "TestOrangeHrmLogOut"
+        "TestSignup",
+        "TestLogin",
+        "TestForgotPassword",
+        "TestMyProfile",
+        "TestMyWallet",
+        "TestChangePassword",
+        "TestMyShrubsIcon"
     ]
 
     def get_class_name(item):

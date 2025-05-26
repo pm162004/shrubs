@@ -8,8 +8,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
 from constant import validation_assert, input_field, error
 from log_config import setup_logger
-logger = setup_logger()
 
+logger = setup_logger()
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
@@ -35,59 +35,75 @@ wait = WebDriverWait(driver, 25)
 wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "body")))
 
 
-
 # Element Getters
 
 def email_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "email")))
 
+
 def password_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "password")))
+
 
 def refresh_page():
     logger.info("Refreshing the page")
     driver.refresh()
     wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
+
 def display_myfiles_after_login():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//b[normalize-space()='My Files']")))
+
 
 def get_my_shrubs():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//p[normalize-space()='My Shrubs']")))
 
+
 def get_new_shrub():
     return wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".md-button-content")))
+
 
 def shrub_title_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "shrub-name")))
 
+
 def shrub_title_blank_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Shrub Title is required']")))
 
+
 def permissions_field_validation():
-    return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Permissions field is required']")))
+    return wait.until(
+        EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Permissions field is required']")))
+
 
 def select_view_only_permissions():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='View Only']")))
 
+
 def thumbnail_type_field_validation():
-    return wait.until(EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Thumbnail type field is required']")))
+    return wait.until(
+        EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Thumbnail type field is required']")))
+
 
 def shrub_project_icon_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Shrub Project Icon']")))
 
+
 def select_thumbnail_icon():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//h6[normalize-space()='alert-octagon']")))
 
+
 def thumbnail_icon_cancel_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
+
 
 def shrub_title_already_exists_validation():
     logger.info("Checking if duplicate shrub title validation appears")
     try:
         driver.find_element(By.NAME, "btn-save").click()
         error_message = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Project already exist with the given slug']"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//span[normalize-space()='Project already exist with the given slug']"))
         )
         logger.info("Error message: " + error_message.text)
         return error_message.text
@@ -102,7 +118,8 @@ def shrub_title_already_exists_validation():
             logger.warning("No alert found, retrying for modal.")
             try:
                 error_message = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='Project already exist with the given slug']"))
+                    EC.presence_of_element_located(
+                        (By.XPATH, "//span[normalize-space()='Project already exist with the given slug']"))
                 )
                 logger.info("Modal error message: " + error_message.text)
                 return error_message.text
@@ -110,71 +127,91 @@ def shrub_title_already_exists_validation():
                 logger.warning("No modal or message found.")
                 return None
 
+
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
     WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
 
+
 def background_color_dropdown():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
+
 
 def select_color_picker_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='thumbnail']")))
 
+
 def select_color_from_color_picker():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Color:#BD10E0']")))
 
+
 def save_style_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
+
 
 def save_header_style_btn():
     WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
 
+
 def overlay_spinner():
     return WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
 
+
 def progress_spinner():
     return WebDriverWait(driver, 30).until(EC.invisibility_of_element_located((By.ID, "progress-spinner")))
+
 
 def get_new_branch():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-new-branch']")))
 
+
 def create_links_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//p[normalize-space()='Create Links']")))
+
 
 def link_branch_title_input_field():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Branch Title']")))
 
+
 def link_branch_title_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//small[@class='text-danger']")))
+
 
 def save_new_branch_btn():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
 
+
 def branch_add_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-upload-image']")))
+
 
 def add_link_input_field():
     progress_spinner()
     return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Link']")))
 
+
 def blank_link_validation():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='md-error']")))
 
+
 def invalid_link_error():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='md-error']")))
+
 
 def link_save_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
 
+
 def back_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Back')]")))
+
 
 def save_link_message(driver):
     try:
@@ -186,19 +223,23 @@ def save_link_message(driver):
         logger.warning("Timeout: Success message not found")
         return None
 
+
 def back_branch_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Back')]")))
 
-# ============================== TEST CASES ==============================
 
-def test_login():
-    logger.info("Running test_login")
-    email_input_field().send_keys(email)
-    password_input_field().send_keys(password)
-    wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin"))).click()
-    assert display_myfiles_after_login().text == validation_assert.MY_FILES
-    logger.info("Login successful")
+# ============================== TEST CASES ==============================
+class TestMyShrubsIcon:
+
+    def test_login(self):
+        logger.info("Running test_login")
+        email_input_field().send_keys(email)
+        password_input_field().send_keys(password)
+        wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin"))).click()
+        assert display_myfiles_after_login().text == validation_assert.MY_FILES
+        logger.info("Login successful")
+
 
 def test_my_shrubs():
     logger.info("Navigating to My Shrubs")
@@ -207,6 +248,7 @@ def test_my_shrubs():
     get_new_shrub().click()
     logger.info("Clicked on new shrub button")
 
+
 def test_blank_input_field_shrubs():
     logger.info("Testing blank shrub validations")
     save_new_shrub_btn().click()
@@ -214,6 +256,7 @@ def test_blank_input_field_shrubs():
     assert permissions_field_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
     assert thumbnail_type_field_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
     logger.info("Blank field validations passed")
+
 
 def test_shrub_title_already_exists():
     logger.info("Testing existing shrub title")
@@ -227,6 +270,7 @@ def test_shrub_title_already_exists():
     assert shrub_title_already_exists_validation() == validation_assert.EXISTS_SHRUBS_TITLE
     logger.info("Duplicate title validation passed")
 
+
 def test_valid_shrubs():
     logger.info("Testing valid shrub creation")
     refresh_page()
@@ -238,6 +282,7 @@ def test_valid_shrubs():
     save_new_shrub_btn().click()
     logger.info("Valid shrub created")
 
+
 def test_shrub_style():
     logger.info("Testing shrub styling")
     background_color_dropdown().click()
@@ -246,6 +291,7 @@ def test_shrub_style():
     save_style_btn().click()
     save_header_style_btn().click()
     logger.info("Shrub styling applied successfully")
+
 
 def test_shrub_branch():
     logger.info("Testing branch creation")
@@ -256,6 +302,7 @@ def test_shrub_branch():
     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
     save_new_branch_btn().click()
     logger.info("Branch created successfully")
+
 
 def test_add_link():
     logger.info("Testing add link to branch")

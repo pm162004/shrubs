@@ -113,7 +113,7 @@ def check_invalid_expiry_date():
 
 # --- Test Class with logging ---
 
-class TestMyProfile:
+class TestMyWallet:
 
     def test_login(self):
         logger.info("Running test: Login with valid credentials")

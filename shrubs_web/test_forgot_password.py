@@ -133,7 +133,7 @@ def capture_on_failure(test_name, use_timestamp=True, folder="screenshorts"):
 
 # ============================== TEST CLASS ==============================
 
-class TestChangePassword:
+class TestForgotPassword:
 
 
 
@@ -290,4 +290,3 @@ class TestChangePassword:
         except Exception as e:
             capture_on_failure("test_new_password_login")
             raise e
-
