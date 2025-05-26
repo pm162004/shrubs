@@ -14,7 +14,7 @@ logger = setup_logger()
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-chrome_options.add_argument("--headless")  # Optional for headless mode
+# chrome_options.add_argument("--headless")  # Optional for headless mode
 
 prefs = {
     "credentials_enable_service": False,
@@ -29,8 +29,8 @@ logger.info("Launching browser and navigating to URL")
 driver.get(config.WEB_URL)
 
 email = config.CORRECT_EMAIL
-password = config.CORRECT_PASSWORD
-new_password = config.NEW_PASSWORD
+password = config.CONFIRM_PASSWORD
+new_password = config.RESET_PASSWORD
 wait = WebDriverWait(driver, 25)
 wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "body")))
 

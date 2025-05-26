@@ -1292,3 +1292,11 @@
 2025-05-26 17:26:04,179 - INFO - New password login successful, 'My Files' visible
 2025-05-26 17:26:18,099 - INFO - Quitting browser
 2025-05-26 17:26:18,240 - INFO - Password reset to original and browser closed
+2025-05-26 17:27:55,661 - INFO - Launching browser and navigating to URL
+2025-05-26 17:28:39,990 - INFO - Launching browser and navigating to URL
+2025-05-26 17:28:41,803 - INFO - Running test_login
+2025-05-26 17:29:10,343 - INFO - Navigating to My Shrubs
+2025-05-26 17:29:36,872 - INFO - Launching browser and navigating to URL
+2025-05-26 17:29:38,290 - INFO - Running test_login
+2025-05-26 17:30:04,421 - INFO - Launching browser and navigating to URL
+2025-05-26 17:30:06,003 - INFO - Running test_login
