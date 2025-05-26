@@ -26,7 +26,6 @@ wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
 
-# UI interaction functions
 def forgot_password_button():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='custom-link']")))
 
@@ -131,6 +130,9 @@ def capture_on_failure(test_name, use_timestamp=True, folder="screenshorts"):
     logger.info(f"Screenshot saved as: {test_name}_failure.png")
     return full_path
 
+def login_button():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-signin']")))
+
 # ============================== TEST CLASS ==============================
 
 class TestForgotPassword:
@@ -205,7 +207,7 @@ class TestForgotPassword:
     def test_confirm_password_validation(self):
         try:
             logger.info("Running test: Confirm password mismatch")
-            new_password_input_field().send_keys(creds.RESET_PASSWORD)
+            new_password_input_field().send_keys(creds.CHANGE_OLD_PASSWORD)
             confirm_password_input_field().send_keys(creds.CONFIRM_PASSWORD)
             assert check_error_confirm_password().text == error.CONFIRM_PASSWORD_VALIDATION
             submit_reset_password().click()
@@ -273,7 +275,7 @@ class TestForgotPassword:
             time.sleep(0.5)
             password_input_field().send_keys(creds.CHANGE_OLD_PASSWORD)
 
-            wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin"))).click()
+            login_button().click()
             time.sleep(0.5)
             assert check_invalid_password().text == error.PASSWORD_VALIDATION
 
@@ -284,7 +286,7 @@ class TestForgotPassword:
             logger.info("Running test: Login with new password")
             email_input_field().send_keys(creds.CHANGE_PASSWORD_EMAIL)
             password_input_field().send_keys(creds.RESET_PASSWORD)
-            wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin"))).click()
+            login_button().click()
             assert display_myfiles_after_login().text == validation_assert.MY_FILES
             quit_browser()
         except Exception as e:
