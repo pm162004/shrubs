@@ -1,7 +1,6 @@
 EMAIL_VALIDATION = "Email address is not valid."
 PASSWORD_VALIDATION = "Invalid credentials"
 NON_EXIST_EMAIL = "The selected email is invalid."
-
 EXIST_USERNAME_ERROR = "Username taken. Please choose another"
 EXIST_EMAIL_ERROR = "The email has already been taken."
 CHARACTER_8_PASSWORD = "The Password field must be at least 8 characters"
