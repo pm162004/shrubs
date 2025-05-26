@@ -1303,3 +1303,24 @@
 2025-05-26 19:00:41,910 - INFO - Launching browser and navigating to URL
 2025-05-26 19:00:43,688 - INFO - Running test_login
 2025-05-26 19:01:12,254 - INFO - Navigating to My Shrubs
+2025-05-26 19:01:20,677 - INFO - Launching browser and navigating to URL
+2025-05-26 19:01:22,506 - INFO - Running test_login
+2025-05-26 19:01:40,463 - INFO - Login successful
+2025-05-26 19:01:40,465 - INFO - Navigating to My Shrubs
+2025-05-26 19:01:45,972 - INFO - Clicked on new shrub button
+2025-05-26 19:01:45,974 - INFO - Testing blank shrub validations
+2025-05-26 19:01:45,974 - INFO - Waiting for save shrub button to be clickable
+2025-05-26 19:01:56,532 - INFO - Testing existing shrub title
+2025-05-26 19:01:56,532 - INFO - Refreshing the page
+2025-05-26 19:02:20,988 - INFO - Launching browser and navigating to URL
+2025-05-26 19:02:22,190 - INFO - Running test_login
+2025-05-26 19:02:31,707 - INFO - Login successful
+2025-05-26 19:02:31,709 - INFO - Navigating to My Shrubs
+2025-05-26 19:02:36,979 - INFO - Clicked on new shrub button
+2025-05-26 19:02:36,980 - INFO - Testing blank shrub validations
+2025-05-26 19:02:36,981 - INFO - Waiting for save shrub button to be clickable
+2025-05-26 19:02:37,794 - INFO - Blank field validations passed
+2025-05-26 19:02:37,795 - INFO - Testing existing shrub title
+2025-05-26 19:02:37,795 - INFO - Refreshing the page
+2025-05-26 19:03:03,696 - INFO - Testing valid shrub creation
+2025-05-26 19:03:03,697 - INFO - Refreshing the page
