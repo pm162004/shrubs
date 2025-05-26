@@ -2,13 +2,11 @@ import random
 import string
 import requests
 
-
 def random_email_generator(size=5, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
 
 
 email = random_email_generator() + '@yopmail.com'
-
 
 def random_username_generator(length=8):
     characters = string.ascii_letters + string.digits
@@ -19,9 +17,7 @@ def random_username_generator(length=8):
 
     return username
 
-
 random_username = random_username_generator(10)
-
 
 def get_random_word_from_api():
     try:

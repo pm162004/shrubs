@@ -1,11 +1,8 @@
-from constant.creds import OLD_PASSWORD
-from constant.input_field import DECLINED_CARD_NUMBER
-
 EMAIL_VALIDATION = "Email address is not valid."
 PASSWORD_VALIDATION = "Invalid credentials"
 NON_EXIST_EMAIL = "The selected email is invalid."
-EXIST_USERNAME_SUGGESION1_ERROR = "Username taken. Please choose another or try admin16"
-EXIST_USERNAME_SUGGESION2_ERROR = "Username taken. Please choose another or try test8"
+
+EXIST_USERNAME_ERROR = "Username taken. Please choose another"
 EXIST_EMAIL_ERROR = "The email has already been taken."
 CHARACTER_8_PASSWORD = "The Password field must be at least 8 characters"
 LOWERCASE_PASSWORD = "The Password Must include uppercase, lowercase, number, and special character"
