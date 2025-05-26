@@ -116,7 +116,7 @@ class TestLogin:
         save_screenshot("invalid_password")
         logger.info("Invalid password error validation passed")
 
-    def test_invalid_email(self):
+    def test_non_exist_email(self):
         refresh_page()
         logger.info("Running test: Incorrectly formatted email")
         email_input_field().send_keys(input_field.NON_EXIST_EMAIL)
