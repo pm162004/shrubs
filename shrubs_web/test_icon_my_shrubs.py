@@ -1,3 +1,4 @@
+import random
 import time
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
@@ -47,8 +48,10 @@ def password_input_field():
 
 def refresh_page():
     logger.info("Refreshing the page")
-    driver.refresh()
+    driver.delete_all_cookies()
+    driver.execute_script("window.localStorage.clear(); window.sessionStorage.clear();")
     wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+    return driver.refresh()
 
 
 def display_myfiles_after_login():
@@ -56,6 +59,7 @@ def display_myfiles_after_login():
 
 
 def get_my_shrubs():
+    time.sleep(2)
     return wait.until(EC.presence_of_element_located((By.XPATH, "//p[normalize-space()='My Shrubs']")))
 
 
@@ -131,7 +135,7 @@ def shrub_title_already_exists_validation():
 
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
-    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
+    overlay_spinner()
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
 
 
@@ -230,6 +234,17 @@ def back_branch_link_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Back')]")))
 
 
+def select_random_icon():
+
+    icons = wait.until(EC.visibility_of_all_elements_located(
+        (By.CSS_SELECTOR, "div.icon-hover")
+    ))
+
+    if not icons:
+        raise Exception("No icons found in the modal.")
+
+    random_icon = random.choice(icons)
+    random_icon.click()
 # ============================== TEST CASES ==============================
 class TestMyShrubsIcon:
 
@@ -260,7 +275,6 @@ def test_blank_input_field_shrubs():
 
 def test_shrub_title_already_exists():
     logger.info("Testing existing shrub title")
-    refresh_page()
     shrub_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
     select_view_only_permissions().click()
     shrub_project_icon_btn().click()
@@ -277,7 +291,7 @@ def test_shrub_title_already_exists():
 #     shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
 #     select_view_only_permissions().click()
 #     shrub_project_icon_btn().click()
-#     select_thumbnail_icon().click()
+#     select_random_icon()
 #     thumbnail_icon_cancel_btn().click()
 #     save_new_shrub_btn().click()
 #     logger.info("Valid shrub created")
