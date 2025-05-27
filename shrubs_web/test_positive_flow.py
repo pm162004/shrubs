@@ -66,6 +66,16 @@ def save_screenshot(filename, use_timestamp=True, folder="screenshorts"):
     driver.save_screenshot(f"{folder}/{filename}")  # using global driver
     return full_path
 
+
+def get_my_shrubs():
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//p[normalize-space()='My Shrubs']")))
+
+
+def get_new_shrub():
+    time.sleep(5)
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']")))
+
+
 # ============================== TEST CASES ==============================
 
 class TestPositiveFlow:
@@ -82,3 +92,9 @@ class TestPositiveFlow:
         assert display_myfiles_after_login().text == validation_assert.MY_FILES
         logger.info("Valid login passed, My Files is visible")
         quit_browser()
+
+def test_my_shrubs():
+    logger.info("Navigating to My Shrubs")
+    get_my_shrubs().click()
+    get_new_shrub().click()
+    logger.info("Clicked on new shrub button")

@@ -1328,3 +1328,26 @@
 2025-05-26 19:03:55,428 - INFO - Testing branch creation
 2025-05-26 19:04:20,778 - INFO - Testing add link to branch
 2025-05-27 09:42:53,301 - INFO - Launching browser and navigating to URL
+2025-05-27 10:14:39,089 - INFO - Launching login page
+2025-05-27 10:14:43,613 - INFO - Running test: Valid login flow
+2025-05-27 10:14:43,614 - INFO - Refreshing page
+2025-05-27 10:14:51,099 - INFO - Valid login passed, My Files is visible
+2025-05-27 10:15:28,959 - INFO - Launching browser and navigating to URL
+2025-05-27 10:15:30,441 - INFO - Running test_login
+2025-05-27 10:15:43,830 - INFO - Login successful
+2025-05-27 10:15:43,832 - INFO - Navigating to My Shrubs
+2025-05-27 10:15:50,408 - INFO - Testing blank shrub validations
+2025-05-27 10:15:50,408 - INFO - Waiting for save shrub button to be clickable
+2025-05-27 10:18:02,512 - INFO - Launching browser and navigating to URL
+2025-05-27 10:18:03,936 - INFO - Running test_login
+2025-05-27 10:18:17,058 - INFO - Login successful
+2025-05-27 10:18:17,065 - INFO - Navigating to My Shrubs
+2025-05-27 10:18:22,472 - INFO - Clicked on new shrub button
+2025-05-27 10:20:10,167 - INFO - Launching browser and navigating to URL
+2025-05-27 10:20:11,675 - INFO - Running test_login
+2025-05-27 10:20:22,750 - INFO - Login successful
+2025-05-27 10:20:22,751 - INFO - Navigating to My Shrubs
+2025-05-27 10:20:27,959 - INFO - Clicked on new shrub button
+2025-05-27 10:20:27,961 - INFO - Testing blank shrub validations
+2025-05-27 10:20:27,961 - INFO - Waiting for save shrub button to be clickable
+2025-05-27 10:20:28,696 - INFO - Blank field validations passed

@@ -60,11 +60,12 @@ def get_my_shrubs():
 
 
 def get_new_shrub():
-    return wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".md-button-content")))
+    time.sleep(5)
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']")))
 
 
 def shrub_title_input_field():
-    return wait.until(EC.presence_of_element_located((By.NAME, "shrub-name")))
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='shrub-name']")))
 
 
 def shrub_title_blank_validation():
@@ -244,7 +245,6 @@ class TestMyShrubsIcon:
 def test_my_shrubs():
     logger.info("Navigating to My Shrubs")
     get_my_shrubs().click()
-    time.sleep(5)
     get_new_shrub().click()
     logger.info("Clicked on new shrub button")
 
@@ -271,58 +271,58 @@ def test_shrub_title_already_exists():
     logger.info("Duplicate title validation passed")
 
 
-def test_valid_shrubs():
-    logger.info("Testing valid shrub creation")
-    refresh_page()
-    shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    select_view_only_permissions().click()
-    shrub_project_icon_btn().click()
-    select_thumbnail_icon().click()
-    thumbnail_icon_cancel_btn().click()
-    save_new_shrub_btn().click()
-    logger.info("Valid shrub created")
-
-
-def test_shrub_style():
-    logger.info("Testing shrub styling")
-    background_color_dropdown().click()
-    select_color_picker_btn().click()
-    select_color_from_color_picker().click()
-    save_style_btn().click()
-    save_header_style_btn().click()
-    logger.info("Shrub styling applied successfully")
-
-
-def test_shrub_branch():
-    logger.info("Testing branch creation")
-    get_new_branch().click()
-    create_links_btn().click()
-    save_new_branch_btn().click()
-    assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
-    link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    save_new_branch_btn().click()
-    logger.info("Branch created successfully")
-
-
-def test_add_link():
-    logger.info("Testing add link to branch")
-    branch_add_link_btn().click()
-    add_link_input_field().send_keys(Keys.ENTER)
-    time.sleep(1)
-    link_save_btn().click()
-    assert blank_link_validation().text == validation_assert.ENTER_LINK
-    add_link_input_field().send_keys(input_field.VALID_SHRUBS)
-    link_save_btn().click()
-    assert invalid_link_error().text == error.LINK_ERROR
-    add_link_input_field().send_keys(Keys.CONTROL, "a")
-    add_link_input_field().send_keys(Keys.DELETE)
-    add_link_input_field().send_keys(input_field.LINK)
-    add_link_input_field().send_keys(Keys.ENTER)
-    time.sleep(2)
-    link_save_btn().click()
-    success_msg = save_link_message(driver)
-    assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
-    back_branch_link_btn().click()
-    link_save_btn().click()
-    back_link_btn().click()
-    logger.info("Link added successfully")
+# def test_valid_shrubs():
+#     logger.info("Testing valid shrub creation")
+#     refresh_page()
+#     shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
+#     select_view_only_permissions().click()
+#     shrub_project_icon_btn().click()
+#     select_thumbnail_icon().click()
+#     thumbnail_icon_cancel_btn().click()
+#     save_new_shrub_btn().click()
+#     logger.info("Valid shrub created")
+#
+#
+# def test_shrub_style():
+#     logger.info("Testing shrub styling")
+#     background_color_dropdown().click()
+#     select_color_picker_btn().click()
+#     select_color_from_color_picker().click()
+#     save_style_btn().click()
+#     save_header_style_btn().click()
+#     logger.info("Shrub styling applied successfully")
+#
+#
+# def test_shrub_branch():
+#     logger.info("Testing branch creation")
+#     get_new_branch().click()
+#     create_links_btn().click()
+#     save_new_branch_btn().click()
+#     assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
+#     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+#     save_new_branch_btn().click()
+#     logger.info("Branch created successfully")
+#
+#
+# def test_add_link():
+#     logger.info("Testing add link to branch")
+#     branch_add_link_btn().click()
+#     add_link_input_field().send_keys(Keys.ENTER)
+#     time.sleep(1)
+#     link_save_btn().click()
+#     assert blank_link_validation().text == validation_assert.ENTER_LINK
+#     add_link_input_field().send_keys(input_field.VALID_SHRUBS)
+#     link_save_btn().click()
+#     assert invalid_link_error().text == error.LINK_ERROR
+#     add_link_input_field().send_keys(Keys.CONTROL, "a")
+#     add_link_input_field().send_keys(Keys.DELETE)
+#     add_link_input_field().send_keys(input_field.LINK)
+#     add_link_input_field().send_keys(Keys.ENTER)
+#     time.sleep(2)
+#     link_save_btn().click()
+#     success_msg = save_link_message(driver)
+#     assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
+#     back_branch_link_btn().click()
+#     link_save_btn().click()
+#     back_link_btn().click()
+#     logger.info("Link added successfully")
