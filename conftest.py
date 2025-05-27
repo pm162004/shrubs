@@ -6,7 +6,8 @@ def pytest_collection_modifyitems(session, config, items):
         "TestMyProfile",
         "TestMyWallet",
         "TestChangePassword",
-        "TestMyShrubsIcon"
+        "TestMyShrubsIcon",
+        "TestPositiveFlow"
     ]
 
     def get_class_name(item):

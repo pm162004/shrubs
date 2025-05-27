@@ -9,8 +9,6 @@ from constant import creds, validation_assert, input_field, error
 from log_config import setup_logger
 from selenium.common.exceptions import (
     NoSuchWindowException,
-    TimeoutException,
-    WebDriverException,
 )
 logger = setup_logger()
 

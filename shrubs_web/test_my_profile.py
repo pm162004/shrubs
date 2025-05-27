@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
-from constant import creds, validation_assert, input_field, error
+from constant import validation_assert, input_field, error
 from log_config import setup_logger
 
 logger = setup_logger()
@@ -21,7 +21,6 @@ wait = WebDriverWait(driver, 25)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
-# Element getters (same as your existing ones)
 def email_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "email")))
 
