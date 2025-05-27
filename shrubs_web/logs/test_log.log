@@ -1847,3 +1847,8 @@
 2025-05-27 17:07:36,839 - INFO - Refreshing page
 2025-05-27 17:08:04,959 - INFO - Navigating to My Shrubs
 2025-05-27 17:08:13,147 - INFO - Testing valid shrub creation
+2025-05-27 18:08:50,564 - INFO - Launching login page
+2025-05-27 18:08:54,847 - INFO - Running test: Valid login flow
+2025-05-27 18:08:54,847 - INFO - Refreshing page
+2025-05-27 18:09:22,903 - INFO - Navigating to My Shrubs
+2025-05-27 18:09:53,965 - INFO - Testing valid shrub creation
