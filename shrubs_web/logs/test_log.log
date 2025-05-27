@@ -1670,3 +1670,180 @@
 2025-05-27 14:15:11,199 - INFO - Clicked on new shrub button
 2025-05-27 14:15:11,201 - INFO - Testing valid shrub creation
 2025-05-27 14:15:29,670 - INFO - Valid shrub created
+2025-05-27 15:05:36,993 - INFO - Launching login page
+2025-05-27 15:05:41,536 - INFO - Running test: Valid login flow
+2025-05-27 15:05:41,536 - INFO - Refreshing page
+2025-05-27 15:05:54,629 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:05:54,640 - INFO - Navigating to My Shrubs
+2025-05-27 15:06:17,068 - INFO - Clicked on new shrub button
+2025-05-27 15:06:17,073 - INFO - Testing valid shrub creation
+2025-05-27 15:07:36,282 - INFO - Launching login page
+2025-05-27 15:07:40,932 - INFO - Running test: Valid login flow
+2025-05-27 15:07:40,932 - INFO - Refreshing page
+2025-05-27 15:07:50,772 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:07:50,774 - INFO - Navigating to My Shrubs
+2025-05-27 15:08:04,527 - INFO - Clicked on new shrub button
+2025-05-27 15:08:04,529 - INFO - Testing valid shrub creation
+2025-05-27 15:09:00,574 - INFO - Launching login page
+2025-05-27 15:09:05,109 - INFO - Running test: Valid login flow
+2025-05-27 15:09:05,109 - INFO - Refreshing page
+2025-05-27 15:09:30,743 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:09:30,757 - INFO - Navigating to My Shrubs
+2025-05-27 15:09:50,631 - INFO - Clicked on new shrub button
+2025-05-27 15:09:50,634 - INFO - Testing valid shrub creation
+2025-05-27 15:11:04,488 - INFO - Launching login page
+2025-05-27 15:11:08,995 - INFO - Running test: Valid login flow
+2025-05-27 15:11:08,995 - INFO - Refreshing page
+2025-05-27 15:11:36,217 - INFO - Navigating to My Shrubs
+2025-05-27 15:12:13,318 - INFO - Testing valid shrub creation
+2025-05-27 15:35:43,090 - INFO - Launching login page
+2025-05-27 15:35:47,611 - INFO - Running test: Valid login flow
+2025-05-27 15:35:47,612 - INFO - Refreshing page
+2025-05-27 15:36:02,649 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:36:02,651 - INFO - Navigating to My Shrubs
+2025-05-27 15:36:21,482 - INFO - Clicked on new shrub button
+2025-05-27 15:36:21,485 - INFO - Testing valid shrub creation
+2025-05-27 15:38:38,400 - INFO - Launching login page
+2025-05-27 15:38:44,636 - INFO - Running test: Valid login flow
+2025-05-27 15:38:44,636 - INFO - Refreshing page
+2025-05-27 15:38:54,102 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:38:54,107 - INFO - Navigating to My Shrubs
+2025-05-27 15:39:13,978 - INFO - Clicked on new shrub button
+2025-05-27 15:39:13,982 - INFO - Testing valid shrub creation
+2025-05-27 15:40:18,389 - INFO - Launching login page
+2025-05-27 15:40:22,715 - INFO - Running test: Valid login flow
+2025-05-27 15:40:22,715 - INFO - Refreshing page
+2025-05-27 15:40:34,019 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:40:34,022 - INFO - Navigating to My Shrubs
+2025-05-27 15:40:50,968 - INFO - Clicked on new shrub button
+2025-05-27 15:40:50,971 - INFO - Testing valid shrub creation
+2025-05-27 15:42:23,226 - INFO - Launching login page
+2025-05-27 15:42:27,602 - INFO - Running test: Valid login flow
+2025-05-27 15:42:27,602 - INFO - Refreshing page
+2025-05-27 15:42:46,828 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:42:46,838 - INFO - Navigating to My Shrubs
+2025-05-27 15:43:04,458 - INFO - Clicked on new shrub button
+2025-05-27 15:43:04,460 - INFO - Testing valid shrub creation
+2025-05-27 15:44:01,901 - INFO - Launching login page
+2025-05-27 15:44:06,545 - INFO - Running test: Valid login flow
+2025-05-27 15:44:06,545 - INFO - Refreshing page
+2025-05-27 15:44:19,379 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:44:19,381 - INFO - Navigating to My Shrubs
+2025-05-27 15:44:36,731 - INFO - Clicked on new shrub button
+2025-05-27 15:44:36,734 - INFO - Testing valid shrub creation
+2025-05-27 15:46:02,535 - INFO - Launching login page
+2025-05-27 15:46:07,116 - INFO - Running test: Valid login flow
+2025-05-27 15:46:07,116 - INFO - Refreshing page
+2025-05-27 15:46:22,611 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:46:22,612 - INFO - Navigating to My Shrubs
+2025-05-27 15:46:40,962 - INFO - Clicked on new shrub button
+2025-05-27 15:46:40,963 - INFO - Testing valid shrub creation
+2025-05-27 15:47:45,952 - INFO - Launching login page
+2025-05-27 15:47:50,425 - INFO - Running test: Valid login flow
+2025-05-27 15:47:50,425 - INFO - Refreshing page
+2025-05-27 15:48:06,730 - INFO - Valid login passed, My Files is visible
+2025-05-27 15:48:06,741 - INFO - Navigating to My Shrubs
+2025-05-27 15:48:32,974 - INFO - Clicked on new shrub button
+2025-05-27 15:48:32,976 - INFO - Testing valid shrub creation
+2025-05-27 15:50:04,628 - INFO - Launching login page
+2025-05-27 15:50:09,983 - INFO - Running test: Valid login flow
+2025-05-27 15:50:09,986 - INFO - Refreshing page
+2025-05-27 15:50:38,610 - INFO - Navigating to My Shrubs
+2025-05-27 15:51:05,928 - INFO - Testing valid shrub creation
+2025-05-27 16:17:23,088 - INFO - Launching login page
+2025-05-27 16:17:27,819 - INFO - Running test: Valid login flow
+2025-05-27 16:17:27,819 - INFO - Refreshing page
+2025-05-27 16:17:41,828 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:17:41,844 - INFO - Navigating to My Shrubs
+2025-05-27 16:17:58,826 - INFO - Clicked on new shrub button
+2025-05-27 16:17:58,833 - INFO - Testing valid shrub creation
+2025-05-27 16:18:45,421 - INFO - Launching login page
+2025-05-27 16:18:51,827 - INFO - Running test: Valid login flow
+2025-05-27 16:18:51,827 - INFO - Refreshing page
+2025-05-27 16:19:09,190 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:19:09,203 - INFO - Navigating to My Shrubs
+2025-05-27 16:19:30,804 - INFO - Clicked on new shrub button
+2025-05-27 16:19:30,806 - INFO - Testing valid shrub creation
+2025-05-27 16:31:51,931 - INFO - Launching login page
+2025-05-27 16:31:56,639 - INFO - Running test: Valid login flow
+2025-05-27 16:31:56,639 - INFO - Refreshing page
+2025-05-27 16:32:05,347 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:32:05,354 - INFO - Navigating to My Shrubs
+2025-05-27 16:32:16,038 - INFO - Clicked on new shrub button
+2025-05-27 16:32:16,039 - INFO - Testing valid shrub creation
+2025-05-27 16:34:25,725 - INFO - Launching login page
+2025-05-27 16:34:30,406 - INFO - Running test: Valid login flow
+2025-05-27 16:34:30,406 - INFO - Refreshing page
+2025-05-27 16:34:39,116 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:34:39,118 - INFO - Navigating to My Shrubs
+2025-05-27 16:34:51,214 - INFO - Clicked on new shrub button
+2025-05-27 16:34:51,217 - INFO - Testing valid shrub creation
+2025-05-27 16:37:41,802 - INFO - Launching login page
+2025-05-27 16:37:46,334 - INFO - Running test: Valid login flow
+2025-05-27 16:37:46,335 - INFO - Refreshing page
+2025-05-27 16:37:58,906 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:37:58,908 - INFO - Navigating to My Shrubs
+2025-05-27 16:38:11,954 - INFO - Clicked on new shrub button
+2025-05-27 16:38:11,964 - INFO - Testing valid shrub creation
+2025-05-27 16:39:12,437 - INFO - Launching login page
+2025-05-27 16:39:17,251 - INFO - Running test: Valid login flow
+2025-05-27 16:39:17,252 - INFO - Refreshing page
+2025-05-27 16:39:32,763 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:39:32,768 - INFO - Navigating to My Shrubs
+2025-05-27 16:39:50,055 - INFO - Clicked on new shrub button
+2025-05-27 16:39:50,058 - INFO - Testing valid shrub creation
+2025-05-27 16:42:53,014 - INFO - Launching login page
+2025-05-27 16:42:57,627 - INFO - Running test: Valid login flow
+2025-05-27 16:42:57,628 - INFO - Refreshing page
+2025-05-27 16:43:11,905 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:43:11,907 - INFO - Navigating to My Shrubs
+2025-05-27 16:43:26,968 - INFO - Clicked on new shrub button
+2025-05-27 16:43:26,969 - INFO - Testing valid shrub creation
+2025-05-27 16:43:50,544 - INFO - Valid shrub created
+2025-05-27 16:44:15,326 - INFO - Launching login page
+2025-05-27 16:44:19,833 - INFO - Waiting for save shrub button to be clickable
+2025-05-27 16:44:27,772 - INFO - Launching login page
+2025-05-27 16:44:32,093 - INFO - Running test: Valid login flow
+2025-05-27 16:44:32,093 - INFO - Refreshing page
+2025-05-27 16:44:43,272 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:44:43,273 - INFO - Navigating to My Shrubs
+2025-05-27 16:45:00,417 - INFO - Clicked on new shrub button
+2025-05-27 16:45:00,421 - INFO - Testing valid shrub creation
+2025-05-27 16:45:41,088 - INFO - Valid shrub created
+2025-05-27 16:51:25,261 - INFO - Launching login page
+2025-05-27 16:51:29,823 - INFO - Running test: Valid login flow
+2025-05-27 16:51:29,823 - INFO - Refreshing page
+2025-05-27 16:51:51,557 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:51:51,559 - INFO - Navigating to My Shrubs
+2025-05-27 16:52:12,907 - INFO - Clicked on new shrub button
+2025-05-27 16:52:12,910 - INFO - Testing valid shrub creation
+2025-05-27 16:52:46,942 - INFO - Valid shrub created
+2025-05-27 16:53:15,231 - INFO - Launching login page
+2025-05-27 16:53:19,577 - INFO - Running test: Valid login flow
+2025-05-27 16:53:19,577 - INFO - Refreshing page
+2025-05-27 16:53:32,857 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:53:32,863 - INFO - Navigating to My Shrubs
+2025-05-27 16:53:51,853 - INFO - Clicked on new shrub button
+2025-05-27 16:53:51,856 - INFO - Testing valid shrub creation
+2025-05-27 16:54:52,501 - INFO - Launching login page
+2025-05-27 16:54:56,776 - INFO - Running test: Valid login flow
+2025-05-27 16:54:56,776 - INFO - Refreshing page
+2025-05-27 16:55:18,317 - INFO - Valid login passed, My Files is visible
+2025-05-27 16:55:18,319 - INFO - Navigating to My Shrubs
+2025-05-27 16:55:41,991 - INFO - Clicked on new shrub button
+2025-05-27 16:55:41,995 - INFO - Testing valid shrub creation
+2025-05-27 16:57:07,969 - INFO - Launching login page
+2025-05-27 16:57:12,582 - INFO - Running test: Valid login flow
+2025-05-27 16:57:12,582 - INFO - Refreshing page
+2025-05-27 16:57:41,245 - INFO - Navigating to My Shrubs
+2025-05-27 16:58:30,929 - INFO - Testing valid shrub creation
+2025-05-27 17:01:09,266 - INFO - Launching login page
+2025-05-27 17:01:13,983 - INFO - Running test: Valid login flow
+2025-05-27 17:01:13,983 - INFO - Refreshing page
+2025-05-27 17:01:42,288 - INFO - Navigating to My Shrubs
+2025-05-27 17:02:09,642 - INFO - Testing valid shrub creation
+2025-05-27 17:07:31,287 - INFO - Launching login page
+2025-05-27 17:07:36,839 - INFO - Running test: Valid login flow
+2025-05-27 17:07:36,839 - INFO - Refreshing page
+2025-05-27 17:08:04,959 - INFO - Navigating to My Shrubs
+2025-05-27 17:08:13,147 - INFO - Testing valid shrub creation
