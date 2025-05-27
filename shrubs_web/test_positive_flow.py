@@ -1,6 +1,7 @@
 import random
 import time,os,datetime
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -100,6 +101,7 @@ def shrub_project_icon_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Shrub Project Icon']")))
 
 def select_thumbnail_image_btn():
+    overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Thumbnail Image']")))
 
 
@@ -118,7 +120,38 @@ def next_image_btn():
     overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
 
+def save_crop_image_btn():
+    overlay_spinner()
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='button' and .//div[@class='md-button-content' and normalize-space()='Save']]")))
+
+def upload_image_my_files_btn():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "//div[contains(@class, 'sidebar-card') and .//p[normalize-space(text())='My Files']]//a[contains(@class, 'menu-list-item')]")))
+
+def upload_image_my_shrubs_btn():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "//div[contains(@class, 'sidebar-card') and .//p[normalize-space(text())='My Shrubs']]//a[contains(@class, 'menu-list-item')]")))
+
+def select_thumbnail_folder():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "//div[span[text()[normalize-space()='thumbnail']]]")))
+
+
+
+def select_random_image(driver):
+    try:
+        images = WebDriverWait(driver, 10).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "img.thumbnail-height"))
+        )
+        selected_image = random.choice(images)
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_image)
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "img.thumbnail-height")))
+        ActionChains(driver).move_to_element(selected_image).click().perform()
+    except Exception as e:
+        raise Exception(f"Failed to select random image: {str(e)}")
+
 def zoomin_image_btn():
+    overlay_spinner()
     zoom_in_button = wait.until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-in')]"))
     )
@@ -126,6 +159,7 @@ def zoomin_image_btn():
     return zoom_in_button.click()
 
 def zoom_out_image_btn():
+    overlay_spinner()
     zoom_out_button = wait.until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-out')]"))
     )
@@ -162,9 +196,35 @@ def upload_random_image(relative_folder):
 
     file_path = os.path.join(folder_path, random.choice(images))
 
-    wait = WebDriverWait(driver, 20)
+
     file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
     file_input.send_keys(file_path)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File already exists!']"))
+        )
+        ok_button = driver.find_element(By.XPATH, "//button[normalize-space()='Ok']")
+        ok_button.click()
+    except:
+        pass
+
+def select_random_my_shrub():
+    try:
+        shrub_cards = wait.until(EC.presence_of_all_elements_located((
+            By.CSS_SELECTOR,
+            "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg"
+        )))
+
+        selected_shrub = random.choice(shrub_cards)
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_shrub)
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg")))
+        selected_shrub.click()
+    except Exception as e:
+        print(f"[ERROR] Failed to select shrub: {e}")
+        driver.save_screenshot("error_select_shrub.png")
+        raise
+
 
 
 
@@ -206,10 +266,50 @@ def test_valid_shrubs():
     thumbnail_icon_cancel_btn().click()
 
 
-def test_valid_image_flow():
+def test_valid_my_computer_image_flow():
     select_thumbnail_image_btn().click()
     upload_random_image("image")
     next_image_btn().click()
     zoomin_image_btn()
     zoom_out_image_btn()
+    save_crop_image_btn().click()
+
+def test_valid_my_files_image_flow():
+    overlay_spinner()
+    select_thumbnail_image_btn().click()
+    upload_image_my_files_btn().click()
+    # WebDriverWait(driver, 10).until(
+    #     EC.presence_of_element_located((By.CSS_SELECTOR, "img.thumbnail-height"))
+    # )
+    select_random_image(driver)
+    next_image_btn().click()
+    zoomin_image_btn()
+    zoom_out_image_btn()
+    save_crop_image_btn().click()
     logger.info("Valid shrub created")
+
+def test_valid_my_shrubs_image_flow():
+    select_thumbnail_image_btn().click()
+    upload_image_my_shrubs_btn().click()
+    select_random_my_shrub()
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']"))
+    )
+
+    select_thumbnail_folder().click()
+    next_image_btn().click()
+    zoomin_image_btn()
+    zoom_out_image_btn()
+    save_crop_image_btn().click()
+    logger.info("Valid shrub created")
+# save_new_shrub_btn().click()
+
+# def test_shrub_style():
+#     logger.info("Testing shrub styling")
+#     background_color_dropdown().click()
+#     select_color_picker_btn().click()
+#     select_color_from_color_picker().click()
+#     save_style_btn().click()
+#     save_header_style_btn().click()
+#     logger.info("Shrub styling applied successfully")
+#
