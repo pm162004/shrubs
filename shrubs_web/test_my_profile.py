@@ -8,6 +8,7 @@ from shrubs_setup.config import config
 from constant import validation_assert, input_field, error
 from log_config import setup_logger
 
+
 logger = setup_logger()
 
 chrome_options = webdriver.ChromeOptions()
@@ -28,14 +29,18 @@ def password_input_field():
     return wait.until(EC.presence_of_element_located((By.NAME, "password")))
 
 def display_myfiles_after_login():
-    return wait.until(EC.presence_of_element_located(
-        (By.XPATH, "//b[@class='text-active text-xs font-bold sidebar-menu'][normalize-space()='My Files']")))
+
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//b[normalize-space()='My Files']")))
 
 def droppable_area():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//i[normalize-space()='arrow_drop_down']")))
 
 def my_profile():
-    return wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='user']//li[1]")))
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//a[@href='/edit-profile' and .//span[contains(text(), 'My Profile')]]")))
+
+
+def overlay_spinner():
+    return WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
 
 def check_blank_first_name():
     return wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'First Name is required')]")))
@@ -131,18 +136,30 @@ def bio_input_field():
 def save_my_profile_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save']")))
 
+def login_button():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-signin']")))
+
+
+def refresh_page():
+    logger.info("Refreshing page")
+    return driver.refresh()
+
+
+def password_mask_button():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//*[name()='path' and contains(@d,'M12 7c2.76')]")))
 
 class TestMyProfile:
 
-    def test_login(self):
-        logger.info("Running test: Login")
-        email_input_field().send_keys(email)
-        password_input_field().send_keys(password)
-        btn_login = wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin")))
-        btn_login.click()
-        time.sleep(5)
+    def test_valid_login_flow(self):
+        logger.info("Running test: Valid login flow")
+        refresh_page()
+        email_input_field().send_keys(config.CORRECT_EMAIL)
+        password_input_field().send_keys(config.CORRECT_PASSWORD)
+        password_mask_button().click()
+        logger.debug("Clicked password visibility toggle")
+        login_button().click()
         assert display_myfiles_after_login().text == validation_assert.MY_FILES
-        logger.info("Login successful, 'My Files' is visible")
+        logger.info("Valid login passed, My Files is visible")
 
     def test_my_profile(self):
         logger.info("Running test: Check mandatory field validation messages on My Profile")
@@ -163,6 +180,7 @@ class TestMyProfile:
         logger.info("Running test: Input invalid and valid data on My Profile")
         firstname_input_field().send_keys(input_field.FIRSTNAME)
         lastname_input_field().send_keys(input_field.LASTNAME)
+        overlay_spinner()
         date_of_birth_input_field().send_keys(input_field.INVALID_DATE_OF_BIRTH)
         date_picker_ok_btn().click()
         assert check_invalid_date_of_birth().text == error.DATE_OF_BIRTH_VALIDATION

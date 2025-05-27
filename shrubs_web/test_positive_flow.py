@@ -114,6 +114,23 @@ def save_new_shrub_btn():
     overlay_spinner()
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
 
+def next_image_btn():
+    overlay_spinner()
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
+
+def zoomin_image_btn():
+    zoom_in_button = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-in')]"))
+    )
+
+    return zoom_in_button.click()
+
+def zoom_out_image_btn():
+    zoom_out_button = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-out')]"))
+    )
+    return zoom_out_button.click()
+
 def overlay_spinner():
     return WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
 
@@ -131,9 +148,26 @@ def select_random_icon():
     random_icon.click()
 
 
-def upload_file(file_path):
+# def upload_file(file_path):
+#     abs_path = os.path.abspath(file_path)  # Convert to absolute path
+#     file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
+#     file_input.send_keys(abs_path)
+
+
+def upload_random_image(relative_folder):
+    folder_path = os.path.abspath(relative_folder)
+    images = [f for f in os.listdir(folder_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+    if not images:
+        raise Exception(f"No images found in {folder_path}")
+
+    file_path = os.path.join(folder_path, random.choice(images))
+
+    wait = WebDriverWait(driver, 20)
     file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
     file_input.send_keys(file_path)
+
+
+
 # ============================== TEST CASES ==============================
 
 class TestPositiveFlow:
@@ -170,8 +204,12 @@ def test_valid_shrubs():
     shrub_project_icon_btn().click()
     select_random_icon()
     thumbnail_icon_cancel_btn().click()
-    select_thumbnail_image_btn().click()
-    save_new_shrub_btn().click()
-    upload_file("shrubs_web/image/i1.jpg")
-    logger.info("Valid shrub created")
 
+
+def test_valid_image_flow():
+    select_thumbnail_image_btn().click()
+    upload_random_image("image")
+    next_image_btn().click()
+    zoomin_image_btn()
+    zoom_out_image_btn()
+    logger.info("Valid shrub created")

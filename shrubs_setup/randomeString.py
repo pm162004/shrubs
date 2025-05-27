@@ -1,7 +1,7 @@
 import random
 import string
 import requests
-
+import os
 def random_email_generator(size=5, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
 
@@ -61,3 +61,12 @@ def random_password_generator(length=12):
 
 random_password = random_password_generator(12)
 
+def get_relative_image_path(base_file_path, image_file_path):
+    return os.path.relpath(image_file_path, os.path.dirname(base_file_path))
+
+# Example usage
+base_path = "/home/web-h-028/PycharmProjects/shrubs_automation/shrubs_web/test_positive_flow.py"
+image_path = "/home/web-h-028/PycharmProjects/shrubs_automation/shrubs_web/image"
+
+relative_path = get_relative_image_path(base_path, image_path)
+print(relative_path)
