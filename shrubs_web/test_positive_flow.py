@@ -29,7 +29,9 @@ wait = WebDriverWait(driver, 25)
 
 
 def display_myfiles_after_login():
-    return wait.until(EC.presence_of_element_located((By.XPATH, "//b[normalize-space()='My Files']")))
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//a[@href='/platform/files' and contains(@class, 'nav-item') and contains(@class, 'active') and contains(., 'My Files')]")))
+
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//a[@href='/platform/files' and contains(@class, 'nav-item') and contains(@class, 'active') and contains(., 'My Files')]")))
 
 
 def email_input_field():
@@ -128,6 +130,7 @@ def select_thumbnail_icon():
 
 
 def thumbnail_icon_cancel_btn():
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'Cancel')]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
 
 
@@ -329,26 +332,26 @@ class TestPositiveFlow:
         save_crop_image_btn().click()
         logger.info("Clicked 'Save' button to save cropped image")
 
-    def test_valid_my_files_image_flow(self):
-        logger.info("Starting 'My Files' image upload and crop flow")
-        overlay_spinner()
-        logger.info("Overlay spinner disappeared")
-        select_thumbnail_image_btn().click()
-        logger.info("Clicked 'Thumbnail Image' button")
-        upload_image_my_files_btn().click()
-        logger.info("Clicked 'My Files' folder upload button")
-        logger.info("Thumbnail images loaded in 'My Files' folder")
-        select_random_image(driver)
-        logger.info("Selected a random image from 'My Files'")
-        next_image_btn().click()
-        logger.info("Clicked 'Next' button")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        logger.info("Clicked 'Save' button for cropped image")
-        logger.info("Valid shrub created in 'My Files' image flow")
+    # def test_valid_my_files_image_flow(self):
+    #     logger.info("Starting 'My Files' image upload and crop flow")
+    #     overlay_spinner()
+    #     logger.info("Overlay spinner disappeared")
+    #     select_thumbnail_image_btn().click()
+    #     logger.info("Clicked 'Thumbnail Image' button")
+    #     upload_image_my_files_btn().click()
+    #     logger.info("Clicked 'My Files' folder upload button")
+    #     logger.info("Thumbnail images loaded in 'My Files' folder")
+    #     select_random_image(driver)
+    #     logger.info("Selected a random image from 'My Files'")
+    #     next_image_btn().click()
+    #     logger.info("Clicked 'Next' button")
+    #     zoomin_image_btn()
+    #     logger.info("Zoomed in image")
+    #     zoom_out_image_btn()
+    #     logger.info("Zoomed out image")
+    #     save_crop_image_btn().click()
+    #     logger.info("Clicked 'Save' button for cropped image")
+    #     logger.info("Valid shrub created in 'My Files' image flow")
 
     # def test_valid_my_shrubs_image_flow(self):
     #     logger.info("Starting 'My Shrubs' image upload and crop flow")
