@@ -285,28 +285,28 @@ def test_shrub_title_already_exists():
     logger.info("Duplicate title validation passed")
 
 
-# def test_valid_shrubs():
-#     logger.info("Testing valid shrub creation")
-#     refresh_page()
-#     shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
-#     select_view_only_permissions().click()
-#     shrub_project_icon_btn().click()
-#     select_random_icon()
-#     thumbnail_icon_cancel_btn().click()
-#     save_new_shrub_btn().click()
-#     logger.info("Valid shrub created")
-#
-#
-# def test_shrub_style():
-#     logger.info("Testing shrub styling")
-#     background_color_dropdown().click()
-#     select_color_picker_btn().click()
-#     select_color_from_color_picker().click()
-#     save_style_btn().click()
-#     save_header_style_btn().click()
-#     logger.info("Shrub styling applied successfully")
-#
-#
+def test_valid_shrubs():
+    logger.info("Testing valid shrub creation")
+    refresh_page()
+    shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    select_view_only_permissions().click()
+    shrub_project_icon_btn().click()
+    select_random_icon()
+    thumbnail_icon_cancel_btn().click()
+    save_new_shrub_btn().click()
+    logger.info("Valid shrub created")
+
+
+def test_shrub_style():
+    logger.info("Testing shrub styling")
+    background_color_dropdown().click()
+    select_color_picker_btn().click()
+    select_color_from_color_picker().click()
+    save_style_btn().click()
+    save_header_style_btn().click()
+    logger.info("Shrub styling applied successfully")
+
+
 # def test_shrub_branch():
 #     logger.info("Testing branch creation")
 #     get_new_branch().click()

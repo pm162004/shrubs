@@ -9,6 +9,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
 from constant import validation_assert, input_field, error
 from log_config import setup_logger
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 logger = setup_logger()
 
@@ -231,6 +233,15 @@ def zoomin_image_btn():
 
     return zoom_in_button.click()
 
+def ok_btn():
+    overlay_spinner()
+    ok = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//div[@class='content' and normalize-space()='Ok']"))
+    )
+
+    return ok.click()
+
+
 
 def zoom_out_image_btn():
     overlay_spinner()
@@ -243,6 +254,28 @@ def zoom_out_image_btn():
 def overlay_spinner():
     return WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
 
+def select_random_font(driver):
+    wait = WebDriverWait(driver, 10)
+
+    # Open the font dropdown first (click the combobox area)
+    combobox = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div.multiselect")))
+    combobox.click()
+
+    # Wait for all visible font options to load
+    font_options = wait.until(EC.visibility_of_all_elements_located(
+        (By.CSS_SELECTOR, "li.multiselect__element:not([style*='display: none']) > span.multiselect__option")
+    ))
+
+    if not font_options:
+        raise Exception("No fonts found in the dropdown.")
+
+    # Randomly select and click a font
+    selected_font = random.choice(font_options)
+    font_name = selected_font.text.strip()
+    selected_font.click()
+
+    print(f"Selected random font: {font_name}")
+    return font_name
 
 def select_random_icon():
     icons = wait.until(EC.visibility_of_all_elements_located(
@@ -278,7 +311,7 @@ def upload_random_image(relative_folder):
 
 
 
-from selenium.webdriver.common.action_chains import ActionChains
+
 
 def select_random_my_shrub(driver, wait):
     try:
@@ -317,7 +350,7 @@ def select_random_my_shrub(driver, wait):
 def handle_file_exists_popup(driver):
     try:
         WebDriverWait(driver, 5).until(
-            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File already exists!']"))
+            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File upload option']"))
         )
         print("[INFO] 'File already exists!' popup detected.")
 
@@ -328,6 +361,128 @@ def handle_file_exists_popup(driver):
         print("[INFO] Clicked on 'Ok' button.")
     except Exception:
         print("[INFO] 'File already exists!' popup not found — skipping.")
+
+def background_color_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
+
+def shrub_title_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shrub Title']")))
+
+def font_color_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Color'])[1]")))
+
+def select_font_style_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font'])[1]")))
+
+def select_font_weight_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font weight'])[1]")))
+
+def select_font_size_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font size'])[1]")))
+
+
+def select_random_alignment(driver):
+    wait = WebDriverWait(driver, 10)
+
+    # Locate all alignment buttons (left, center, right)
+    alignment_buttons = wait.until(EC.presence_of_all_elements_located((
+        By.XPATH,
+        "//h5[contains(text(),'Horizontal font alignment')]/following::div[contains(@class,'justify-around')]/span"
+    )))
+
+    # Pick a random button and click it
+    random_button = random.choice(alignment_buttons)
+    alignment_name = random_button.find_element(By.TAG_NAME, "i").text
+    random_button.click()
+
+    print(f"Random alignment selected: {alignment_name}")
+def select_font_alignment_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Alignment'])[1]")))
+
+def select_bold_font_weight(driver):
+    wait = WebDriverWait(driver, 10)
+
+    # Click to open the 'Select your font weight' dropdown
+    font_weight_dropdown = wait.until(EC.element_to_be_clickable((
+        By.XPATH, "//label[contains(text(), 'Select your font weight')]/following-sibling::div"
+    )))
+    font_weight_dropdown.click()
+
+    # Wait for the 'Bold' option to be visible and click it
+    bold_option = wait.until(EC.element_to_be_clickable((
+        By.XPATH, "//span[@class='multiselect__option' and normalize-space(text())='Bold']"
+    )))
+    bold_option.click()
+
+    print("Bold font weight selected.")
+
+def select_random_font_size(driver):
+    wait = WebDriverWait(driver, 10)
+
+    # Open the font size dropdown
+    font_size_dropdown = wait.until(EC.element_to_be_clickable((
+        By.XPATH, "//label[contains(text(), 'Select your font size')]/following-sibling::div"
+    )))
+    font_size_dropdown.click()
+
+    # Get all font size options
+    font_size_options = wait.until(EC.presence_of_all_elements_located((
+        By.XPATH, "//span[@class='multiselect__option']"
+    )))
+
+    # Pick a random option
+    random_option = random.choice(font_size_options)
+    print(f"Randomly selected font size: {random_option.text}")
+
+    # Click the selected option
+    random_option.click()
+def shrub_header_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Sub Header')]")))
+
+def shrub_description_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shrub Description']")))
+
+def select_color_picker_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='thumbnail']")))
+
+def select_background_image_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'background-image')]")))
+
+def select_no_background_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'no-background')]")))
+
+
+def select_color_from_color_picker():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Color:#BD10E0']")))
+
+def select_random_preset_color(driver, wait):
+    try:
+        # Wait for all preset color elements
+        preset_colors = wait.until(EC.presence_of_all_elements_located((
+            By.XPATH, "//div[contains(@class, 'vc-sketch-presets-color')]"
+        )))
+
+        # Choose one randomly
+        random_color = random.choice(preset_colors)
+
+        # Scroll into view and click using ActionChains
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", random_color)
+        ActionChains(driver).move_to_element(random_color).click().perform()
+
+        # Optional: Print the color being selected
+        print(f"[INFO] Selected preset color: {random_color.get_attribute('aria-label')}")
+
+    except Exception as e:
+        print(f"[ERROR] Failed to select preset color: {e}")
+        driver.save_screenshot("error_preset_color.png")
+        raise
+def save_header_style_btn():
+    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
+
+def save_style_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
+
 
 # ============================== TEST CASES ==============================
 
@@ -433,7 +588,8 @@ class TestPositiveFlow:
             driver.save_screenshot("error_thumbnail_label_missing.png")
             raise
         logger.info("Thumbnail span appeared after shrub selection")
-        select_thumbnail_folder().click()
+        select_thumbnail_folder()
+        select_random_image(driver)
         logger.info("Clicked on thumbnail folder")
         next_image_btn().click()
         logger.info("Clicked 'Next' button")
@@ -444,5 +600,53 @@ class TestPositiveFlow:
         save_crop_image_btn().click()
         logger.info("Clicked 'Save' button to save cropped image")
         logger.info("Valid shrub created in 'My Shrubs' image flow")
+        ok_btn()
+        time.sleep(2)
         save_new_shrub_btn().click()
         logger.info("Clicked 'Save New Shrub' button to finalize creation")
+
+def test_shrub_style_background():
+    logger.info("Testing shrub styling")
+    background_color_dropdown().click()
+    select_background_image_btn().click()
+    upload_random_image("image")
+    logger.info("Uploaded random image from 'image' folder")
+    next_image_btn().click()
+    logger.info("Clicked 'Next' button after image upload")
+    zoomin_image_btn()
+    logger.info("Zoomed in image")
+    zoom_out_image_btn()
+    logger.info("Zoomed out image")
+    save_crop_image_btn().click()
+    save_screenshot("Background_image")
+    time.sleep(1)
+    select_no_background_btn().click()
+    select_color_picker_btn().click()
+    select_random_preset_color(driver,wait)
+    save_screenshot("Color_pick")
+    time.sleep(1)
+    select_no_background_btn().click()
+    background_color_dropdown().click()
+
+
+def test_shrub_style_shrub_title():
+    shrub_title_dropdown().click()
+    select_random_preset_color(driver, wait)
+    font_color_dropdown().click()
+    select_font_style_dropdown().click()
+    select_random_font(driver)
+    select_font_style_dropdown().click()
+    select_font_weight_dropdown().click()
+    select_bold_font_weight(driver)
+    select_font_weight_dropdown().click()
+    select_font_size_dropdown().click()
+    select_random_font_size(driver)
+    select_font_size_dropdown().click()
+    select_font_alignment_dropdown().click()
+    select_random_alignment(driver)
+    select_font_alignment_dropdown().click()
+    # shrub_header_dropdown().click()
+    # shrub_description_dropdown().click()
+    # save_style_btn().click()
+    # save_header_style_btn().click()
+    # logger.info("Shrub styling applied successfully")
