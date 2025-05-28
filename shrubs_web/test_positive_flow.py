@@ -164,8 +164,22 @@ def upload_image_my_shrubs_btn():
 
 
 def select_thumbnail_folder():
-    return wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//div[span[text()[normalize-space()='thumbnail']]]")))
+    try:
+        element = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, "//div[span[text()[normalize-space()='thumbnail']]]")
+        ))
+
+        # Scroll the element into view
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+
+        # Perform double-click using ActionChains
+        ActionChains(driver).move_to_element(element).double_click().perform()
+        print("[INFO] Double-clicked on 'thumbnail' folder.")
+
+    except Exception as e:
+        print(f"[ERROR] Could not double-click thumbnail folder: {e}")
+        driver.save_screenshot("error_thumbnail_doubleclick.png")
+        raise
 
 
 def select_random_image(driver):
@@ -186,7 +200,8 @@ def select_random_image(driver):
         logger.info(f"Found {len(images)} images")
 
         selected_image = random.choice(images)
-        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_image)
+        driver.execute_script("window.scrollTo(0, arguments[0].getBoundingClientRect().top + window.scrollY - 100);", selected_image)
+
 
         # Use JavaScript click as fallback if ActionChains fails
         try:
@@ -262,7 +277,10 @@ def upload_random_image(relative_folder):
         pass
 
 
-def select_random_my_shrub():
+
+from selenium.webdriver.common.action_chains import ActionChains
+
+def select_random_my_shrub(driver, wait):
     try:
         shrub_cards = wait.until(EC.presence_of_all_elements_located((
             By.CSS_SELECTOR,
@@ -270,15 +288,46 @@ def select_random_my_shrub():
         )))
 
         selected_shrub = random.choice(shrub_cards)
+
+        # Scroll into view using JavaScript
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_shrub)
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg")))
-        selected_shrub.click()
+
+        # Wait for the element to be clickable
+        wait.until(EC.element_to_be_clickable((
+            By.CSS_SELECTOR,
+            "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg"
+        )))
+
+        # Perform double-click using ActionChains
+        actions = ActionChains(driver)
+        actions.move_to_element(selected_shrub).double_click().perform()
+
+        print("[INFO] Random shrub double-clicked.")
+
+        # Handle "File already exists!" popup if it appears
+        handle_file_exists_popup(driver)
+
     except Exception as e:
         print(f"[ERROR] Failed to select shrub: {e}")
         driver.save_screenshot("error_select_shrub.png")
         raise
 
+
+
+def handle_file_exists_popup(driver):
+    try:
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File already exists!']"))
+        )
+        print("[INFO] 'File already exists!' popup detected.")
+
+        ok_button = WebDriverWait(driver, 5).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Ok']"))
+        )
+        ok_button.click()
+        print("[INFO] Clicked on 'Ok' button.")
+    except Exception:
+        print("[INFO] 'File already exists!' popup not found — skipping.")
 
 # ============================== TEST CASES ==============================
 
@@ -374,11 +423,15 @@ class TestPositiveFlow:
         logger.info("Clicked 'Thumbnail Image' button")
         upload_image_my_shrubs_btn().click()
         logger.info("Clicked 'My Shrubs' folder upload button")
-        select_random_my_shrub()
+        select_random_my_shrub(driver,wait)
         logger.info("Selected a random shrub from 'My Shrubs'")
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']"))
-        )
+        try:
+            wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']")))
+            logger.info("Thumbnail span appeared after shrub selection")
+        except Exception as e:
+            logger.warning(f"Thumbnail label not found: {e}")
+            driver.save_screenshot("error_thumbnail_label_missing.png")
+            raise
         logger.info("Thumbnail span appeared after shrub selection")
         select_thumbnail_folder().click()
         logger.info("Clicked on thumbnail folder")
