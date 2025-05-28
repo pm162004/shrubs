@@ -177,6 +177,7 @@ def select_random_image(driver):
             )
         except TimeoutException:
             logger.warning("Overlay did not disappear – continuing anyway")
+
         logger.info("Waiting for images to be visible...")
         images = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "img.object-cover"))
@@ -186,10 +187,24 @@ def select_random_image(driver):
 
         selected_image = random.choice(images)
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_image)
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, selected_image.get_attribute("xpath") or ".")))
-        ActionChains(driver).move_to_element(selected_image).click().perform()
+
+        # Use JavaScript click as fallback if ActionChains fails
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(selected_image)
+            )
+            ActionChains(driver).move_to_element(selected_image).click().perform()
+        except Exception as e:
+            logger.warning(f"ActionChains click failed: {e} — trying JS click")
+            driver.execute_script("arguments[0].click();", selected_image)
+
+        logger.info("Random image selected successfully")
+
     except Exception as e:
-        raise Exception(f"Failed to select random image: {str(e)}")
+        logger.error(f"Failed to select random image: {e}")
+        driver.save_screenshot("screenshots/select_random_image_error.png")
+        raise
+
 
 
 
@@ -332,49 +347,49 @@ class TestPositiveFlow:
         save_crop_image_btn().click()
         logger.info("Clicked 'Save' button to save cropped image")
 
-    # def test_valid_my_files_image_flow(self):
-    #     logger.info("Starting 'My Files' image upload and crop flow")
-    #     overlay_spinner()
-    #     logger.info("Overlay spinner disappeared")
-    #     select_thumbnail_image_btn().click()
-    #     logger.info("Clicked 'Thumbnail Image' button")
-    #     upload_image_my_files_btn().click()
-    #     logger.info("Clicked 'My Files' folder upload button")
-    #     logger.info("Thumbnail images loaded in 'My Files' folder")
-    #     select_random_image(driver)
-    #     logger.info("Selected a random image from 'My Files'")
-    #     next_image_btn().click()
-    #     logger.info("Clicked 'Next' button")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     logger.info("Clicked 'Save' button for cropped image")
-    #     logger.info("Valid shrub created in 'My Files' image flow")
+    def test_valid_my_files_image_flow(self):
+        logger.info("Starting 'My Files' image upload and crop flow")
+        overlay_spinner()
+        logger.info("Overlay spinner disappeared")
+        select_thumbnail_image_btn().click()
+        logger.info("Clicked 'Thumbnail Image' button")
+        upload_image_my_files_btn().click()
+        logger.info("Clicked 'My Files' folder upload button")
+        logger.info("Thumbnail images loaded in 'My Files' folder")
+        select_random_image(driver)
+        logger.info("Selected a random image from 'My Files'")
+        next_image_btn().click()
+        logger.info("Clicked 'Next' button")
+        zoomin_image_btn()
+        logger.info("Zoomed in image")
+        zoom_out_image_btn()
+        logger.info("Zoomed out image")
+        save_crop_image_btn().click()
+        logger.info("Clicked 'Save' button for cropped image")
+        logger.info("Valid shrub created in 'My Files' image flow")
 
-    # def test_valid_my_shrubs_image_flow(self):
-    #     logger.info("Starting 'My Shrubs' image upload and crop flow")
-    #     select_thumbnail_image_btn().click()
-    #     logger.info("Clicked 'Thumbnail Image' button")
-    #     upload_image_my_shrubs_btn().click()
-    #     logger.info("Clicked 'My Shrubs' folder upload button")
-    #     select_random_my_shrub()
-    #     logger.info("Selected a random shrub from 'My Shrubs'")
-    #     WebDriverWait(driver, 10).until(
-    #         EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']"))
-    #     )
-    #     logger.info("Thumbnail span appeared after shrub selection")
-    #     select_thumbnail_folder().click()
-    #     logger.info("Clicked on thumbnail folder")
-    #     next_image_btn().click()
-    #     logger.info("Clicked 'Next' button")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     logger.info("Clicked 'Save' button to save cropped image")
-    #     logger.info("Valid shrub created in 'My Shrubs' image flow")
-    #     save_new_shrub_btn().click()
-    #     logger.info("Clicked 'Save New Shrub' button to finalize creation")
+    def test_valid_my_shrubs_image_flow(self):
+        logger.info("Starting 'My Shrubs' image upload and crop flow")
+        select_thumbnail_image_btn().click()
+        logger.info("Clicked 'Thumbnail Image' button")
+        upload_image_my_shrubs_btn().click()
+        logger.info("Clicked 'My Shrubs' folder upload button")
+        select_random_my_shrub()
+        logger.info("Selected a random shrub from 'My Shrubs'")
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']"))
+        )
+        logger.info("Thumbnail span appeared after shrub selection")
+        select_thumbnail_folder().click()
+        logger.info("Clicked on thumbnail folder")
+        next_image_btn().click()
+        logger.info("Clicked 'Next' button")
+        zoomin_image_btn()
+        logger.info("Zoomed in image")
+        zoom_out_image_btn()
+        logger.info("Zoomed out image")
+        save_crop_image_btn().click()
+        logger.info("Clicked 'Save' button to save cropped image")
+        logger.info("Valid shrub created in 'My Shrubs' image flow")
+        save_new_shrub_btn().click()
+        logger.info("Clicked 'Save New Shrub' button to finalize creation")
