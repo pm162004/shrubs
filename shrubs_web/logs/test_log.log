@@ -3995,3 +3995,11 @@
 2025-05-29 11:42:35,474 - INFO - Starting 'My Shrubs' image upload and crop flow
 2025-05-29 11:42:45,780 - INFO - Testing shrub styling
 2025-05-29 11:44:58,123 - INFO - Launching login page
+2025-05-29 11:45:03,125 - INFO - Running test: Valid login flow
+2025-05-29 11:45:03,126 - INFO - Refreshing page
+2025-05-29 11:45:03,497 - INFO - Refreshing page completed
+2025-05-29 11:45:03,497 - INFO - Entering email
+2025-05-29 11:45:04,866 - INFO - Entering password
+2025-05-29 11:45:05,050 - INFO - Clicking password visibility toggle
+2025-05-29 11:45:05,240 - INFO - Clicking login button
+2025-05-29 11:45:30,520 - INFO - Navigating to 'My Shrubs'
