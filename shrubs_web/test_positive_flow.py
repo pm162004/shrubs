@@ -132,6 +132,7 @@ def select_thumbnail_icon():
 
 
 def thumbnail_icon_cancel_btn():
+    overlay_spinner()
     wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'Cancel')]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
 
@@ -139,6 +140,7 @@ def thumbnail_icon_cancel_btn():
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
     overlay_spinner()
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME, "btn-save")))
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
 
 
@@ -363,6 +365,8 @@ def handle_file_exists_popup(driver):
         print("[INFO] 'File already exists!' popup not found — skipping.")
 
 def background_color_dropdown():
+    overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Background']")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
 
 def shrub_title_dropdown():
@@ -633,24 +637,24 @@ def test_shrub_style_background():
     background_color_dropdown().click()
 
 
-# def test_shrub_style_shrub_title():
-#     shrub_title_dropdown().click()
-#     select_random_preset_color(driver, wait)
-#     font_color_dropdown().click()
-#     select_font_style_dropdown().click()
-#     select_random_font(driver)
-#     select_font_style_dropdown().click()
-#     select_font_weight_dropdown().click()
-#     select_bold_font_weight(driver)
-#     select_font_weight_dropdown().click()
-#     select_font_size_dropdown().click()
-#     select_random_font_size(driver)
-#     select_font_size_dropdown().click()
-#     select_font_alignment_dropdown().click()
-#     select_random_alignment(driver)
-#     select_font_alignment_dropdown().click()
-#     shrub_header_dropdown().click()
-#     shrub_description_dropdown().click()
-#     save_style_btn().click()
-#     save_header_style_btn().click()
-#     logger.info("Shrub styling applied successfully")
+def test_shrub_style_shrub_title():
+    shrub_title_dropdown().click()
+    select_random_preset_color(driver, wait)
+    font_color_dropdown().click()
+    select_font_style_dropdown().click()
+    select_random_font(driver)
+    select_font_style_dropdown().click()
+    select_font_weight_dropdown().click()
+    select_bold_font_weight(driver)
+    select_font_weight_dropdown().click()
+    select_font_size_dropdown().click()
+    select_random_font_size(driver)
+    select_font_size_dropdown().click()
+    select_font_alignment_dropdown().click()
+    select_random_alignment(driver)
+    select_font_alignment_dropdown().click()
+    shrub_header_dropdown().click()
+    shrub_description_dropdown().click()
+    save_style_btn().click()
+    save_header_style_btn().click()
+    logger.info("Shrub styling applied successfully")
