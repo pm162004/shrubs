@@ -5489,3 +5489,10 @@
 2025-05-30 17:14:05,107 - INFO - Entering password
 2025-05-30 17:14:05,214 - INFO - Clicking password visibility toggle
 2025-05-30 17:14:05,313 - INFO - Clicking login button
+2025-05-30 17:14:30,791 - INFO - Navigating to 'My Shrubs'
+2025-05-30 17:14:58,295 - INFO - Testing valid shrub creation
+2025-05-30 17:15:23,589 - INFO - Starting 'My Computer' image upload and crop flow
+2025-05-30 17:15:48,891 - INFO - Starting 'My Files' image upload and crop flow
+2025-05-30 17:15:48,906 - INFO - Overlay spinner disappeared
+2025-05-30 17:16:14,280 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-05-30 17:16:39,395 - INFO - Testing shrub styling
