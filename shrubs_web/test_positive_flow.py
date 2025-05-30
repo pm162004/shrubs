@@ -138,7 +138,6 @@ def select_thumbnail_icon():
 
 def thumbnail_icon_cancel_btn():
     overlay_spinner()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'Cancel')]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
 
 
@@ -150,7 +149,6 @@ def save_new_shrub_btn():
 
 def next_image_btn():
     overlay_spinner()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
 
 
@@ -725,45 +723,45 @@ class TestPositiveFlow:
     def test_shrub_style_background(self):
 
         logger.info("Testing shrub styling")
-    background_color_dropdown(driver).click()
-    select_background_image_btn().click()
-    upload_random_image("image")
-    logger.info("Uploaded random image from 'image' folder")
-    next_image_btn().click()
-    logger.info("Clicked 'Next' button after image upload")
-    zoomin_image_btn()
-    logger.info("Zoomed in image")
-    zoom_out_image_btn()
-    logger.info("Zoomed out image")
-    save_crop_image_btn().click()
-    save_screenshot("Background_image")
-    time.sleep(1)
-    select_no_background_btn().click()
-    select_color_picker_btn().click()
-    select_random_preset_color(driver, wait)
-    save_screenshot("Color_pick")
-    time.sleep(1)
-    select_no_background_btn().click()
-    background_color_dropdown(driver).click()
+        background_color_dropdown(driver).click()
+        select_background_image_btn().click()
+        upload_random_image("image")
+        logger.info("Uploaded random image from 'image' folder")
+        next_image_btn().click()
+        logger.info("Clicked 'Next' button after image upload")
+        zoomin_image_btn()
+        logger.info("Zoomed in image")
+        zoom_out_image_btn()
+        logger.info("Zoomed out image")
+        save_crop_image_btn().click()
+        save_screenshot("Background_image")
+        time.sleep(1)
+        select_no_background_btn().click()
+        select_color_picker_btn().click()
+        select_random_preset_color(driver, wait)
+        save_screenshot("Color_pick")
+        time.sleep(1)
+        select_no_background_btn().click()
+        background_color_dropdown(driver).click()
 
 
-def test_shrub_style_shrub_title():
-    shrub_title_dropdown().click()
-    select_random_preset_color(driver, wait)
-    font_color_dropdown().click()
-    select_font_style_dropdown().click()
-    select_random_font(driver)
-    select_font_style_dropdown().click()
-    select_font_weight_dropdown().click()
-    select_bold_font_weight(driver)
-    select_font_weight_dropdown().click()
-    select_font_size_dropdown().click()
-    select_random_font_size(driver)
-    select_font_size_dropdown().click()
-    select_font_alignment_dropdown().click()
-    select_random_alignment(driver)
-    select_font_alignment_dropdown().click()
-    logger.info("Shrub styling applied successfully")
+    def test_shrub_style_shrub_title(self):
+        shrub_title_dropdown().click()
+        select_random_preset_color(driver, wait)
+        font_color_dropdown().click()
+        select_font_style_dropdown().click()
+        select_random_font(driver)
+        select_font_style_dropdown().click()
+        select_font_weight_dropdown().click()
+        select_bold_font_weight(driver)
+        select_font_weight_dropdown().click()
+        select_font_size_dropdown().click()
+        select_random_font_size(driver)
+        select_font_size_dropdown().click()
+        select_font_alignment_dropdown().click()
+        select_random_alignment(driver)
+        select_font_alignment_dropdown().click()
+        logger.info("Shrub styling applied successfully")
 
 
 def test_shrub_style_header():
