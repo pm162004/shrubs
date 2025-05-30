@@ -28,6 +28,8 @@ driver.get(config.WEB_URL)
 time.sleep(3)
 
 wait = WebDriverWait(driver, 25)
+wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
 
 def display_myfiles_after_login():
@@ -50,6 +52,8 @@ def login_button():
 
 def refresh_page():
     logger.info("Refreshing page")
+    wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+    wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
     return driver.refresh()
 
 
@@ -136,16 +140,14 @@ def thumbnail_icon_cancel_btn():
     wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'Cancel')]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Cancel')]")))
 
-
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
     overlay_spinner()
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME, "btn-save")))
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
-
 
 def next_image_btn():
     overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
 
 
@@ -364,10 +366,34 @@ def handle_file_exists_popup(driver):
     except Exception:
         print("[INFO] 'File already exists!' popup not found — skipping.")
 
-def background_color_dropdown():
-    overlay_spinner()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Background']")))
+
+
+def background_color_dropdown(driver, timeout=20):
+    overlay_spinner()  # Assuming this handles any overlay spinner present before interaction
+
+
+    try:
+        # Wait until the 'Background' element is visible on the page
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Background']")))
+    except TimeoutException:
+        # On timeout, save screenshot and print page source for debugging
+        driver.save_screenshot("timeout_background.png")
+        print(driver.page_source)
+        raise  # Reraise exception so caller can handle it if needed
+
+    # Once visible, wait until the element is clickable and return it
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
+
+
+def header_dropdown():
+    overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Header']")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Header']")))
+
+def header_background_dropdown():
+    overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "(//span[normalize-space()='Background'])[1]")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[normalize-space()='Background'])[1]")))
 
 def shrub_title_dropdown():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shrub Title']")))
@@ -449,12 +475,21 @@ def shrub_description_dropdown():
 def select_color_picker_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='thumbnail']")))
 
+def select_header_color_picker_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'color-picker')])[1]")))
+
 def select_background_image_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'background-image')]")))
+
+def select_header_background_image_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'background-image')])[1]")))
 
 def select_no_background_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'no-background')]/parent::div")))
 
+
+def select_no_header_background_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'no-background')]/parent::div)[1]")))
 
 def select_color_from_color_picker():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Color:#BD10E0']")))
@@ -609,13 +644,12 @@ class TestPositiveFlow:
         except TimeoutException:
             print("[INFO] OK button not found or not clickable — skipping.")
 
-        time.sleep(2)
         save_new_shrub_btn().click()
         logger.info("Clicked 'Save New Shrub' button to finalize creation")
 
 def test_shrub_style_background():
     logger.info("Testing shrub styling")
-    background_color_dropdown().click()
+    background_color_dropdown(driver).click()
     select_background_image_btn().click()
     upload_random_image("image")
     logger.info("Uploaded random image from 'image' folder")
@@ -634,7 +668,7 @@ def test_shrub_style_background():
     save_screenshot("Color_pick")
     time.sleep(1)
     select_no_background_btn().click()
-    background_color_dropdown().click()
+    background_color_dropdown(driver).click()
 
 
 def test_shrub_style_shrub_title():
@@ -656,5 +690,28 @@ def test_shrub_style_shrub_title():
     shrub_header_dropdown().click()
     shrub_description_dropdown().click()
     save_style_btn().click()
-    save_header_style_btn().click()
     logger.info("Shrub styling applied successfully")
+
+def test_shrub_header_style():
+    header_dropdown().click()
+    header_background_dropdown().click()
+    select_header_background_image_btn().click()
+    upload_random_image("image")
+    logger.info("Uploaded random image from 'image' folder")
+    next_image_btn().click()
+    logger.info("Clicked 'Next' button after image upload")
+    zoomin_image_btn()
+    logger.info("Zoomed in image")
+    zoom_out_image_btn()
+    logger.info("Zoomed out image")
+    save_crop_image_btn().click()
+    save_screenshot("Header Background_image")
+    time.sleep(1)
+    select_no_header_background_btn().click()
+    select_header_color_picker_btn().click()
+    select_random_preset_color(driver,wait)
+    save_screenshot("Color_pick")
+    time.sleep(1)
+    select_no_header_background_btn().click()
+    header_background_dropdown().click()
+    # save_header_style_btn().click()
