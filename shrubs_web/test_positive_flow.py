@@ -11,7 +11,6 @@ from constant import validation_assert, input_field, error
 from log_config import setup_logger
 from selenium.webdriver.common.action_chains import ActionChains
 
-
 logger = setup_logger()
 
 chrome_options = webdriver.ChromeOptions()
@@ -28,12 +27,16 @@ driver.get(config.WEB_URL)
 time.sleep(3)
 
 wait = WebDriverWait(driver, 25)
+wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
 
 def display_myfiles_after_login():
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//a[@href='/platform/files' and contains(@class, 'nav-item') and contains(@class, 'active') and contains(., 'My Files')]")))
+    wait.until(EC.visibility_of_element_located((By.XPATH,
+                                                 "//a[@href='/platform/files' and contains(@class, 'nav-item') and contains(@class, 'active') and contains(., 'My Files')]")))
 
-    return wait.until(EC.presence_of_element_located((By.XPATH, "//a[@href='/platform/files' and contains(@class, 'nav-item') and contains(@class, 'active') and contains(., 'My Files')]")))
+    return wait.until(EC.presence_of_element_located((By.XPATH,
+                                                      "//a[@href='/platform/files' and contains(@class, 'nav-item') and contains(@class, 'active') and contains(., 'My Files')]")))
 
 
 def email_input_field():
@@ -50,6 +53,8 @@ def login_button():
 
 def refresh_page():
     logger.info("Refreshing page")
+    wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+    wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
     return driver.refresh()
 
 
@@ -140,12 +145,12 @@ def thumbnail_icon_cancel_btn():
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
     overlay_spinner()
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME, "btn-save")))
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
 
 
 def next_image_btn():
     overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
 
 
@@ -204,8 +209,8 @@ def select_random_image(driver):
         logger.info(f"Found {len(images)} images")
 
         selected_image = random.choice(images)
-        driver.execute_script("window.scrollTo(0, arguments[0].getBoundingClientRect().top + window.scrollY - 100);", selected_image)
-
+        driver.execute_script("window.scrollTo(0, arguments[0].getBoundingClientRect().top + window.scrollY - 100);",
+                              selected_image)
 
         # Use JavaScript click as fallback if ActionChains fails
         try:
@@ -225,8 +230,6 @@ def select_random_image(driver):
         raise
 
 
-
-
 def zoomin_image_btn():
     overlay_spinner()
     zoom_in_button = wait.until(
@@ -235,6 +238,7 @@ def zoomin_image_btn():
 
     return zoom_in_button.click()
 
+
 def ok_btn():
     overlay_spinner()
     ok = wait.until(
@@ -242,7 +246,6 @@ def ok_btn():
     )
 
     return ok.click()
-
 
 
 def zoom_out_image_btn():
@@ -255,6 +258,7 @@ def zoom_out_image_btn():
 
 def overlay_spinner():
     return WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
+
 
 def select_random_font(driver):
     wait = WebDriverWait(driver, 10)
@@ -278,6 +282,7 @@ def select_random_font(driver):
 
     print(f"Selected random font: {font_name}")
     return font_name
+
 
 def select_random_icon():
     icons = wait.until(EC.visibility_of_all_elements_located(
@@ -310,9 +315,6 @@ def upload_random_image(relative_folder):
         ok_button.click()
     except:
         pass
-
-
-
 
 
 def select_random_my_shrub(driver, wait):
@@ -348,7 +350,6 @@ def select_random_my_shrub(driver, wait):
         raise
 
 
-
 def handle_file_exists_popup(driver):
     try:
         WebDriverWait(driver, 5).until(
@@ -364,25 +365,101 @@ def handle_file_exists_popup(driver):
     except Exception:
         print("[INFO] 'File already exists!' popup not found — skipping.")
 
-def background_color_dropdown():
-    overlay_spinner()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Background']")))
+
+def background_color_dropdown(driver, timeout=20):
+    overlay_spinner()  # Assuming this handles any overlay spinner present before interaction
+
+    try:
+        # Wait until the 'Background' element is visible on the page
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Background']")))
+    except TimeoutException:
+        # On timeout, save screenshot and print page source for debugging
+        driver.save_screenshot("timeout_background.png")
+        print(driver.page_source)
+        raise  # Reraise exception so caller can handle it if needed
+
+    # Once visible, wait until the element is clickable and return it
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
+
+
+def header_dropdown():
+    overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Header']")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Header']")))
+
+
+def header_background_dropdown():
+    overlay_spinner()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "(//span[normalize-space()='Background'])[1]")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[normalize-space()='Background'])[1]")))
+
 
 def shrub_title_dropdown():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shrub Title']")))
 
+
+def shrub_header_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[normalize-space()='Sub Header'])[2]")))
+
+
 def font_color_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Color'])[1]")))
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Color'])[1]")))
+
+
+def sub_header_font_color_dropdown():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Color'])[2]")))
+
+
+def description_font_color_dropdown():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Color'])[3]")))
+
 
 def select_font_style_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font'])[1]")))
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font'])[1]")))
+
+
+def select_sub_header_font_style_dropdown():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font'])[2]")))
+
+
+def select_description_font_style_dropdown():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font'])[3]")))
+
 
 def select_font_weight_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font weight'])[1]")))
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font weight'])[1]")))
+
+
+def select_sub_header_font_weight_dropdown():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font weight'])[2]")))
+
+
+def select_description_font_weight_dropdown():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font weight'])[3]")))
+
 
 def select_font_size_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font size'])[1]")))
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font size'])[1]")))
+
+
+def select_sub_header_font_size_dropdown():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font size'])[2]")))
+
+
+def select_description_font_size_dropdown():
+    return wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font size'])[2]")))
 
 
 def select_random_alignment(driver):
@@ -400,8 +477,22 @@ def select_random_alignment(driver):
     random_button.click()
 
     print(f"Random alignment selected: {alignment_name}")
+
+
 def select_font_alignment_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Alignment'])[1]")))
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Alignment'])[1]")))
+
+
+def select_sub_header_font_alignment_dropdown():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Alignment'])[2]")))
+
+
+def select_description_font_alignment_dropdown():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Alignment'])[3]")))
+
 
 def select_bold_font_weight(driver):
     wait = WebDriverWait(driver, 10)
@@ -419,6 +510,7 @@ def select_bold_font_weight(driver):
     bold_option.click()
 
     print("Bold font weight selected.")
+
 
 def select_random_font_size(driver):
     wait = WebDriverWait(driver, 10)
@@ -440,24 +532,39 @@ def select_random_font_size(driver):
 
     # Click the selected option
     random_option.click()
-def shrub_header_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Sub Header')]")))
+
 
 def shrub_description_dropdown():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shrub Description']")))
 
+
 def select_color_picker_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='thumbnail']")))
 
+
+def select_header_color_picker_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'color-picker')])[1]")))
+
+
 def select_background_image_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'background-image')]")))
+
+
+def select_header_background_image_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'background-image')])[1]")))
+
 
 def select_no_background_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'no-background')]/parent::div")))
 
 
+def select_no_header_background_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'no-background')]/parent::div)[1]")))
+
+
 def select_color_from_color_picker():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Color:#BD10E0']")))
+
 
 def select_random_preset_color(driver, wait):
     try:
@@ -480,9 +587,12 @@ def select_random_preset_color(driver, wait):
         print(f"[ERROR] Failed to select preset color: {e}")
         driver.save_screenshot("error_preset_color.png")
         raise
+
+
 def save_header_style_btn():
     WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
+
 
 def save_style_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
@@ -582,7 +692,7 @@ class TestPositiveFlow:
         logger.info("Clicked 'Thumbnail Image' button")
         upload_image_my_shrubs_btn().click()
         logger.info("Clicked 'My Shrubs' folder upload button")
-        select_random_my_shrub(driver,wait)
+        select_random_my_shrub(driver, wait)
         logger.info("Selected a random shrub from 'My Shrubs'")
         try:
             wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']")))
@@ -609,13 +719,13 @@ class TestPositiveFlow:
         except TimeoutException:
             print("[INFO] OK button not found or not clickable — skipping.")
 
-        time.sleep(2)
         save_new_shrub_btn().click()
         logger.info("Clicked 'Save New Shrub' button to finalize creation")
 
-def test_shrub_style_background():
-    logger.info("Testing shrub styling")
-    background_color_dropdown().click()
+    def test_shrub_style_background(self):
+
+        logger.info("Testing shrub styling")
+    background_color_dropdown(driver).click()
     select_background_image_btn().click()
     upload_random_image("image")
     logger.info("Uploaded random image from 'image' folder")
@@ -630,11 +740,11 @@ def test_shrub_style_background():
     time.sleep(1)
     select_no_background_btn().click()
     select_color_picker_btn().click()
-    select_random_preset_color(driver,wait)
+    select_random_preset_color(driver, wait)
     save_screenshot("Color_pick")
     time.sleep(1)
     select_no_background_btn().click()
-    background_color_dropdown().click()
+    background_color_dropdown(driver).click()
 
 
 def test_shrub_style_shrub_title():
@@ -653,8 +763,109 @@ def test_shrub_style_shrub_title():
     select_font_alignment_dropdown().click()
     select_random_alignment(driver)
     select_font_alignment_dropdown().click()
+    logger.info("Shrub styling applied successfully")
+
+
+def test_shrub_style_header():
+    shrub_header_dropdown().click()
+    sub_header_font_color_dropdown().click()
+    select_random_preset_color(driver, wait)
+    select_sub_header_font_style_dropdown().click()
+    select_random_font(driver)
+    select_sub_header_font_style_dropdown().click()
+    select_sub_header_font_weight_dropdown().click()
+    select_bold_font_weight(driver)
+    select_sub_header_font_weight_dropdown().click()
+    select_sub_header_font_size_dropdown().click()
+    select_random_font_size(driver)
+    select_sub_header_font_size_dropdown().click()
+    select_font_alignment_dropdown().click()
+    select_random_alignment(driver)
+    select_sub_header_font_alignment_dropdown().click()
     shrub_header_dropdown().click()
     shrub_description_dropdown().click()
     save_style_btn().click()
-    save_header_style_btn().click()
     logger.info("Shrub styling applied successfully")
+
+
+def test_shrub_description_style():
+    shrub_description_dropdown().click()
+    description_font_color_dropdown().click()
+    select_random_preset_color(driver, wait)
+    select_description_font_style_dropdown().click()
+    select_random_font(driver)
+    select_description_font_style_dropdown().click()
+    select_description_font_weight_dropdown().click()
+    select_bold_font_weight(driver)
+    select_description_font_weight_dropdown().click()
+    select_description_font_size_dropdown().click()
+    select_random_font_size(driver)
+    select_description_font_size_dropdown().click()
+    select_description_font_alignment_dropdown().click()
+    select_random_alignment(driver)
+    select_description_font_alignment_dropdown().click()
+    shrub_description_dropdown().click()
+    save_style_btn().click()
+    logger.info("Shrub styling applied successfully")
+
+
+def test_shrub_header_style():
+    header_dropdown().click()
+    header_background_dropdown().click()
+    select_header_background_image_btn().click()
+    upload_random_image("image")
+    logger.info("Uploaded random image from 'image' folder")
+    next_image_btn().click()
+    logger.info("Clicked 'Next' button after image upload")
+    zoomin_image_btn()
+    logger.info("Zoomed in image")
+    zoom_out_image_btn()
+    logger.info("Zoomed out image")
+    save_crop_image_btn().click()
+    save_screenshot("Header Background_image")
+    time.sleep(1)
+    select_no_header_background_btn().click()
+    select_header_color_picker_btn().click()
+    select_random_preset_color(driver, wait)
+    save_screenshot("Color_pick")
+    time.sleep(1)
+    select_no_header_background_btn().click()
+    header_background_dropdown().click()
+    shrub_title_dropdown().click()
+    select_random_preset_color(driver, wait)
+    font_color_dropdown().click()
+    select_font_style_dropdown().click()
+    select_random_font(driver)
+    select_font_style_dropdown().click()
+    select_font_weight_dropdown().click()
+    select_bold_font_weight(driver)
+    select_font_weight_dropdown().click()
+    select_font_size_dropdown().click()
+    select_random_font_size(driver)
+    select_font_size_dropdown().click()
+    select_font_alignment_dropdown().click()
+    select_random_alignment(driver)
+    select_font_alignment_dropdown().click()
+    shrub_header_dropdown().click()
+    shrub_description_dropdown().click()
+    save_style_btn().click()
+    shrub_header_dropdown().click()
+    sub_header_font_color_dropdown().click()
+    select_random_preset_color(driver, wait)
+    select_sub_header_font_style_dropdown().click()
+    select_random_font(driver)
+    select_sub_header_font_style_dropdown().click()
+    select_sub_header_font_weight_dropdown().click()
+    select_bold_font_weight(driver)
+    select_sub_header_font_weight_dropdown().click()
+    select_sub_header_font_size_dropdown().click()
+    select_random_font_size(driver)
+    select_sub_header_font_size_dropdown().click()
+    select_font_alignment_dropdown().click()
+    select_random_alignment(driver)
+    select_sub_header_font_alignment_dropdown().click()
+    shrub_header_dropdown().click()
+    shrub_description_dropdown().click()
+    save_style_btn().click()
+    logger.info("Shrub styling applied successfully")
+    # save_header_style_btn().click()
