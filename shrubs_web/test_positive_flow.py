@@ -364,19 +364,9 @@ def handle_file_exists_popup(driver):
         print("[INFO] 'File already exists!' popup not found — skipping.")
 
 
-def background_color_dropdown(driver, timeout=20):
+def background_color_dropdown():
     overlay_spinner()  # Assuming this handles any overlay spinner present before interaction
 
-    try:
-        # Wait until the 'Background' element is visible on the page
-        wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Background']")))
-    except TimeoutException:
-        # On timeout, save screenshot and print page source for debugging
-        driver.save_screenshot("timeout_background.png")
-        print(driver.page_source)
-        raise  # Reraise exception so caller can handle it if needed
-
-    # Once visible, wait until the element is clickable and return it
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
 
 
@@ -553,6 +543,7 @@ def select_header_background_image_btn():
 
 
 def select_no_background_btn():
+
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'no-background')]/parent::div")))
 
 
@@ -723,7 +714,7 @@ class TestPositiveFlow:
     def test_shrub_style_background(self):
 
         logger.info("Testing shrub styling")
-        background_color_dropdown(driver).click()
+        background_color_dropdown().click()
         select_background_image_btn().click()
         upload_random_image("image")
         logger.info("Uploaded random image from 'image' folder")
@@ -735,14 +726,12 @@ class TestPositiveFlow:
         logger.info("Zoomed out image")
         save_crop_image_btn().click()
         save_screenshot("Background_image")
-        time.sleep(1)
         select_no_background_btn().click()
         select_color_picker_btn().click()
         select_random_preset_color(driver, wait)
         save_screenshot("Color_pick")
-        time.sleep(1)
         select_no_background_btn().click()
-        background_color_dropdown(driver).click()
+        background_color_dropdown().click()
 
 
     def test_shrub_style_shrub_title(self):
