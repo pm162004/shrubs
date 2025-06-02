@@ -17,7 +17,7 @@ random_username = random_username_generator(10)
 
 def get_random_word_from_api():
     try:
-        response = requests.get("https://api.datamuse.com/words?ml=meaning_like&max=20000")
+        response = requests.get("https://api.datamuse.com/words?ml=meaning_like&max=50000")
         response.raise_for_status()
         words = [item["word"] for item in response.json()]
         return random.choice(words)
