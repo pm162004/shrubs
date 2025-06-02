@@ -2,12 +2,11 @@ import random
 import time
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
-from constant import validation_assert, input_field, error
+from constant import validation_assert, input_field
 from log_config import setup_logger
 
 logger = setup_logger()
@@ -15,7 +14,7 @@ logger = setup_logger()
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-# chrome_options.add_argument("--headless")  # Optional for headless mode
+
 
 prefs = {
     "credentials_enable_service": False,
@@ -24,7 +23,7 @@ prefs = {
 }
 chrome_options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(options=chrome_options)
-
+chrome_options.add_argument("--headless")  # Optional for headless mode
 driver.maximize_window()
 logger.info("Launching browser and navigating to URL")
 driver.get(config.WEB_URL)
@@ -307,36 +306,36 @@ def test_shrub_style():
     logger.info("Shrub styling applied successfully")
 
 
-# def test_shrub_branch():
-#     logger.info("Testing branch creation")
-#     get_new_branch().click()
-#     create_links_btn().click()
-#     save_new_branch_btn().click()
-#     assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
-#     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-#     save_new_branch_btn().click()
-#     logger.info("Branch created successfully")
-#
-#
-# def test_add_link():
-#     logger.info("Testing add link to branch")
-#     branch_add_link_btn().click()
-#     add_link_input_field().send_keys(Keys.ENTER)
-#     time.sleep(1)
-#     link_save_btn().click()
-#     assert blank_link_validation().text == validation_assert.ENTER_LINK
-#     add_link_input_field().send_keys(input_field.VALID_SHRUBS)
-#     link_save_btn().click()
-#     assert invalid_link_error().text == error.LINK_ERROR
-#     add_link_input_field().send_keys(Keys.CONTROL, "a")
-#     add_link_input_field().send_keys(Keys.DELETE)
-#     add_link_input_field().send_keys(input_field.LINK)
-#     add_link_input_field().send_keys(Keys.ENTER)
-#     time.sleep(2)
-#     link_save_btn().click()
-#     success_msg = save_link_message(driver)
-#     assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
-#     back_branch_link_btn().click()
-#     link_save_btn().click()
-#     back_link_btn().click()
-#     logger.info("Link added successfully")
+def test_shrub_branch():
+    logger.info("Testing branch creation")
+    get_new_branch().click()
+    create_links_btn().click()
+    save_new_branch_btn().click()
+    assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
+    link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    save_new_branch_btn().click()
+    logger.info("Branch created successfully")
+
+
+def test_add_link():
+    logger.info("Testing add link to branch")
+    branch_add_link_btn().click()
+    add_link_input_field().send_keys(Keys.ENTER)
+    time.sleep(1)
+    link_save_btn().click()
+    assert blank_link_validation().text == validation_assert.ENTER_LINK
+    add_link_input_field().send_keys(input_field.VALID_SHRUBS)
+    link_save_btn().click()
+    assert invalid_link_error().text == error.LINK_ERROR
+    add_link_input_field().send_keys(Keys.CONTROL, "a")
+    add_link_input_field().send_keys(Keys.DELETE)
+    add_link_input_field().send_keys(input_field.LINK)
+    add_link_input_field().send_keys(Keys.ENTER)
+    time.sleep(2)
+    link_save_btn().click()
+    success_msg = save_link_message(driver)
+    assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
+    back_branch_link_btn().click()
+    link_save_btn().click()
+    back_link_btn().click()
+    logger.info("Link added successfully")
