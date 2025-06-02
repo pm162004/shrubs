@@ -1,5 +1,4 @@
 import time,datetime,os
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver

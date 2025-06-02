@@ -1,11 +1,10 @@
 import time
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
-from constant import creds, validation_assert, input_field, error
+from constant import validation_assert, input_field, error
 from log_config import setup_logger
 
 logger = setup_logger()

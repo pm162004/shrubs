@@ -1,7 +1,8 @@
+import random
 import time
 from selenium.common import TimeoutException
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -14,7 +15,7 @@ logger = setup_logger()
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-# chrome_options.add_argument("--headless")  # Optional for headless mode
+
 
 prefs = {
     "credentials_enable_service": False,
@@ -23,7 +24,7 @@ prefs = {
 }
 chrome_options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(options=chrome_options)
-
+chrome_options.add_argument("--headless")  # Optional for headless mode
 driver.maximize_window()
 logger.info("Launching browser and navigating to URL")
 driver.get(config.WEB_URL)
@@ -33,8 +34,8 @@ password = config.CORRECT_PASSWORD
 new_password = config.RESET_PASSWORD
 wait = WebDriverWait(driver, 25)
 wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "body")))
-wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
-wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
+
+
 # Element Getters
 
 def email_input_field():
@@ -47,8 +48,9 @@ def password_input_field():
 
 def refresh_page():
     logger.info("Refreshing the page")
-    wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "body")))
-    wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
+    driver.delete_all_cookies()
+    driver.execute_script("window.localStorage.clear(); window.sessionStorage.clear();")
+    wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
     return driver.refresh()
 
 
@@ -57,18 +59,17 @@ def display_myfiles_after_login():
 
 
 def get_my_shrubs():
-    overlay_spinner()
+    time.sleep(2)
     return wait.until(EC.presence_of_element_located((By.XPATH, "//p[normalize-space()='My Shrubs']")))
 
 
 def get_new_shrub():
-    overlay_spinner()
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[text()='New Shrub']]")))
     time.sleep(5)
-    return driver.find_element(By.XPATH, "//button[.//div[text()='New Shrub']]")
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']")))
+
 
 def shrub_title_input_field():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@type='text' and @name='shrub-name']")))
+    return wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='shrub-name']")))
 
 
 def shrub_title_blank_validation():
@@ -134,7 +135,7 @@ def shrub_title_already_exists_validation():
 
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
-    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
+    overlay_spinner()
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
 
 
@@ -232,11 +233,18 @@ def back_branch_link_btn():
     progress_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Back')]")))
 
-def login_button():
-    overlay_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-signin']")))
 
+def select_random_icon():
 
+    icons = wait.until(EC.visibility_of_all_elements_located(
+        (By.CSS_SELECTOR, "div.icon-hover")
+    ))
+
+    if not icons:
+        raise Exception("No icons found in the modal.")
+
+    random_icon = random.choice(icons)
+    random_icon.click()
 # ============================== TEST CASES ==============================
 class TestMyShrubsIcon:
 
@@ -244,7 +252,7 @@ class TestMyShrubsIcon:
         logger.info("Running test_login")
         email_input_field().send_keys(email)
         password_input_field().send_keys(password)
-        login_button().click()
+        wait.until(EC.element_to_be_clickable((By.NAME, "btn-signin"))).click()
         assert display_myfiles_after_login().text == validation_assert.MY_FILES
         logger.info("Login successful")
 
@@ -258,79 +266,77 @@ def test_my_shrubs():
 
 def test_blank_input_field_shrubs():
     logger.info("Testing blank shrub validations")
-
     save_new_shrub_btn().click()
     assert shrub_title_blank_validation().text == validation_assert.ENTER_SHRUBS_TITLE
     assert permissions_field_validation().text == validation_assert.ENTER_SHRUBS_PERMISSIONS
     assert thumbnail_type_field_validation().text == validation_assert.ENTER_SHRUBS_THUMBNAIL
-
     logger.info("Blank field validations passed")
 
 
-# def test_shrub_title_already_exists():
-#     logger.info("Testing existing shrub title")
-#     shrub_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
-#     select_view_only_permissions().click()
-#     shrub_project_icon_btn().click()
-#     select_thumbnail_icon().click()
-#     thumbnail_icon_cancel_btn().click()
-#     time.sleep(2)
-#     assert shrub_title_already_exists_validation() == validation_assert.EXISTS_SHRUBS_TITLE
-#     logger.info("Duplicate title validation passed")
+def test_shrub_title_already_exists():
+    logger.info("Testing existing shrub title")
+    shrub_title_input_field().send_keys(input_field.EXISTING_SHRUBS)
+    select_view_only_permissions().click()
+    shrub_project_icon_btn().click()
+    select_thumbnail_icon().click()
+    thumbnail_icon_cancel_btn().click()
+    time.sleep(2)
+    assert shrub_title_already_exists_validation() == validation_assert.EXISTS_SHRUBS_TITLE
+    logger.info("Duplicate title validation passed")
 
 
-# def test_valid_shrubs():
-#     logger.info("Testing valid shrub creation")
-#     refresh_page()
-#     shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
-#     select_view_only_permissions().click()
-#     shrub_project_icon_btn().click()
-#     select_thumbnail_icon().click()
-#     thumbnail_icon_cancel_btn().click()
-#     save_new_shrub_btn().click()
-#     logger.info("Valid shrub created")
-#
-#
-# def test_shrub_style():
-#     logger.info("Testing shrub styling")
-#     background_color_dropdown().click()
-#     select_color_picker_btn().click()
-#     select_color_from_color_picker().click()
-#     save_style_btn().click()
-#     save_header_style_btn().click()
-#     logger.info("Shrub styling applied successfully")
-#
-#
-# def test_shrub_branch():
-#     logger.info("Testing branch creation")
-#     get_new_branch().click()
-#     create_links_btn().click()
-#     save_new_branch_btn().click()
-#     assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
-#     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-#     save_new_branch_btn().click()
-#     logger.info("Branch created successfully")
-#
-#
-# def test_add_link():
-#     logger.info("Testing add link to branch")
-#     branch_add_link_btn().click()
-#     add_link_input_field().send_keys(Keys.ENTER)
-#     time.sleep(1)
-#     link_save_btn().click()
-#     assert blank_link_validation().text == validation_assert.ENTER_LINK
-#     add_link_input_field().send_keys(input_field.VALID_SHRUBS)
-#     link_save_btn().click()
-#     assert invalid_link_error().text == error.LINK_ERROR
-#     add_link_input_field().send_keys(Keys.CONTROL, "a")
-#     add_link_input_field().send_keys(Keys.DELETE)
-#     add_link_input_field().send_keys(input_field.LINK)
-#     add_link_input_field().send_keys(Keys.ENTER)
-#     time.sleep(2)
-#     link_save_btn().click()
-#     success_msg = save_link_message(driver)
-#     assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
-#     back_branch_link_btn().click()
-#     link_save_btn().click()
-#     back_link_btn().click()
-#     logger.info("Link added successfully")
+def test_valid_shrubs():
+    logger.info("Testing valid shrub creation")
+    refresh_page()
+    shrub_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    select_view_only_permissions().click()
+    shrub_project_icon_btn().click()
+    select_random_icon()
+    thumbnail_icon_cancel_btn().click()
+    save_new_shrub_btn().click()
+    logger.info("Valid shrub created")
+
+
+def test_shrub_style():
+    logger.info("Testing shrub styling")
+    background_color_dropdown().click()
+    select_color_picker_btn().click()
+    select_color_from_color_picker().click()
+    save_style_btn().click()
+    save_header_style_btn().click()
+    logger.info("Shrub styling applied successfully")
+
+
+def test_shrub_branch():
+    logger.info("Testing branch creation")
+    get_new_branch().click()
+    create_links_btn().click()
+    save_new_branch_btn().click()
+    assert link_branch_title_validation().text == validation_assert.ENTER_LIST_BRANCH
+    link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    save_new_branch_btn().click()
+    logger.info("Branch created successfully")
+
+
+def test_add_link():
+    logger.info("Testing add link to branch")
+    branch_add_link_btn().click()
+    add_link_input_field().send_keys(Keys.ENTER)
+    time.sleep(1)
+    link_save_btn().click()
+    assert blank_link_validation().text == validation_assert.ENTER_LINK
+    add_link_input_field().send_keys(input_field.VALID_SHRUBS)
+    link_save_btn().click()
+    assert invalid_link_error().text == error.LINK_ERROR
+    add_link_input_field().send_keys(Keys.CONTROL, "a")
+    add_link_input_field().send_keys(Keys.DELETE)
+    add_link_input_field().send_keys(input_field.LINK)
+    add_link_input_field().send_keys(Keys.ENTER)
+    time.sleep(2)
+    link_save_btn().click()
+    success_msg = save_link_message(driver)
+    assert success_msg.text == validation_assert.SAVE_SUCCESS_LINK
+    back_branch_link_btn().click()
+    link_save_btn().click()
+    back_link_btn().click()
+    logger.info("Link added successfully")
