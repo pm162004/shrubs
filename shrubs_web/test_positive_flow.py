@@ -1,5 +1,7 @@
 import random
 import time, os, datetime
+
+import selenium
 from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
@@ -837,19 +839,33 @@ class TestPositiveFlow:
             raise
 
     def test_my_shrubs(self):
-        def test_my_shrubs(self):
-            logger.info("Navigating to 'My Shrubs'")
-            get_my_shrubs().click()
-            WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-            logger.info("Overlay spinner disappeared after navigating to 'My Shrubs'")
+        logger.info("Navigating to 'My Shrubs'")
+        get_my_shrubs().click()
 
-            switch_to_window(driver)
+        # Wait for spinner to disappear (increase timeout to 30 seconds)
+        WebDriverWait(driver, 30).until(
+            EC.invisibility_of_element_located((By.ID, "overlay-spinner"))
+        )
+        logger.info("Overlay spinner disappeared after navigating to 'My Shrubs'")
 
-            new_shrub_button = get_new_shrub()
-            WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable(new_shrub_button))  # Wait until button is clickable
-            driver.execute_script("arguments[0].scrollIntoView(true);", new_shrub_button)  # Scroll if off-screen
+        # Wait for 'New Shrub' button to be clickable
+        new_shrub_button = WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']"))
+        )
+
+        # Scroll the button into view
+        driver.execute_script("arguments[0].scrollIntoView(true);", new_shrub_button)
+
+        # Small pause to avoid click interception from any lingering overlays
+        import time
+        time.sleep(0.5)
+
+        # Try normal click, fallback to JS click if intercepted
+        try:
             new_shrub_button.click()
+        except selenium.common.exceptions.ElementClickInterceptedException:
+            logger.warning("Normal click intercepted, trying JS click")
+            driver.execute_script("arguments[0].click();", new_shrub_button)
 
     def test_valid_shrubs(self):
         logger.info("Testing valid shrub creation")

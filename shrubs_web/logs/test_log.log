@@ -9034,3 +9034,72 @@ Stacktrace:
 2025-06-02 18:18:09,326 - INFO - Entering password
 2025-06-02 18:18:09,479 - INFO - Clicking password visibility toggle
 2025-06-02 18:18:09,479 - INFO - Clicking login button
+2025-06-02 18:18:19,636 - INFO - Valid login passed, 'My Files' is visible
+2025-06-02 18:18:19,638 - INFO - Testing valid shrub creation
+2025-06-02 18:18:50,277 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-02 18:19:24,606 - INFO - Launching login page
+2025-06-02 18:19:29,427 - INFO - Running test: Valid login flow
+2025-06-02 18:19:29,427 - INFO - Refreshing page
+2025-06-02 18:19:29,909 - INFO - Refreshing page completed
+2025-06-02 18:19:29,912 - INFO - Entering email
+2025-06-02 18:19:31,073 - INFO - Entering password
+2025-06-02 18:19:31,203 - INFO - Clicking password visibility toggle
+2025-06-02 18:19:31,203 - INFO - Clicking login button
+2025-06-02 18:19:37,564 - INFO - Valid login passed, 'My Files' is visible
+2025-06-02 18:19:37,568 - INFO - Navigating to 'My Shrubs'
+2025-06-02 18:19:39,958 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-02 18:19:46,517 - INFO - Testing valid shrub creation
+2025-06-02 18:22:53,434 - INFO - Launching login page
+2025-06-02 18:22:58,113 - INFO - Running test: Valid login flow
+2025-06-02 18:22:58,113 - INFO - Refreshing page
+2025-06-02 18:22:58,893 - INFO - Refreshing page completed
+2025-06-02 18:22:58,893 - INFO - Entering email
+2025-06-02 18:22:59,995 - INFO - Entering password
+2025-06-02 18:23:00,103 - INFO - Clicking password visibility toggle
+2025-06-02 18:23:00,103 - INFO - Clicking login button
+2025-06-02 18:23:07,969 - INFO - Valid login passed, 'My Files' is visible
+2025-06-02 18:23:07,970 - INFO - Navigating to 'My Shrubs'
+2025-06-02 18:23:10,234 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-02 18:23:10,245 - INFO - Waiting for overlay spinner to disappear before clicking new shrub button
+2025-06-02 18:23:16,921 - INFO - Testing valid shrub creation
+2025-06-02 18:24:30,941 - INFO - Launching login page
+2025-06-02 18:24:35,623 - INFO - Running test: Valid login flow
+2025-06-02 18:24:35,623 - INFO - Refreshing page
+2025-06-02 18:24:35,959 - INFO - Refreshing page completed
+2025-06-02 18:24:35,959 - INFO - Entering email
+2025-06-02 18:24:36,975 - INFO - Entering password
+2025-06-02 18:24:37,084 - INFO - Clicking password visibility toggle
+2025-06-02 18:24:37,084 - INFO - Clicking login button
+2025-06-02 18:24:47,083 - INFO - Valid login passed, 'My Files' is visible
+2025-06-02 18:24:47,085 - INFO - Navigating to 'My Shrubs'
+2025-06-02 18:24:51,172 - INFO - Testing valid shrub creation
+2025-06-02 18:25:28,006 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-02 18:27:02,240 - INFO - Launching login page
+2025-06-02 18:27:06,738 - INFO - Running test: Valid login flow
+2025-06-02 18:27:06,738 - INFO - Refreshing page
+2025-06-02 18:28:30,416 - INFO - Refreshing page completed
+2025-06-02 18:28:30,417 - INFO - Entering email
+2025-06-02 18:28:30,993 - ERROR - Exception during valid login flow: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.59)
+Stacktrace:
+#0 0x58eaef65271a <unknown>
+#1 0x58eaef0f50a0 <unknown>
+#2 0x58eaef0ca310 <unknown>
+#3 0x58eaef174ae8 <unknown>
+#4 0x58eaef191c3c <unknown>
+#5 0x58eaef16c173 <unknown>
+#6 0x58eaef138d4b <unknown>
+#7 0x58eaef1399b1 <unknown>
+#8 0x58eaef6178cb <unknown>
+#9 0x58eaef61b7ca <unknown>
+#10 0x58eaef5ff622 <unknown>
+#11 0x58eaef61c354 <unknown>
+#12 0x58eaef5e445f <unknown>
+#13 0x58eaef6404f8 <unknown>
+#14 0x58eaef6406d6 <unknown>
+#15 0x58eaef651586 <unknown>
+#16 0x747979c9caa4 <unknown>
+#17 0x747979d29c3c <unknown>
+
+2025-06-02 18:28:31,176 - INFO - Navigating to 'My Shrubs'
