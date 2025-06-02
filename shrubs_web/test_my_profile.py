@@ -185,54 +185,40 @@ class TestMyProfile:
         date_picker_ok_btn().click()
         assert check_invalid_date_of_birth().text == error.DATE_OF_BIRTH_VALIDATION
         logger.info("Invalid DOB validation message verified")
-
         date_of_birth_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         date_of_birth_input_field().send_keys(input_field.DATE_OF_BIRTH)
         date_picker_ok_btn().click()
-
         phone_no_input_field().send_keys(input_field.INVALID_PHONE_NUMBER[0])
         assert check_invalid_least_phone_number().text == error.LEAST_PHONE_NUMBER_ERROR
         logger.info("Phone number too short validation message verified")
-
         phone_no_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         phone_no_input_field().send_keys(input_field.INVALID_PHONE_NUMBER[1])
         assert check_invalid_greater_than_phone_number().text == error.GREATER_PHONE_NUMBER_ERROR
         logger.info("Phone number too long validation message verified")
-
         phone_no_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         phone_no_input_field().send_keys(input_field.INVALID_PHONE_NUMBER[2])
         assert check_invalid_phone_number().text == error.PHONE_VALIDATION
         logger.info("Phone number invalid format validation message verified")
-
         phone_no_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         phone_no_input_field().send_keys(input_field.PHONE_NUMBER)
-
         country_input_field().click()
         country_select().click()
-
         address_input_field().send_keys(input_field.ADDRESS)
-
         city_input_field().send_keys(input_field.INVALID_CITY)
         assert check_invalid_city().text == error.CITY_VALIDATION
         logger.info("Invalid city validation message verified")
-
         city_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         city_input_field().send_keys(input_field.CITY)
-
         state_input_field().send_keys(input_field.INVALID_STATE)
         assert check_invalid_state().text == error.STATE_VALIDATION
         logger.info("Invalid state validation message verified")
-
         state_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         state_input_field().send_keys(input_field.STATE)
-
         zip_code_input_field().send_keys(input_field.INVALID_POSTAL_CODE)
         assert check_invalid_zip_code().text == error.POSTAL_CODE_VALIDATION
         logger.info("Invalid postal code validation message verified")
-
         zip_code_input_field().send_keys(Keys.CONTROL, "a" + Keys.DELETE)
         zip_code_input_field().send_keys(input_field.ZIPCODE)
-
         bio_input_field().send_keys(input_field.BIO)
         save_my_profile_btn().click()
         assert check_success_message_for_my_profile().text == validation_assert.SUCCESS_MESSAGE_FOR_MY_PROFILE

@@ -2,30 +2,24 @@ import random
 import time, os, datetime
 from selenium import webdriver
 from selenium.common import TimeoutException
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
-from constant import validation_assert, input_field, error
+from constant import validation_assert, input_field
 from log_config import setup_logger
 from selenium.webdriver.common.action_chains import ActionChains
 
 logger = setup_logger()
-
 chrome_options = webdriver.ChromeOptions()
-
 driver = webdriver.Chrome(options=chrome_options)
 chrome_options.add_argument('--headless')
 driver.maximize_window()
-
 email = config.CORRECT_EMAIL
 password = config.CORRECT_PASSWORD
-
 logger.info("Launching login page")
 driver.get(config.WEB_URL)
 time.sleep(3)
-
 wait = WebDriverWait(driver, 25)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
@@ -82,7 +76,7 @@ def save_screenshot(filename, use_timestamp=True, folder="screenshorts"):
         filename = "{}.png".format(filename)
 
     full_path = folder, filename
-    driver.save_screenshot(f"{folder}/{filename}")  # using global driver
+    driver.save_screenshot(f"{folder}/{filename}")
     return full_path
 
 
@@ -175,11 +169,8 @@ def select_thumbnail_folder():
         element = wait.until(EC.element_to_be_clickable(
             (By.XPATH, "//div[span[text()[normalize-space()='thumbnail']]]")
         ))
-
-        # Scroll the element into view
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
 
-        # Perform double-click using ActionChains
         ActionChains(driver).move_to_element(element).double_click().perform()
         print("[INFO] Double-clicked on 'thumbnail' folder.")
 
@@ -210,7 +201,6 @@ def select_random_image(driver):
         driver.execute_script("window.scrollTo(0, arguments[0].getBoundingClientRect().top + window.scrollY - 100);",
                               selected_image)
 
-        # Use JavaScript click as fallback if ActionChains fails
         try:
             WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable(selected_image)
@@ -261,11 +251,9 @@ def overlay_spinner():
 def select_random_font(driver):
     wait = WebDriverWait(driver, 10)
 
-    # Open the font dropdown first (click the combobox area)
     combobox = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div.multiselect")))
     combobox.click()
 
-    # Wait for all visible font options to load
     font_options = wait.until(EC.visibility_of_all_elements_located(
         (By.CSS_SELECTOR, "li.multiselect__element:not([style*='display: none']) > span.multiselect__option")
     ))
@@ -273,7 +261,6 @@ def select_random_font(driver):
     if not font_options:
         raise Exception("No fonts found in the dropdown.")
 
-    # Randomly select and click a font
     selected_font = random.choice(font_options)
     font_name = selected_font.text.strip()
     selected_font.click()
@@ -324,22 +311,18 @@ def select_random_my_shrub(driver, wait):
 
         selected_shrub = random.choice(shrub_cards)
 
-        # Scroll into view using JavaScript
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_shrub)
 
-        # Wait for the element to be clickable
         wait.until(EC.element_to_be_clickable((
             By.CSS_SELECTOR,
             "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg"
         )))
 
-        # Perform double-click using ActionChains
         actions = ActionChains(driver)
         actions.move_to_element(selected_shrub).double_click().perform()
 
         print("[INFO] Random shrub double-clicked.")
 
-        # Handle "File already exists!" popup if it appears
         handle_file_exists_popup(driver)
 
     except Exception as e:
@@ -365,8 +348,7 @@ def handle_file_exists_popup(driver):
 
 
 def background_color_dropdown():
-    overlay_spinner()  # Assuming this handles any overlay spinner present before interaction
-
+    overlay_spinner()
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Background']")))
 
 
@@ -453,13 +435,11 @@ def select_description_font_size_dropdown():
 def select_random_alignment(driver):
     wait = WebDriverWait(driver, 10)
 
-    # Locate all alignment buttons (left, center, right)
     alignment_buttons = wait.until(EC.presence_of_all_elements_located((
         By.XPATH,
         "//h5[contains(text(),'Horizontal font alignment')]/following::div[contains(@class,'justify-around')]/span"
     )))
 
-    # Pick a random button and click it
     random_button = random.choice(alignment_buttons)
     alignment_name = random_button.find_element(By.TAG_NAME, "i").text
     random_button.click()
@@ -485,13 +465,11 @@ def select_description_font_alignment_dropdown():
 def select_bold_font_weight(driver):
     wait = WebDriverWait(driver, 10)
 
-    # Click to open the 'Select your font weight' dropdown
     font_weight_dropdown = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//label[contains(text(), 'Select your font weight')]/following-sibling::div"
     )))
     font_weight_dropdown.click()
 
-    # Wait for the 'Bold' option to be visible and click it
     bold_option = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//span[@class='multiselect__option' and normalize-space(text())='Bold']"
     )))
@@ -503,22 +481,18 @@ def select_bold_font_weight(driver):
 def select_random_font_size(driver):
     wait = WebDriverWait(driver, 10)
 
-    # Open the font size dropdown
     font_size_dropdown = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//label[contains(text(), 'Select your font size')]/following-sibling::div"
     )))
     font_size_dropdown.click()
 
-    # Get all font size options
     font_size_options = wait.until(EC.presence_of_all_elements_located((
         By.XPATH, "//span[@class='multiselect__option']"
     )))
 
-    # Pick a random option
     random_option = random.choice(font_size_options)
     print(f"Randomly selected font size: {random_option.text}")
 
-    # Click the selected option
     random_option.click()
 
 
@@ -543,7 +517,6 @@ def select_header_background_image_btn():
 
 
 def select_no_background_btn():
-
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'no-background')]/parent::div")))
 
 
@@ -557,19 +530,16 @@ def select_color_from_color_picker():
 
 def select_random_preset_color(driver, wait):
     try:
-        # Wait for all preset color elements
+
         preset_colors = wait.until(EC.presence_of_all_elements_located((
             By.XPATH, "//div[contains(@class, 'vc-sketch-presets-color')]"
         )))
 
-        # Choose one randomly
         random_color = random.choice(preset_colors)
 
-        # Scroll into view and click using ActionChains
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", random_color)
         ActionChains(driver).move_to_element(random_color).click().perform()
 
-        # Optional: Print the color being selected
         print(f"[INFO] Selected preset color: {random_color.get_attribute('aria-label')}")
 
     except Exception as e:
@@ -707,7 +677,6 @@ class TestPositiveFlow:
             ok_btn()
         except TimeoutException:
             print("[INFO] OK button not found or not clickable — skipping.")
-
         save_new_shrub_btn().click()
         logger.info("Clicked 'Save New Shrub' button to finalize creation")
 
@@ -732,7 +701,6 @@ class TestPositiveFlow:
         save_screenshot("Color_pick")
         select_no_background_btn().click()
         background_color_dropdown().click()
-
 
     def test_shrub_style_shrub_title(self):
         shrub_title_dropdown().click()

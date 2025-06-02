@@ -13,17 +13,18 @@ from selenium.common.exceptions import (
 logger = setup_logger()
 
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument('--headless')
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option("useAutomationExtension", False)
 driver = webdriver.Chrome(options=chrome_options)
+chrome_options.add_argument('--headless')
 driver.set_window_size(1920, 1080)
 driver.get(config.WEB_URL)
 
 email = config.CORRECT_EMAIL
 password = config.PASSWORD
 new_password = config.RESET_PASSWORD
+clear_input = Keys.CONTROL + 'a' + Keys.BACKSPACE
 wait = WebDriverWait(driver, 25)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
@@ -82,7 +83,6 @@ def refresh_page():
         driver.refresh()
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
     else:
-        # Handle situation: reopen browser or fail gracefully
         logger.error("Browser window is closed, cannot refresh")
 
 def is_browser_window_open(driver):
@@ -139,7 +139,7 @@ def reset_password_page():
     overlay_spinner()
     return wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'Reset Password')]")))
 
-clear_input = Keys.CONTROL + 'a' + Keys.BACKSPACE
+
 
 def quit_browser():
     logger.info("Quitting browser")
@@ -273,11 +273,9 @@ class TestChangePassword:
         btn_login.click()
         assert display_myfiles_after_login().text == validation_assert.MY_FILES
         logger.info("New password login successful, 'My Files' visible")
-
         droppable_area().click()
         my_profile().click()
         reset_password_page().click()
-
         current_password_input_field().send_keys(new_password)
         new_password_input_field().send_keys(password)
         confirm_new_password_input_field().send_keys(password)

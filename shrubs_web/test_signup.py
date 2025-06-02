@@ -1,5 +1,4 @@
 import time,os,datetime
-
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -11,13 +10,10 @@ from constant import validation_assert, input_field, error
 from log_config import setup_logger
 
 logger = setup_logger()
-
 chrome_options = webdriver.ChromeOptions()
-
 driver = webdriver.Chrome(options=chrome_options)
 chrome_options.add_argument('--headless')
 driver.maximize_window()
-
 logger.info("Opening signup page")
 driver.get(config.WEB_URL)
 wait = WebDriverWait(driver, 30)
@@ -93,7 +89,7 @@ def save_screenshot(filename, use_timestamp=True, folder="screenshorts"):
         filename = "{}.png".format(filename)
 
     full_path = folder, filename
-    driver.save_screenshot(f"{folder}/{filename}")  # using global driver
+    driver.save_screenshot(f"{folder}/{filename}")
     return full_path
 # ============================== TEST CASES ==============================
 
@@ -181,20 +177,16 @@ class TestSignup:
     def test_valid_signup(self):
         logger.info("Running test: Valid signup flow")
         refresh_page()
-
         uname = randomeString.random_username
         em = randomeString.email
         pwd = randomeString.random_password
         logger.debug(f"Generated credentials: {uname}, {em}, {pwd}")
-
         username_input_field().send_keys(uname)
         email_input_field().send_keys(em)
         email_input_field().send_keys(Keys.TAB)
         password_input_field().send_keys(pwd)
-
         ActionChains(driver).move_to_element(signup_btn()).click().perform()
         time.sleep(3)
-
         try:
             msg = success_signup_message().text
             assert msg.startswith("Congratulations")
@@ -203,6 +195,5 @@ class TestSignup:
             logger.error("Signup failed or success message not found.")
             save_screenshot("signup_failure.png")
             logger.warning("Screenshot saved as signup_failure.png")
-
             raise e
         quit_browser()
