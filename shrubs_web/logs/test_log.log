@@ -12397,3 +12397,6 @@ Stacktrace:
 2025-06-03 15:51:53,989 - INFO - Refreshing page
 2025-06-03 15:51:54,411 - INFO - Refreshing page completed
 2025-06-03 15:51:54,411 - INFO - Entering email
+2025-06-03 15:51:56,095 - INFO - Entering password
+2025-06-03 15:51:56,437 - INFO - Clicking password visibility toggle
+2025-06-03 15:51:56,581 - INFO - Clicking login button
