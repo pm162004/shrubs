@@ -113,7 +113,50 @@ def select_font(driver):
         print(f"Error occurred while selecting font: {e}")
         raise e  # Re-raise the exception for further debugging
 
+def select_font_branch(driver):
+    wait = WebDriverWait(driver, 20)
 
+    try:
+        # Step 1: Click the dropdown
+        dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[3]")))
+        dropdown.click()
+
+        # Step 2: Wait for the list to appear
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
+
+        # Step 3: Get all font options
+        font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
+        font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
+
+        if not font_names:
+            raise Exception("No fonts found in the dropdown.")
+
+        # Step 4: Pick a random font
+        selected_font = random.choice(font_names)
+        print(f"Randomly selected font: {selected_font}")
+
+        # Step 5: Wait for the input field and type the font name
+        input_field = wait.until(
+            EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[1]")))
+
+        # Ensure input field is cleared before typing
+
+        # Type and select the font
+        input_field.send_keys(selected_font)
+        input_field.send_keys(Keys.ENTER)
+
+        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
+        try:
+            close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
+            close_button.click()
+        except Exception:
+            print("No close button found.")
+
+
+
+    except Exception as e:
+        print(f"Error occurred while selecting font: {e}")
+        raise e  # Re-raise the exception for further debugging
 def select_font_header(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -444,22 +487,22 @@ def wait_for_spinner_to_disappear(driver, timeout=10, short_wait=2):
 
 
 def overlay_spinner():
-    import selenium
     try:
-        spinner = driver.find_elements(By.ID, "overlay-spinner")
-        if spinner:
-            WebDriverWait(driver, 30).until(
-                EC.invisibility_of_element_located((By.ID, "overlay-spinner"))
-            )
-    except selenium.common.exceptions.InvalidSessionIdException:
-        logger.error("Driver session invalid during overlay_spinner call")
+        WebDriverWait(driver, 60).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, 'overlay-spinner-class'))
+        )
+    except TimeoutException:
+        logger.error("Spinner did not disappear in time!")
         raise
 
 
-def wait_for_overlay_to_disappear(driver, timeout=10):
-    WebDriverWait(driver, timeout).until(
-        EC.invisibility_of_element_located((By.CLASS_NAME, "md-overlay"))
-    )
+def wait_for_overlay_to_disappear(driver):
+    try:
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, ".md-overlay"))
+        )
+    except TimeoutException:
+        print("Overlay still visible after waiting.")
 
 
 
@@ -705,6 +748,20 @@ def select_bold_font_weight(driver):
 
     print("Bold font weight selected.")
 
+def select_bold_font_weight_branch(driver):
+    wait = WebDriverWait(driver, 10)
+
+    font_weight_dropdown = wait.until(EC.element_to_be_clickable((
+        By.XPATH, "(//div[@class='multiselect__select'])[4]"
+    )))
+    font_weight_dropdown.click()
+
+    bold_option = wait.until(EC.element_to_be_clickable((
+        By.XPATH, "(//span[@class='option__title'][normalize-space()='Bold'])[1]"
+    )))
+    bold_option.click()
+
+    print("Bold font weight selected.")
 def select_bold_font_weight_header(driver):
     wait = WebDriverWait(driver, 10)
 
@@ -740,6 +797,35 @@ def select_random_font_size(driver):
     try:
         font_size_dropdown = wait.until(EC.element_to_be_clickable((
             By.XPATH, "(//div[@role='combobox'])[4]"
+        )))
+        font_size_dropdown.click()
+
+        font_size_options = wait.until(EC.presence_of_all_elements_located((
+            By.XPATH, "//li[@class='multiselect__element']"
+        )))
+
+        if not font_size_options:
+            print("No font size options found!")
+            return
+
+        random_option = random.choice(font_size_options)
+        print(f"Randomly selected font size: {random_option.text}")
+
+        random_option.click()
+
+    except TimeoutException:
+        print("TimeoutException: Could not load font size options.")
+    except NoSuchElementException:
+        print("NoSuchElementException: Could not find the font size dropdown or options.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {str(e)}")
+
+def select_random_font_size_branch(driver):
+    wait = WebDriverWait(driver, 20)
+
+    try:
+        font_size_dropdown = wait.until(EC.element_to_be_clickable((
+            By.XPATH, "(//div[@role='combobox'])[5]"
         )))
         font_size_dropdown.click()
 
@@ -848,7 +934,7 @@ def select_background_image_btn():
 
 def select_icon_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH,
-                                                  "//i[contains(@class, 'feather--arrow-down-left')]/ancestor::div[contains(@class, 'cursor-pointer')]")))
+                                                  "//img[@alt='thumbnail' and contains(@src, 'tick.b42a347e.svg')]")))
 
 
 def select_header_background_image_btn():
@@ -916,11 +1002,15 @@ def save_header_style_btn():
 
 
 def save_style_btn():
+    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(@class, 'md-button') and .//div[@class='md-button-content' and text()=' Save ']])[2]")))
 
 
 def new_branch_btn():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-new-branch']")))
+
+    WebDriverWait(driver, 30).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
+    time.sleep(5)
+    return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-new-branch']")))
 
 
 def save_as_template_btn():
@@ -933,6 +1023,15 @@ def save_as_template_btn():
     save = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[5]")))
     save.click()
 
+def save_as_template_btn_branch():
+    save_template = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Save As Template')]")))
+    save_template.click()
+
+    input = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[1]")))
+    input.send_keys(input_field.VALID_SHRUBS)
+
+    save = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[3]")))
+    save.click()
 
 
 def create_links_btn():
@@ -961,7 +1060,7 @@ def upload_audio_btn():
 
 def save_new_branch_btn():
     overlay_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[2]")))
 
 
 def link_branch_title_validation():
@@ -998,8 +1097,10 @@ def add_code_textarea():
 
 
 def link_save_btn():
-    progress_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save')]")))
+
+    wait_for_overlay_to_disappear(driver)  # Ensure any overlay is gone
+
+    return WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Save')]")))
 
 
 def code_save_btn():
@@ -1019,13 +1120,13 @@ def upload_view_btn():
 
 
 def back_branch_link_btn():
-    progress_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Back')]")))
+    wait_for_overlay_to_disappear(driver)
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Back')]")))
 
 
 def bank_branch_btn():
     progress_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Save')]")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Back')]")))
 
 
 def back_code_btn():
@@ -1034,8 +1135,8 @@ def back_code_btn():
 
 
 def back_link_btn():
-    progress_spinner()
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Back')]")))
+    wait_for_overlay_to_disappear(driver)
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Back')]")))
 
 
 def wait_time():
@@ -1216,7 +1317,7 @@ class TestPositiveFlow:
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
         wait_time()
-        background_color_dropdown().click()
+        # background_color_dropdown().click()
         # select_background_image_btn().click()
         # upload_random_image("image")
         # logger.info("Uploaded random image from 'image' folder")
@@ -1233,8 +1334,8 @@ class TestPositiveFlow:
         # select_color_picker_btn().click()
         # select_random_preset_color(driver, wait)
         # save_screenshot("Color_pick")
-        select_no_background_btn().click()
-        background_color_dropdown().click()
+        # select_no_background_btn().click()
+        # background_color_dropdown().click()
 
     # def test_shrub_style_shrub_title(self):
     #
@@ -1312,7 +1413,7 @@ class TestPositiveFlow:
         logger.info("Shrub styling applied successfully")
 
     def test_shrub_header_style(self):
-        header_dropdown().click()
+        # header_dropdown().click()
         # header_background_dropdown().click()
         # overlay_spinner()
         # select_header_background_image_btn().click()
@@ -1359,28 +1460,30 @@ class TestPositiveFlow:
         # select_font_alignment_dropdown().click()
         # select_random_alignment(driver)
         # select_font_alignment_dropdown().click()
-        element = shrub_header_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        element.click()
-        sub_header_font_color_dropdown().click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        sub_header_font_color_dropdown().click()
-        select_sub_header_font_style_dropdown().click()
-        selected_font = select_font_header(driver)
-        print(f" Selected Font: {selected_font}")
-        select_sub_header_font_style_dropdown().click()
-        select_sub_header_font_weight_dropdown().click()
-        select_bold_font_weight_header(driver)
-        select_sub_header_font_weight_dropdown().click()
-        select_sub_header_font_size_dropdown().click()
-        select_random_header_font_size(driver)
-        select_sub_header_font_size_dropdown().click()
-        select_sub_header_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_sub_header_font_alignment_dropdown().click()
-        shrub_header_dropdown().click()
+        # element = shrub_header_dropdown()
+        # driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        # element.click()
+        # sub_header_font_color_dropdown().click()
+        # select_background_color_picker_btn().click()
+        # select_random_preset_color(driver, wait)
+        # sub_header_font_color_dropdown().click()
+        # select_sub_header_font_style_dropdown().click()
+        # selected_font = select_font_header(driver)
+        # print(f" Selected Font: {selected_font}")
+        # select_sub_header_font_style_dropdown().click()
+        # select_sub_header_font_weight_dropdown().click()
+        # select_bold_font_weight_header(driver)
+        # select_sub_header_font_weight_dropdown().click()
+        # select_sub_header_font_size_dropdown().click()
+        # select_random_header_font_size(driver)
+        # select_sub_header_font_size_dropdown().click()
+        # select_sub_header_font_alignment_dropdown().click()
+        # select_random_alignment(driver)
+        # select_sub_header_font_alignment_dropdown().click()
+        # shrub_header_dropdown().click()
+        time.sleep(3)
         save_style_btn().click()
+
         logger.info("Shrub styling applied successfully")
 
 
@@ -1388,138 +1491,170 @@ class TestPositiveFlow:
     #     new_branch_btn().click()
     #     create_links_btn().click()
     #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    #     font_color_dropdown().click()
-    #     select_random_preset_color(driver, wait)
-    #     font_color_dropdown().click()
-    #     select_font_style_dropdown().click()
-    #     # select_random_font(driver)
-    #     select_font_style_dropdown().click()
-    #     select_font_weight_dropdown().click()
-    #     select_bold_font_weight(driver)
-    #     select_font_weight_dropdown().click()
-    #     select_font_size_dropdown().click()
-    #     select_random_font_size(driver)
-    #     select_font_size_dropdown().click()
-    #     select_font_alignment_dropdown().click()
-    #     select_random_alignment(driver)
-    #     select_font_alignment_dropdown().click()
-    #     select_font_banner_background_dropdown().click()
-    #     select_banner_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     select_no_banner_background_btn().click()
-    #     select_font_banner_background_dropdown().click()
-    #     background_color_dropdown().click()
-    #     select_background_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     select_no_color_background_btn().click()
-    #     background_color_dropdown().click()
-    #     thumbnail_image_dropdown().click()
-    #     select_background_image_btn().click()
-    #     upload_random_image("image")
-    #     logger.info("Uploaded random image from 'image' folder")
-    #     next_image_btn()
-    #     logger.info("Clicked 'Next' button after image upload")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     save_screenshot("Background_image")
-    #     wait_for_overlay_to_disappear(driver)
-    #     select_no_thumbnail_background_btn().click()
-    #     select_icon_btn().click()
-    #     select_random_icon()
-    #     logger.info("Selected random icon")
-    #     thumbnail_icon_cancel_btn().click()
-    #     logger.info("Cancelled thumbnail icon selection")
-    #     thumbnail_image_dropdown().click()
-    #     save_as_template_btn().click()
-    #     save_new_branch_btn().click()
-    #     logger.info("Branch created successfully")
-    #     branch_add_link_btn().click()
-    #     add_link_input_field().send_keys(Keys.ENTER)
-    #     time.sleep(1)
-    #     link_save_btn().click()
-    #     add_link_input_field().send_keys(input_field.VALID_SHRUBS)
-    #     link_save_btn().click()
-    #     add_link_input_field().send_keys(Keys.CONTROL, "a")
-    #     add_link_input_field().send_keys(Keys.DELETE)
-    #     add_link_input_field().send_keys(input_field.LINK)
-    #     add_link_input_field().send_keys(Keys.ENTER)
-    #     time.sleep(2)
-    #     link_save_btn().click()
-    #     back_branch_link_btn().click()
-    #     link_save_btn().click()
-    #     back_link_btn().click()
-    #     logger.info("Link added successfully")
-    #
-    # def test_new_branch_embedded_code(self):
-    #     new_branch_btn().click()
-    #     embedded_code_btn().click()
-    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    #     font_color_dropdown().click()
-    #     select_random_preset_color(driver, wait)
-    #     font_color_dropdown().click()
-    #     select_font_style_dropdown().click()
-    #     # select_random_font(driver)
-    #     select_font_style_dropdown().click()
-    #     select_font_weight_dropdown().click()
-    #     select_bold_font_weight(driver)
-    #     select_font_weight_dropdown().click()
-    #     select_font_size_dropdown().click()
-    #     select_random_font_size(driver)
-    #     select_font_size_dropdown().click()
-    #     select_font_alignment_dropdown().click()
-    #     select_random_alignment(driver)
-    #     select_font_alignment_dropdown().click()
-    #     select_font_banner_background_dropdown().click()
-    #     select_banner_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     select_no_banner_background_btn().click()
-    #     select_font_banner_background_dropdown().click()
-    #     background_color_dropdown().click()
-    #     select_background_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     select_no_color_background_btn().click()
-    #     background_color_dropdown().click()
-    #     thumbnail_image_dropdown().click()
-    #     select_background_image_btn().click()
-    #     upload_random_image("image")
-    #     logger.info("Uploaded random image from 'image' folder")
-    #     next_image_btn()
-    #     logger.info("Clicked 'Next' button after image upload")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     save_screenshot("Background_image")
-    #     wait_for_overlay_to_disappear(driver)
-    #     select_no_thumbnail_background_btn().click()
-    #     select_icon_btn().click()
-    #     select_random_icon()
-    #     logger.info("Selected random icon")
-    #     thumbnail_icon_cancel_btn().click()
-    #     logger.info("Cancelled thumbnail icon selection")
-    #     thumbnail_image_dropdown().click()
-    #     save_as_template_btn().click()
-    #     save_new_branch_btn().click()
-    #     branch_add_code_btn().click()
-    #     logger.info("Branch created successfully")
-    #     add_code_textarea().send_keys(input_field.VALID_SHRUBS)
-    #     embedded_website_url_btn().click()
-    #     time.sleep(1)
-    #     code_save_btn().click()
-    #     add_code_textarea().send_keys(Keys.CONTROL, "a")
-    #     add_code_textarea().send_keys(Keys.DELETE)
-    #     add_code_textarea().send_keys(input_field.LINK)
-    #     add_code_textarea().send_keys(Keys.ENTER)
-    #     time.sleep(2)
-    #     code_save_btn().click()
-    #     back_code_btn().click()
-    #     back_link_btn().click()
-    #     logger.info("Link added successfully")
-    #
+        # font_color_dropdown().click()
+        # select_header_color_picker_btn().click()
+        # select_random_preset_color(driver, wait)
+        # font_color_dropdown().click()
+        # select_font_style_dropdown().click()
+        # select_font_branch(driver)
+        # select_font_style_dropdown().click()
+        # select_font_weight_dropdown().click()
+        # select_bold_font_weight_branch(driver)
+        # select_font_weight_dropdown().click()
+        # select_font_size_dropdown().click()
+        # select_random_font_size_branch(driver)
+        # select_font_size_dropdown().click()
+        # select_font_alignment_dropdown().click()
+        # select_random_alignment(driver)
+        # select_font_alignment_dropdown().click()
+        # time.sleep(1)
+        # banner = select_font_banner_background_dropdown()
+        # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+        # banner.click()
+        # color = select_banner_color_picker_btn()
+        # driver.execute_script("arguments[0].scrollIntoView(true);", color)
+        # color.click()
+        # select_random_preset_color(driver, wait)
+        #
+        # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+        # driver.execute_script("arguments[0].click();", banner)
+        #
+        #
+        # background = background_color_dropdown()
+        # driver.execute_script("arguments[0].scrollIntoView(true);", background)
+        # background.click()
+        # select_background_color_picker_btn().click()
+        # select_random_preset_color(driver, wait)
+        #
+        # select_no_color_background_btn().click()
+        # driver.execute_script("arguments[0].scrollIntoView(true);", background)
+        # driver.execute_script("arguments[0].click();", background)
+        # thumbnail = thumbnail_image_dropdown()
+        # driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
+        # thumbnail.click()
+        # select_background_image_btn().click()
+        # upload_random_image("image")
+        # logger.info("Uploaded random image from 'image' folder")
+        # next_image_btn()
+        # logger.info("Clicked 'Next' button after image upload")
+        # zoomin_image_btn()
+        # logger.info("Zoomed in image")
+        # zoom_out_image_btn()
+        # logger.info("Zoomed out image")
+        # save_crop_image_btn().click()
+        # save_screenshot("Background_image")
+        # wait_for_overlay_to_disappear(driver)
+        # select_no_thumbnail_background_btn().click()
+        # select_icon_btn().click()
+        # select_random_icon()
+        # logger.info("Selected random icon")
+        # logger.info("Cancelled thumbnail icon selection")
+        # thumbnail.click()
+        # save_as_template_btn_branch()
+        # wait_for_overlay_to_disappear(driver)
+        # driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
+        # save_new_branch_btn().click()
+        # logger.info("Branch created successfully")
+        # branch_add_link_btn().click()
+        # add_link_input_field().send_keys(Keys.CONTROL, 'a')
+        # add_link_input_field().send_keys(Keys.DELETE)
+        # add_link_input_field().send_keys(input_field.LINK)
+        #
+        # link_save_btn().click()
+        # wait_for_overlay_to_disappear(driver)
+        # wait_for_spinner_to_disappear(driver)
+        # time.sleep(5)
+        # back_branch_link_btn().click()
+        # wait_for_overlay_to_disappear(driver)
+        # wait_for_spinner_to_disappear(driver)
+        # time.sleep(5)
+        # back_link_btn().click()
+        # logger.info("Link added successfully")
+
+    def test_new_branch_embedded_code(self):
+        new_branch_btn().click()
+        embedded_code_btn().click()
+        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        font_color_dropdown().click()
+        select_header_color_picker_btn().click()
+        select_random_preset_color(driver, wait)
+        font_color_dropdown().click()
+        select_font_style_dropdown().click()
+        select_font_branch(driver)
+        select_font_style_dropdown().click()
+        select_font_weight_dropdown().click()
+        select_bold_font_weight_branch(driver)
+        select_font_weight_dropdown().click()
+        select_font_size_dropdown().click()
+        select_random_font_size_branch(driver)
+        select_font_size_dropdown().click()
+        select_font_alignment_dropdown().click()
+        select_random_alignment(driver)
+        select_font_alignment_dropdown().click()
+        time.sleep(1)
+        banner = select_font_banner_background_dropdown()
+        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+        banner.click()
+        color = select_banner_color_picker_btn()
+        driver.execute_script("arguments[0].scrollIntoView(true);", color)
+        color.click()
+        select_random_preset_color(driver, wait)
+
+        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+        driver.execute_script("arguments[0].click();", banner)
+
+
+        background = background_color_dropdown()
+        driver.execute_script("arguments[0].scrollIntoView(true);", background)
+        background.click()
+        select_background_color_picker_btn().click()
+        select_random_preset_color(driver, wait)
+
+        select_no_color_background_btn().click()
+        driver.execute_script("arguments[0].scrollIntoView(true);", background)
+        driver.execute_script("arguments[0].click();", background)
+        thumbnail = thumbnail_image_dropdown()
+        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
+        thumbnail.click()
+        select_background_image_btn().click()
+        upload_random_image("image")
+        logger.info("Uploaded random image from 'image' folder")
+        next_image_btn()
+        logger.info("Clicked 'Next' button after image upload")
+        zoomin_image_btn()
+        logger.info("Zoomed in image")
+        zoom_out_image_btn()
+        logger.info("Zoomed out image")
+        save_crop_image_btn().click()
+        save_screenshot("Background_image")
+        wait_for_overlay_to_disappear(driver)
+        select_no_thumbnail_background_btn().click()
+        select_icon_btn().click()
+        select_random_icon()
+        logger.info("Selected random icon")
+        logger.info("Cancelled thumbnail icon selection")
+        thumbnail.click()
+        save_as_template_btn_branch()
+        wait_for_overlay_to_disappear(driver)
+        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
+        save_new_branch_btn().click()
+        logger.info("Branch created successfully")
+        branch_add_code_btn().click()
+        logger.info("Branch created successfully")
+        add_code_textarea().send_keys(input_field.VALID_SHRUBS)
+        embedded_website_url_btn().click()
+        time.sleep(1)
+        code_save_btn().click()
+        add_code_textarea().send_keys(Keys.CONTROL, "a")
+        add_code_textarea().send_keys(Keys.DELETE)
+        add_code_textarea().send_keys(input_field.LINK)
+        add_code_textarea().send_keys(Keys.ENTER)
+        time.sleep(2)
+        code_save_btn().click()
+        back_code_btn().click()
+        back_link_btn().click()
+        logger.info("Link added successfully")
+
     # def test_new_branch_upload_files(self):
     #     new_branch_btn().click()
     #     upload_files_btn().click()
