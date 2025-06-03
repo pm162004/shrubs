@@ -63,9 +63,11 @@ def click_element_with_retry(get_element_func, retries=3):
             time.sleep(0.5)
     raise Exception("Failed to click element due to stale reference")
 
+
 def thumbnail_icon_cancel_btn():
     return wait.until(
         EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-close-modal' and contains(., 'Cancel')]")))
+
 
 # Usage:
 def select_font(driver):
@@ -113,6 +115,7 @@ def select_font(driver):
         print(f"Error occurred while selecting font: {e}")
         raise e  # Re-raise the exception for further debugging
 
+
 def select_font_branch(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -157,6 +160,8 @@ def select_font_branch(driver):
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
         raise e  # Re-raise the exception for further debugging
+
+
 def select_font_header(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -184,7 +189,6 @@ def select_font_header(driver):
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[2]")))
 
         # Ensure input field is cleared before typing
-
 
         # Type and select the font
         input_field.send_keys(selected_font)
@@ -249,22 +253,23 @@ def select_font_description(driver):
         print(f"Error occurred while selecting font: {e}")
         raise e  # Re-raise the exception for further debugging
 
+
 def password_mask_button():
-        try:
-            password_button = WebDriverWait(driver, 30).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[name()='path' and contains(@d,'M12 7c2.76')]"))
-            )
-            if password_button.is_displayed() and password_button.is_enabled():
-                password_button.click()
-            else:
-                raise Exception("Password mask button not interactable.")
-        except TimeoutException:
-            driver.save_screenshot("error_password_button_not_clickable.png")
-            print("TimeoutException: The password mask button was not clickable.")
-            raise
-        except Exception as e:
-            print(f"Exception: {str(e)}")
-            raise
+    try:
+        password_button = WebDriverWait(driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, "//*[name()='path' and contains(@d,'M12 7c2.76')]"))
+        )
+        if password_button.is_displayed() and password_button.is_enabled():
+            password_button.click()
+        else:
+            raise Exception("Password mask button not interactable.")
+    except TimeoutException:
+        driver.save_screenshot("error_password_button_not_clickable.png")
+        print("TimeoutException: The password mask button was not clickable.")
+        raise
+    except Exception as e:
+        print(f"Exception: {str(e)}")
+        raise
 
 
 def check_logout_btn():
@@ -341,12 +346,20 @@ def select_thumbnail_icon():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//h6[normalize-space()='alert-octagon']")))
 
 
-
-
 def upload_files_orange_btn():
     return wait.until(
         EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-view' and contains(., 'Upload Files')]")))
 
+def upload_image_orange_btn():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-view' and contains(., 'Upload Images')]")))
+def upload_video_orange_btn():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-view' and contains(., 'Upload Videos')]")))
+
+def upload_audio_orange_btn():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-view' and contains(., 'Upload Audios')]")))
 
 def save_new_shrub_btn():
     logger.info("Waiting for save shrub button to be clickable")
@@ -505,9 +518,6 @@ def wait_for_overlay_to_disappear(driver):
         print("Overlay still visible after waiting.")
 
 
-
-
-
 def select_random_icon():
     icons = wait.until(EC.visibility_of_all_elements_located(
         (By.CSS_SELECTOR, "div.icon-hover")
@@ -527,6 +537,69 @@ def upload_random_image(relative_folder):
         raise Exception(f"No images found in {folder_path}")
 
     file_path = os.path.join(folder_path, random.choice(images))
+
+    file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
+    file_input.send_keys(file_path)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File already exists!']"))
+        )
+        ok_button = driver.find_element(By.XPATH, "//button[normalize-space()='Ok']")
+        ok_button.click()
+    except:
+        pass
+
+
+def upload_random_files(relative_folder):
+    folder_path = os.path.abspath(relative_folder)
+    files = [f for f in os.listdir(folder_path) if f.lower().endswith(('.xlsx', '.pdf', '.doc', '.pptx'))]
+    if not files:
+        raise Exception(f"No images found in {folder_path}")
+
+    file_path = os.path.join(folder_path, random.choice(files))
+
+    file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
+    file_input.send_keys(file_path)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File already exists!']"))
+        )
+        ok_button = driver.find_element(By.XPATH, "//button[normalize-space()='Ok']")
+        ok_button.click()
+    except:
+        pass
+
+
+def upload_random_audio(relative_folder):
+    folder_path = os.path.abspath(relative_folder)
+    files = [f for f in os.listdir(folder_path) if f.lower().endswith(('.mp3'))]
+    if not files:
+        raise Exception(f"No images found in {folder_path}")
+
+    file_path = os.path.join(folder_path, random.choice(files))
+
+    file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
+    file_input.send_keys(file_path)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, "//h5[normalize-space()='File already exists!']"))
+        )
+        ok_button = driver.find_element(By.XPATH, "//button[normalize-space()='Ok']")
+        ok_button.click()
+    except:
+        pass
+
+
+def upload_random_video(relative_folder):
+    folder_path = os.path.abspath(relative_folder)
+    files = [f for f in os.listdir(folder_path) if f.lower().endswith(('.mp4'))]
+    if not files:
+        raise Exception(f"No images found in {folder_path}")
+
+    file_path = os.path.join(folder_path, random.choice(files))
 
     file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
     file_input.send_keys(file_path)
@@ -685,7 +758,6 @@ def select_description_font_size_dropdown():
         (By.XPATH, "(//span[@class='md-list-item-text' and text()='Select your font size'])[3]")))
 
 
-
 def select_random_alignment(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -748,6 +820,7 @@ def select_bold_font_weight(driver):
 
     print("Bold font weight selected.")
 
+
 def select_bold_font_weight_branch(driver):
     wait = WebDriverWait(driver, 10)
 
@@ -762,6 +835,8 @@ def select_bold_font_weight_branch(driver):
     bold_option.click()
 
     print("Bold font weight selected.")
+
+
 def select_bold_font_weight_header(driver):
     wait = WebDriverWait(driver, 10)
 
@@ -777,6 +852,7 @@ def select_bold_font_weight_header(driver):
 
     print("Bold font weight selected.")
 
+
 def select_bold_font_weight_description(driver):
     wait = WebDriverWait(driver, 10)
 
@@ -791,6 +867,8 @@ def select_bold_font_weight_description(driver):
     bold_option.click()
 
     print("Bold font weight selected.")
+
+
 def select_random_font_size(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -819,6 +897,7 @@ def select_random_font_size(driver):
         print("NoSuchElementException: Could not find the font size dropdown or options.")
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
+
 
 def select_random_font_size_branch(driver):
     wait = WebDriverWait(driver, 20)
@@ -849,6 +928,7 @@ def select_random_font_size_branch(driver):
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
 
+
 def select_random_header_font_size(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -878,6 +958,7 @@ def select_random_header_font_size(driver):
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
 
+
 def select_random_description_font_size(driver):
     wait = WebDriverWait(driver, 20)
 
@@ -906,6 +987,8 @@ def select_random_description_font_size(driver):
         print("NoSuchElementException: Could not find the font size dropdown or options.")
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
+
+
 def shrub_description_dropdown():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shrub Description']")))
 
@@ -925,8 +1008,10 @@ def select_banner_color_picker_btn():
 def select_background_color_picker_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'color-picker')])[3]")))
 
+
 def select_description_color_picker_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "(//img[contains(@src, 'color-picker')])[4]")))
+
 
 def select_background_image_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@src, 'background-image')]")))
@@ -1003,11 +1088,11 @@ def save_header_style_btn():
 
 def save_style_btn():
     WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(@class, 'md-button') and .//div[@class='md-button-content' and text()=' Save ']])[2]")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH,
+                                                  "(//button[contains(@class, 'md-button') and .//div[@class='md-button-content' and text()=' Save ']])[2]")))
 
 
 def new_branch_btn():
-
     WebDriverWait(driver, 30).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
     time.sleep(5)
     return WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-new-branch']")))
@@ -1017,17 +1102,20 @@ def save_as_template_btn():
     save_template = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Save As Template')]")))
     save_template.click()
 
-    input = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[5]")))
+    input = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[5]")))
     input.send_keys(input_field.VALID_SHRUBS)
 
     save = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[5]")))
     save.click()
 
+
 def save_as_template_btn_branch():
     save_template = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Save As Template')]")))
     save_template.click()
 
-    input = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[1]")))
+    input = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[1]")))
     input.send_keys(input_field.VALID_SHRUBS)
 
     save = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[3]")))
@@ -1055,7 +1143,7 @@ def upload_videos_btn():
 
 
 def upload_audio_btn():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//p[normalize-space()='Upload Audio']")))
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//p[normalize-space()='Upload Audios']")))
 
 
 def save_new_branch_btn():
@@ -1097,10 +1185,10 @@ def add_code_textarea():
 
 
 def link_save_btn():
-
     wait_for_overlay_to_disappear(driver)  # Ensure any overlay is gone
 
-    return WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Save')]")))
+    return WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save' and contains(., 'Save')]")))
 
 
 def code_save_btn():
@@ -1171,7 +1259,6 @@ class TestPositiveFlow:
 
             WebDriverWait(driver, 30).until(EC.url_contains("analytics"))
 
-
             assert "analytics" in driver.current_url, f"Login failed! Current URL is: {driver.current_url}"
             logger.info("Valid login passed, 'My Files' is visible")
 
@@ -1189,7 +1276,6 @@ class TestPositiveFlow:
         logger.info("Navigating to 'My Shrubs'")
         get_my_shrubs().click()
 
-
         WebDriverWait(driver, 30).until(
             EC.invisibility_of_element_located((By.ID, "overlay-spinner"))
         )
@@ -1199,10 +1285,7 @@ class TestPositiveFlow:
             EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']"))
         )
 
-
         driver.execute_script("arguments[0].scrollIntoView(true);", new_shrub_button)
-
-
 
         # Try normal click, fallback to JS click if intercepted
         try:
@@ -1239,77 +1322,78 @@ class TestPositiveFlow:
 
         logger.info("Cancelled thumbnail icon selection")
 
-    # def test_valid_my_computer_image_flow(self):
-    #     logger.info("Starting 'My Computer' image upload and crop flow")
-    #     wait_time()
-    #     select_thumbnail_image_btn().click()
-    #     logger.info("Clicked 'Thumbnail Image' button")
-    #     upload_random_image("image")
-    #     logger.info("Uploaded random image from 'image' folder")
-    #     next_image_btn()
-    #     logger.info("Clicked 'Next' button after image upload")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     wait_for_spinner_to_disappear(driver)
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     logger.info("Clicked 'Save' button to save cropped image")
-    #
-    # def test_valid_my_files_image_flow(self):
-    #     logger.info("Starting 'My Files' image upload and crop flow")
-    #     overlay_spinner()
-    #     logger.info("Overlay spinner disappeared")
-    #     select_thumbnail_image_btn().click()
-    #     logger.info("Clicked 'Thumbnail Image' button")
-    #     upload_image_my_files_btn(driver, wait)
-    #     logger.info("Clicked 'My Files' folder upload button")
-    #     logger.info("Thumbnail images loaded in 'My Files' folder")
-    #     select_random_image(driver)
-    #     logger.info("Selected a random image from 'My Files'")
-    #     next_image_btn()
-    #     logger.info("Clicked 'Next' button")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     logger.info("Clicked 'Save' button for cropped image")
-    #     logger.info("Valid shrub created in 'My Files' image flow")
-    #
-    # def test_valid_my_shrubs_image_flow(self):
-    #     logger.info("Starting 'My Shrubs' image upload and crop flow")
-    #     select_thumbnail_image_btn().click()
-    #     logger.info("Clicked 'Thumbnail Image' button")
-    #     upload_image_my_shrubs_btn().click()
-    #     logger.info("Clicked 'My Shrubs' folder upload button")
-    #     select_random_my_shrub(driver, wait)
-    #     logger.info("Selected a random shrub from 'My Shrubs'")
-    #     try:
-    #         wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']")))
-    #         logger.info("Thumbnail span appeared after shrub selection")
-    #     except Exception as e:
-    #         logger.warning(f"Thumbnail label not found: {e}")
-    #         driver.save_screenshot("error_thumbnail_label_missing.png")
-    #         raise
-    #     logger.info("Thumbnail span appeared after shrub selection")
-    #     select_thumbnail_folder()
-    #     select_random_image(driver)
-    #     logger.info("Clicked on thumbnail folder")
-    #     next_image_btn()
-    #     logger.info("Clicked 'Next' button")
-    #     zoomin_image_btn()
-    #     logger.info("Zoomed in image")
-    #     zoom_out_image_btn()
-    #     logger.info("Zoomed out image")
-    #     save_crop_image_btn().click()
-    #     logger.info("Clicked 'Save' button to save cropped image")
-    #     logger.info("Valid shrub created in 'My Shrubs' image flow")
-    #     try:
-    #         ok_btn()
-    #     except TimeoutException:
-    #         print("[INFO] OK button not found or not clickable — skipping.")
+        # def test_valid_my_computer_image_flow(self):
+        #     logger.info("Starting 'My Computer' image upload and crop flow")
+        #     wait_time()
+        #     select_thumbnail_image_btn().click()
+        #     logger.info("Clicked 'Thumbnail Image' button")
+        #     upload_random_image("image")
+        #     logger.info("Uploaded random image from 'image' folder")
+        #     next_image_btn()
+        #     logger.info("Clicked 'Next' button after image upload")
+        #     zoomin_image_btn()
+        #     logger.info("Zoomed in image")
+        #     wait_for_spinner_to_disappear(driver)
+        #     zoom_out_image_btn()
+        #     logger.info("Zoomed out image")
+        #     save_crop_image_btn().click()
+        #     logger.info("Clicked 'Save' button to save cropped image")
+        #
+        # def test_valid_my_files_image_flow(self):
+        #     logger.info("Starting 'My Files' image upload and crop flow")
+        #     overlay_spinner()
+        #     logger.info("Overlay spinner disappeared")
+        #     select_thumbnail_image_btn().click()
+        #     logger.info("Clicked 'Thumbnail Image' button")
+        #     upload_image_my_files_btn(driver, wait)
+        #     logger.info("Clicked 'My Files' folder upload button")
+        #     logger.info("Thumbnail images loaded in 'My Files' folder")
+        #     select_random_image(driver)
+        #     logger.info("Selected a random image from 'My Files'")
+        #     next_image_btn()
+        #     logger.info("Clicked 'Next' button")
+        #     zoomin_image_btn()
+        #     logger.info("Zoomed in image")
+        #     zoom_out_image_btn()
+        #     logger.info("Zoomed out image")
+        #     save_crop_image_btn().click()
+        #     logger.info("Clicked 'Save' button for cropped image")
+        #     logger.info("Valid shrub created in 'My Files' image flow")
+        #
+        # def test_valid_my_shrubs_image_flow(self):
+        #     logger.info("Starting 'My Shrubs' image upload and crop flow")
+        #     select_thumbnail_image_btn().click()
+        #     logger.info("Clicked 'Thumbnail Image' button")
+        #     upload_image_my_shrubs_btn().click()
+        #     logger.info("Clicked 'My Shrubs' folder upload button")
+        #     select_random_my_shrub(driver, wait)
+        #     logger.info("Selected a random shrub from 'My Shrubs'")
+        #     try:
+        #         wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']")))
+        #         logger.info("Thumbnail span appeared after shrub selection")
+        #     except Exception as e:
+        #         logger.warning(f"Thumbnail label not found: {e}")
+        #         driver.save_screenshot("error_thumbnail_label_missing.png")
+        #         raise
+        #     logger.info("Thumbnail span appeared after shrub selection")
+        #     select_thumbnail_folder()
+        #     select_random_image(driver)
+        #     logger.info("Clicked on thumbnail folder")
+        #     next_image_btn()
+        #     logger.info("Clicked 'Next' button")
+        #     zoomin_image_btn()
+        #     logger.info("Zoomed in image")
+        #     zoom_out_image_btn()
+        #     logger.info("Zoomed out image")
+        #     save_crop_image_btn().click()
+        #     logger.info("Clicked 'Save' button to save cropped image")
+        #     logger.info("Valid shrub created in 'My Shrubs' image flow")
+        #     try:
+        #         ok_btn()
+        #     except TimeoutException:
+        #         print("[INFO] OK button not found or not clickable — skipping.")
         save_new_shrub_btn()
+
     #     logger.info("Clicked 'Save New Shrub' button to finalize creation")
 
     def test_shrub_style_background(self):
@@ -1337,78 +1421,78 @@ class TestPositiveFlow:
         # select_no_background_btn().click()
         # background_color_dropdown().click()
 
-    # def test_shrub_style_shrub_title(self):
-    #
-    #     element = shrub_title_dropdown()
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", element)
-    #     element.click()
-    #     font_color_dropdown().click()
-    #     select_banner_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     font_color_dropdown().click()
-    #     select_font_style_dropdown().click()
-    #     selected_font = select_font(driver)
-    #     print(f" Selected Font: {selected_font}")
-    #
-    #     select_font_weight_dropdown().click()
-    #     select_bold_font_weight(driver)
-    #     select_font_weight_dropdown().click()
-    #     select_font_size_dropdown().click()
-    #     select_random_font_size(driver)
-    #     select_font_size_dropdown().click()
-    #     select_font_alignment_dropdown().click()
-    #     select_random_alignment(driver)
-    #     select_font_alignment_dropdown().click()
-    #     element.click()
-    #     logger.info("Shrub styling applied successfully")
+        # def test_shrub_style_shrub_title(self):
+        #
+        #     element = shrub_title_dropdown()
+        #     driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        #     element.click()
+        #     font_color_dropdown().click()
+        #     select_banner_color_picker_btn().click()
+        #     select_random_preset_color(driver, wait)
+        #     font_color_dropdown().click()
+        #     select_font_style_dropdown().click()
+        #     selected_font = select_font(driver)
+        #     print(f" Selected Font: {selected_font}")
+        #
+        #     select_font_weight_dropdown().click()
+        #     select_bold_font_weight(driver)
+        #     select_font_weight_dropdown().click()
+        #     select_font_size_dropdown().click()
+        #     select_random_font_size(driver)
+        #     select_font_size_dropdown().click()
+        #     select_font_alignment_dropdown().click()
+        #     select_random_alignment(driver)
+        #     select_font_alignment_dropdown().click()
+        #     element.click()
+        #     logger.info("Shrub styling applied successfully")
 
-    # def test_shrub_style_header(self):
-    #     element = shrub_header_dropdown()
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", element)
-    #     element.click()
-    #     sub_header_font_color_dropdown().click()
-    #     select_background_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     sub_header_font_color_dropdown().click()
-    #     select_sub_header_font_style_dropdown().click()
-    #     selected_font = select_font_header(driver)
-    #     print(f" Selected Font: {selected_font}")
-    #     select_sub_header_font_style_dropdown().click()
-    #     select_sub_header_font_weight_dropdown().click()
-    #     select_bold_font_weight_header(driver)
-    #     select_sub_header_font_weight_dropdown().click()
-    #     select_sub_header_font_size_dropdown().click()
-    #     select_random_header_font_size(driver)
-    #     select_sub_header_font_size_dropdown().click()
-    #     select_sub_header_font_alignment_dropdown().click()
-    #     select_random_alignment(driver)
-    #     select_sub_header_font_alignment_dropdown().click()
-    #     element.click()
-    #     logger.info("Shrub styling applied successfully")
+        # def test_shrub_style_header(self):
+        #     element = shrub_header_dropdown()
+        #     driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        #     element.click()
+        #     sub_header_font_color_dropdown().click()
+        #     select_background_color_picker_btn().click()
+        #     select_random_preset_color(driver, wait)
+        #     sub_header_font_color_dropdown().click()
+        #     select_sub_header_font_style_dropdown().click()
+        #     selected_font = select_font_header(driver)
+        #     print(f" Selected Font: {selected_font}")
+        #     select_sub_header_font_style_dropdown().click()
+        #     select_sub_header_font_weight_dropdown().click()
+        #     select_bold_font_weight_header(driver)
+        #     select_sub_header_font_weight_dropdown().click()
+        #     select_sub_header_font_size_dropdown().click()
+        #     select_random_header_font_size(driver)
+        #     select_sub_header_font_size_dropdown().click()
+        #     select_sub_header_font_alignment_dropdown().click()
+        #     select_random_alignment(driver)
+        #     select_sub_header_font_alignment_dropdown().click()
+        #     element.click()
+        #     logger.info("Shrub styling applied successfully")
 
-    # def test_shrub_description_style(self):
-    #     element = shrub_description_dropdown()
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", element)
-    #     element.click()
-    #     description_font_color_dropdown().click()
-    #     select_description_color_picker_btn().click()
-    #     select_random_preset_color(driver, wait)
-    #     description_font_color_dropdown().click()
-    #     select_description_font_style_dropdown().click()
-    #     selected_font = select_font_description(driver)
-    #     print(f" Selected Font: {selected_font}")
-    #     select_description_font_style_dropdown().click()
-    #     select_description_font_weight_dropdown().click()
-    #     select_bold_font_weight_description(driver)
-    #     select_description_font_weight_dropdown().click()
-    #     select_description_font_size_dropdown().click()
-    #     select_random_description_font_size(driver)
-    #     select_description_font_size_dropdown().click()
-    #     select_description_font_alignment_dropdown().click()
-    #     select_random_alignment(driver)
-    #     select_description_font_alignment_dropdown().click()
-    #     element.click()
-    #     save_as_template_btn()
+        # def test_shrub_description_style(self):
+        #     element = shrub_description_dropdown()
+        #     driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        #     element.click()
+        #     description_font_color_dropdown().click()
+        #     select_description_color_picker_btn().click()
+        #     select_random_preset_color(driver, wait)
+        #     description_font_color_dropdown().click()
+        #     select_description_font_style_dropdown().click()
+        #     selected_font = select_font_description(driver)
+        #     print(f" Selected Font: {selected_font}")
+        #     select_description_font_style_dropdown().click()
+        #     select_description_font_weight_dropdown().click()
+        #     select_bold_font_weight_description(driver)
+        #     select_description_font_weight_dropdown().click()
+        #     select_description_font_size_dropdown().click()
+        #     select_random_description_font_size(driver)
+        #     select_description_font_size_dropdown().click()
+        #     select_description_font_alignment_dropdown().click()
+        #     select_random_alignment(driver)
+        #     select_description_font_alignment_dropdown().click()
+        #     element.click()
+        #     save_as_template_btn()
         save_style_btn().click()
         logger.info("Shrub styling applied successfully")
 
@@ -1486,90 +1570,89 @@ class TestPositiveFlow:
 
         logger.info("Shrub styling applied successfully")
 
-
     # def test_new_branch_create_links_style(self):
     #     new_branch_btn().click()
     #     create_links_btn().click()
     #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        # font_color_dropdown().click()
-        # select_header_color_picker_btn().click()
-        # select_random_preset_color(driver, wait)
-        # font_color_dropdown().click()
-        # select_font_style_dropdown().click()
-        # select_font_branch(driver)
-        # select_font_style_dropdown().click()
-        # select_font_weight_dropdown().click()
-        # select_bold_font_weight_branch(driver)
-        # select_font_weight_dropdown().click()
-        # select_font_size_dropdown().click()
-        # select_random_font_size_branch(driver)
-        # select_font_size_dropdown().click()
-        # select_font_alignment_dropdown().click()
-        # select_random_alignment(driver)
-        # select_font_alignment_dropdown().click()
-        # time.sleep(1)
-        # banner = select_font_banner_background_dropdown()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        # banner.click()
-        # color = select_banner_color_picker_btn()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        # color.click()
-        # select_random_preset_color(driver, wait)
-        #
-        # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        # driver.execute_script("arguments[0].click();", banner)
-        #
-        #
-        # background = background_color_dropdown()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        # background.click()
-        # select_background_color_picker_btn().click()
-        # select_random_preset_color(driver, wait)
-        #
-        # select_no_color_background_btn().click()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        # driver.execute_script("arguments[0].click();", background)
-        # thumbnail = thumbnail_image_dropdown()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        # thumbnail.click()
-        # select_background_image_btn().click()
-        # upload_random_image("image")
-        # logger.info("Uploaded random image from 'image' folder")
-        # next_image_btn()
-        # logger.info("Clicked 'Next' button after image upload")
-        # zoomin_image_btn()
-        # logger.info("Zoomed in image")
-        # zoom_out_image_btn()
-        # logger.info("Zoomed out image")
-        # save_crop_image_btn().click()
-        # save_screenshot("Background_image")
-        # wait_for_overlay_to_disappear(driver)
-        # select_no_thumbnail_background_btn().click()
-        # select_icon_btn().click()
-        # select_random_icon()
-        # logger.info("Selected random icon")
-        # logger.info("Cancelled thumbnail icon selection")
-        # thumbnail.click()
-        # save_as_template_btn_branch()
-        # wait_for_overlay_to_disappear(driver)
-        # driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        # save_new_branch_btn().click()
-        # logger.info("Branch created successfully")
-        # branch_add_link_btn().click()
-        # add_link_input_field().send_keys(Keys.CONTROL, 'a')
-        # add_link_input_field().send_keys(Keys.DELETE)
-        # add_link_input_field().send_keys(input_field.LINK)
-        #
-        # link_save_btn().click()
-        # wait_for_overlay_to_disappear(driver)
-        # wait_for_spinner_to_disappear(driver)
-        # time.sleep(5)
-        # back_branch_link_btn().click()
-        # wait_for_overlay_to_disappear(driver)
-        # wait_for_spinner_to_disappear(driver)
-        # time.sleep(5)
-        # back_link_btn().click()
-        # logger.info("Link added successfully")
+    # font_color_dropdown().click()
+    # select_header_color_picker_btn().click()
+    # select_random_preset_color(driver, wait)
+    # font_color_dropdown().click()
+    # select_font_style_dropdown().click()
+    # select_font_branch(driver)
+    # select_font_style_dropdown().click()
+    # select_font_weight_dropdown().click()
+    # select_bold_font_weight_branch(driver)
+    # select_font_weight_dropdown().click()
+    # select_font_size_dropdown().click()
+    # select_random_font_size_branch(driver)
+    # select_font_size_dropdown().click()
+    # select_font_alignment_dropdown().click()
+    # select_random_alignment(driver)
+    # select_font_alignment_dropdown().click()
+    # time.sleep(1)
+    # banner = select_font_banner_background_dropdown()
+    # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    # banner.click()
+    # color = select_banner_color_picker_btn()
+    # driver.execute_script("arguments[0].scrollIntoView(true);", color)
+    # color.click()
+    # select_random_preset_color(driver, wait)
+    #
+    # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    # driver.execute_script("arguments[0].click();", banner)
+    #
+    #
+    # background = background_color_dropdown()
+    # driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    # background.click()
+    # select_background_color_picker_btn().click()
+    # select_random_preset_color(driver, wait)
+    #
+    # select_no_color_background_btn().click()
+    # driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    # driver.execute_script("arguments[0].click();", background)
+    # thumbnail = thumbnail_image_dropdown()
+    # driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
+    # thumbnail.click()
+    # select_background_image_btn().click()
+    # upload_random_image("image")
+    # logger.info("Uploaded random image from 'image' folder")
+    # next_image_btn()
+    # logger.info("Clicked 'Next' button after image upload")
+    # zoomin_image_btn()
+    # logger.info("Zoomed in image")
+    # zoom_out_image_btn()
+    # logger.info("Zoomed out image")
+    # save_crop_image_btn().click()
+    # save_screenshot("Background_image")
+    # wait_for_overlay_to_disappear(driver)
+    # select_no_thumbnail_background_btn().click()
+    # select_icon_btn().click()
+    # select_random_icon()
+    # logger.info("Selected random icon")
+    # logger.info("Cancelled thumbnail icon selection")
+    # thumbnail.click()
+    # save_as_template_btn_branch()
+    # wait_for_overlay_to_disappear(driver)
+    # driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
+    # save_new_branch_btn().click()
+    # logger.info("Branch created successfully")
+    # branch_add_link_btn().click()
+    # add_link_input_field().send_keys(Keys.CONTROL, 'a')
+    # add_link_input_field().send_keys(Keys.DELETE)
+    # add_link_input_field().send_keys(input_field.LINK)
+    #
+    # link_save_btn().click()
+    # wait_for_overlay_to_disappear(driver)
+    # wait_for_spinner_to_disappear(driver)
+    # time.sleep(5)
+    # back_branch_link_btn().click()
+    # wait_for_overlay_to_disappear(driver)
+    # wait_for_spinner_to_disappear(driver)
+    # time.sleep(5)
+    # back_link_btn().click()
+    # logger.info("Link added successfully")
 
     # def test_new_branch_embedded_code(self):
     #     new_branch_btn().click()
@@ -1658,9 +1741,251 @@ class TestPositiveFlow:
     #     back_link_btn().click()
     #     logger.info("Link added successfully")
 
-    def test_new_branch_upload_files(self):
+    # def test_new_branch_upload_files(self):
+    #     new_branch_btn().click()
+    #     upload_files_btn().click()
+    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    #     font_color_dropdown().click()
+    #     select_header_color_picker_btn().click()
+    #     select_random_preset_color(driver, wait)
+    #     font_color_dropdown().click()
+    #     select_font_style_dropdown().click()
+    #     select_font_branch(driver)
+    #     select_font_style_dropdown().click()
+    #     select_font_weight_dropdown().click()
+    #     select_bold_font_weight_branch(driver)
+    #     select_font_weight_dropdown().click()
+    #     select_font_size_dropdown().click()
+    #     select_random_font_size_branch(driver)
+    #     select_font_size_dropdown().click()
+    #     select_font_alignment_dropdown().click()
+    #     select_random_alignment(driver)
+    #     select_font_alignment_dropdown().click()
+    #     time.sleep(1)
+    #     banner = select_font_banner_background_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    #     banner.click()
+    #     color = select_banner_color_picker_btn()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", color)
+    #     color.click()
+    #     select_random_preset_color(driver, wait)
+    #
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    #     driver.execute_script("arguments[0].click();", banner)
+    #
+    #
+    #     background = background_color_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    #     background.click()
+    #     select_background_color_picker_btn().click()
+    #     select_random_preset_color(driver, wait)
+    #
+    #     select_no_color_background_btn().click()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    #     driver.execute_script("arguments[0].click();", background)
+    #     thumbnail = thumbnail_image_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
+    #     thumbnail.click()
+    #     select_background_image_btn().click()
+    #     upload_random_image("image")
+    #     logger.info("Uploaded random image from 'image' folder")
+    #     next_image_btn()
+    #     logger.info("Clicked 'Next' button after image upload")
+    #     zoomin_image_btn()
+    #     logger.info("Zoomed in image")
+    #     zoom_out_image_btn()
+    #     logger.info("Zoomed out image")
+    #     save_crop_image_btn().click()
+    #     save_screenshot("Background_image")
+    #     wait_for_overlay_to_disappear(driver)
+    #     select_no_thumbnail_background_btn().click()
+    #     select_icon_btn().click()
+    #     select_random_icon()
+    #     logger.info("Selected random icon")
+    #     logger.info("Cancelled thumbnail icon selection")
+    #     thumbnail.click()
+    #     save_as_template_btn_branch()
+    #     wait_for_overlay_to_disappear(driver)
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
+    #     save_new_branch_btn().click()
+    #     logger.info("Branch created successfully")
+    #     upload_view_btn().click()
+    #     upload_files_orange_btn().click()
+    #     logger.info("Branch created successfully")
+    #     logger.info("Starting 'My Computer' image upload and crop flow")
+    #     wait_time()
+    #     logger.info("Clicked 'Thumbnail Image' button")
+    #     upload_random_files("files")
+    #     logger.info("Uploaded random image from 'image' folder")
+    #     back_link_btn().click()
+    #     wait_for_overlay_to_disappear(driver)
+    #     wait_for_spinner_to_disappear(driver)
+    #     time.sleep(5)
+    #     back_link_btn().click()
+
+    # def test_new_branch_upload_images(self):
+    #     new_branch_btn().click()
+    #     upload_images_btn().click()
+    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    #     font_color_dropdown().click()
+    #     select_header_color_picker_btn().click()
+    #     select_random_preset_color(driver, wait)
+    #     font_color_dropdown().click()
+    #     select_font_style_dropdown().click()
+    #     select_font_branch(driver)
+    #     select_font_style_dropdown().click()
+    #     select_font_weight_dropdown().click()
+    #     select_bold_font_weight_branch(driver)
+    #     select_font_weight_dropdown().click()
+    #     select_font_size_dropdown().click()
+    #     select_random_font_size_branch(driver)
+    #     select_font_size_dropdown().click()
+    #     select_font_alignment_dropdown().click()
+    #     select_random_alignment(driver)
+    #     select_font_alignment_dropdown().click()
+    #     time.sleep(1)
+    #     banner = select_font_banner_background_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    #     banner.click()
+    #     color = select_banner_color_picker_btn()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", color)
+    #     color.click()
+    #     select_random_preset_color(driver, wait)
+    #
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    #     driver.execute_script("arguments[0].click();", banner)
+    #
+    #     background = background_color_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    #     background.click()
+    #     select_background_color_picker_btn().click()
+    #     select_random_preset_color(driver, wait)
+    #
+    #     select_no_color_background_btn().click()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    #     driver.execute_script("arguments[0].click();", background)
+    #     thumbnail = thumbnail_image_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
+    #     thumbnail.click()
+    #     select_background_image_btn().click()
+    #     upload_random_image("image")
+    #     logger.info("Uploaded random image from 'image' folder")
+    #     next_image_btn()
+    #     logger.info("Clicked 'Next' button after image upload")
+    #     zoomin_image_btn()
+    #     logger.info("Zoomed in image")
+    #     zoom_out_image_btn()
+    #     logger.info("Zoomed out image")
+    #     save_crop_image_btn().click()
+    #     save_screenshot("Background_image")
+    #     wait_for_overlay_to_disappear(driver)
+    #     select_no_thumbnail_background_btn().click()
+    #     select_icon_btn().click()
+    #     select_random_icon()
+    #     logger.info("Selected random icon")
+    #     logger.info("Cancelled thumbnail icon selection")
+    #     thumbnail.click()
+    #     save_as_template_btn_branch()
+    #     wait_for_overlay_to_disappear(driver)
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
+    #     save_new_branch_btn().click()
+    #     logger.info("Branch created successfully")
+    #     upload_view_btn().click()
+    #     upload_image_orange_btn().click()
+    #     logger.info("Branch created successfully")
+    #     logger.info("Starting 'My Computer' image upload and crop flow")
+    #     wait_time()
+    #     logger.info("Clicked 'Thumbnail Image' button")
+    #     upload_random_image("image")
+    #     logger.info("Uploaded random image from 'image' folder")
+    #     back_link_btn().click()
+    #     wait_for_overlay_to_disappear(driver)
+    #     wait_for_spinner_to_disappear(driver)
+    #     time.sleep(5)
+    #     back_link_btn().click()
+
+    # def test_new_branch_upload_videos(self):
+    #     new_branch_btn().click()
+    #     upload_videos_btn().click()
+    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+    #     font_color_dropdown().click()
+    #     select_header_color_picker_btn().click()
+    #     select_random_preset_color(driver, wait)
+    #     font_color_dropdown().click()
+    #     select_font_style_dropdown().click()
+    #     select_font_branch(driver)
+    #     select_font_style_dropdown().click()
+    #     select_font_weight_dropdown().click()
+    #     select_bold_font_weight_branch(driver)
+    #     select_font_weight_dropdown().click()
+    #     select_font_size_dropdown().click()
+    #     select_random_font_size_branch(driver)
+    #     select_font_size_dropdown().click()
+    #     select_font_alignment_dropdown().click()
+    #     select_random_alignment(driver)
+    #     select_font_alignment_dropdown().click()
+    #     time.sleep(1)
+    #     banner = select_font_banner_background_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    #     banner.click()
+    #     color = select_banner_color_picker_btn()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", color)
+    #     color.click()
+    #     select_random_preset_color(driver, wait)
+    #
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", banner)
+    #     driver.execute_script("arguments[0].click();", banner)
+    #
+    #     background = background_color_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    #     background.click()
+    #     select_background_color_picker_btn().click()
+    #     select_random_preset_color(driver, wait)
+    #
+    #     select_no_color_background_btn().click()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", background)
+    #     driver.execute_script("arguments[0].click();", background)
+    #     thumbnail = thumbnail_image_dropdown()
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
+    #     thumbnail.click()
+    #     select_background_image_btn().click()
+    #     upload_random_image("image")
+    #     logger.info("Uploaded random image from 'image' folder")
+    #     next_image_btn()
+    #     logger.info("Clicked 'Next' button after image upload")
+    #     zoomin_image_btn()
+    #     logger.info("Zoomed in image")
+    #     zoom_out_image_btn()
+    #     logger.info("Zoomed out image")
+    #     save_crop_image_btn().click()
+    #     save_screenshot("Background_image")
+    #     wait_for_overlay_to_disappear(driver)
+    #     select_no_thumbnail_background_btn().click()
+    #     select_icon_btn().click()
+    #     select_random_icon()
+    #     logger.info("Selected random icon")
+    #     logger.info("Cancelled thumbnail icon selection")
+    #     thumbnail.click()
+    #     save_as_template_btn_branch()
+    #     wait_for_overlay_to_disappear(driver)
+    #     driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
+    #     save_new_branch_btn().click()
+    #     logger.info("Branch created successfully")
+    #     upload_view_btn().click()
+    #     upload_video_orange_btn().click()
+    #     logger.info("Branch created successfully")
+    #     wait_time()
+    #     logger.info("Clicked 'Thumbnail Image' button")
+    #     upload_random_video("video")
+    #     back_link_btn().click()
+    #     wait_for_overlay_to_disappear(driver)
+    #     wait_for_spinner_to_disappear(driver)
+    #     time.sleep(5)
+    #     back_link_btn().click()
+
+    def test_new_branch_upload_audios(self):
         new_branch_btn().click()
-        upload_files_btn().click()
+        upload_audio_btn().click()
         link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
@@ -1689,7 +2014,6 @@ class TestPositiveFlow:
 
         driver.execute_script("arguments[0].scrollIntoView(true);", banner)
         driver.execute_script("arguments[0].click();", banner)
-
 
         background = background_color_dropdown()
         driver.execute_script("arguments[0].scrollIntoView(true);", background)
@@ -1727,280 +2051,14 @@ class TestPositiveFlow:
         save_new_branch_btn().click()
         logger.info("Branch created successfully")
         upload_view_btn().click()
-        upload_files_orange_btn().click()
-        logger.info("Branch created successfully")
-        logger.info("Starting 'My Computer' image upload and crop flow")
+        upload_audio_orange_btn().click()
         wait_time()
-        # select_thumbnail_image_btn().click()
+
         logger.info("Clicked 'Thumbnail Image' button")
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
+        upload_random_audio("audio")
+        back_link_btn().click()
+        wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
+        time.sleep(5)
+        back_link_btn().click()
 
-
-    # def test_new_branch_upload_images(self):
-    #     new_branch_btn().click()
-    #     upload_images_btn().click()
-    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        # font_color_dropdown().click()
-        # select_header_color_picker_btn().click()
-        # select_random_preset_color(driver, wait)
-        # font_color_dropdown().click()
-        # select_font_style_dropdown().click()
-        # select_font_branch(driver)
-        # select_font_style_dropdown().click()
-        # select_font_weight_dropdown().click()
-        # select_bold_font_weight_branch(driver)
-        # select_font_weight_dropdown().click()
-        # select_font_size_dropdown().click()
-        # select_random_font_size_branch(driver)
-        # select_font_size_dropdown().click()
-        # select_font_alignment_dropdown().click()
-        # select_random_alignment(driver)
-        # select_font_alignment_dropdown().click()
-        # time.sleep(1)
-        # banner = select_font_banner_background_dropdown()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        # banner.click()
-        # color = select_banner_color_picker_btn()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        # color.click()
-        # select_random_preset_color(driver, wait)
-        #
-        # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        # driver.execute_script("arguments[0].click();", banner)
-        #
-        # background = background_color_dropdown()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        # background.click()
-        # select_background_color_picker_btn().click()
-        # select_random_preset_color(driver, wait)
-        #
-        # select_no_color_background_btn().click()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        # driver.execute_script("arguments[0].click();", background)
-        # thumbnail = thumbnail_image_dropdown()
-        # driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        # thumbnail.click()
-        # select_background_image_btn().click()
-        # upload_random_image("image")
-        # logger.info("Uploaded random image from 'image' folder")
-        # next_image_btn()
-        # logger.info("Clicked 'Next' button after image upload")
-        # zoomin_image_btn()
-        # logger.info("Zoomed in image")
-        # zoom_out_image_btn()
-        # logger.info("Zoomed out image")
-        # save_crop_image_btn().click()
-        # save_screenshot("Background_image")
-        # wait_for_overlay_to_disappear(driver)
-        # select_no_thumbnail_background_btn().click()
-        # select_icon_btn().click()
-        # select_random_icon()
-        # logger.info("Selected random icon")
-        # logger.info("Cancelled thumbnail icon selection")
-        # thumbnail.click()
-        # save_as_template_btn_branch()
-        # wait_for_overlay_to_disappear(driver)
-        # driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        # save_new_branch_btn().click()
-        # logger.info("Branch created successfully")
-    #     upload_view_btn().click()
-    #     upload_files_orange_btn().click()
-    # upload_files_orange_btn().click()
-    # logger.info("Branch created successfully")
-    # logger.info("Starting 'My Computer' image upload and crop flow")
-    # wait_time()
-    # select_thumbnail_image_btn().click()
-    # logger.info("Clicked 'Thumbnail Image' button")
-    # upload_random_image("image")
-    # logger.info("Uploaded random image from 'image' folder")
-    # next_image_btn()
-    # logger.info("Clicked 'Next' button after image upload")
-    # zoomin_image_btn()
-    # logger.info("Zoomed in image")
-    # wait_for_spinner_to_disappear(driver)
-    # zoom_out_image_btn()
-    # logger.info("Zoomed out image")
-    # save_crop_image_btn().click()
-
-    # def test_new_branch_upload_videos(self):
-    #     new_branch_btn().click()
-    #     upload_images_btn().click()
-    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    # font_color_dropdown().click()
-    # select_header_color_picker_btn().click()
-    # select_random_preset_color(driver, wait)
-    # font_color_dropdown().click()
-    # select_font_style_dropdown().click()
-    # select_font_branch(driver)
-    # select_font_style_dropdown().click()
-    # select_font_weight_dropdown().click()
-    # select_bold_font_weight_branch(driver)
-    # select_font_weight_dropdown().click()
-    # select_font_size_dropdown().click()
-    # select_random_font_size_branch(driver)
-    # select_font_size_dropdown().click()
-    # select_font_alignment_dropdown().click()
-    # select_random_alignment(driver)
-    # select_font_alignment_dropdown().click()
-    # time.sleep(1)
-    # banner = select_font_banner_background_dropdown()
-    # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-    # banner.click()
-    # color = select_banner_color_picker_btn()
-    # driver.execute_script("arguments[0].scrollIntoView(true);", color)
-    # color.click()
-    # select_random_preset_color(driver, wait)
-    #
-    # driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-    # driver.execute_script("arguments[0].click();", banner)
-    #
-    # background = background_color_dropdown()
-    # driver.execute_script("arguments[0].scrollIntoView(true);", background)
-    # background.click()
-    # select_background_color_picker_btn().click()
-    # select_random_preset_color(driver, wait)
-    #
-    # select_no_color_background_btn().click()
-    # driver.execute_script("arguments[0].scrollIntoView(true);", background)
-    # driver.execute_script("arguments[0].click();", background)
-    # thumbnail = thumbnail_image_dropdown()
-    # driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-    # thumbnail.click()
-    # select_background_image_btn().click()
-    # upload_random_image("image")
-    # logger.info("Uploaded random image from 'image' folder")
-    # next_image_btn()
-    # logger.info("Clicked 'Next' button after image upload")
-    # zoomin_image_btn()
-    # logger.info("Zoomed in image")
-    # zoom_out_image_btn()
-    # logger.info("Zoomed out image")
-    # save_crop_image_btn().click()
-    # save_screenshot("Background_image")
-    # wait_for_overlay_to_disappear(driver)
-    # select_no_thumbnail_background_btn().click()
-    # select_icon_btn().click()
-    # select_random_icon()
-    # logger.info("Selected random icon")
-    # logger.info("Cancelled thumbnail icon selection")
-    # thumbnail.click()
-    # save_as_template_btn_branch()
-    # wait_for_overlay_to_disappear(driver)
-    # driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-    # save_new_branch_btn().click()
-    # logger.info("Branch created successfully")
-    #     upload_view_btn().click()
-    #     upload_files_orange_btn().click()
-    #     logger.info("Branch created successfully")
-    # upload_files_orange_btn().click()
-    # logger.info("Branch created successfully")
-    # logger.info("Starting 'My Computer' image upload and crop flow")
-    # wait_time()
-    # # select_thumbnail_image_btn().click()
-    # logger.info("Clicked 'Thumbnail Image' button")
-    # upload_random_image("image")
-    # logger.info("Uploaded random image from 'image' folder")
-    # next_image_btn()
-    # logger.info("Clicked 'Next' button after image upload")
-    # zoomin_image_btn()
-    # logger.info("Zoomed in image")
-    # wait_for_spinner_to_disappear(driver)
-    # zoom_out_image_btn()
-    # logger.info("Zoomed out image")
-    # save_crop_image_btn().click()
-
-#
-    # def test_new_branch_upload_audios(self):
-    #     new_branch_btn().click()
-    #     upload_images_btn().click()
-    #     link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-    #         font_color_dropdown().click()
-    #         select_header_color_picker_btn().click()
-    #         select_random_preset_color(driver, wait)
-    #         font_color_dropdown().click()
-    #         select_font_style_dropdown().click()
-    #         select_font_branch(driver)
-    #         select_font_style_dropdown().click()
-    #         select_font_weight_dropdown().click()
-    #         select_bold_font_weight_branch(driver)
-    #         select_font_weight_dropdown().click()
-    #         select_font_size_dropdown().click()
-    #         select_random_font_size_branch(driver)
-    #         select_font_size_dropdown().click()
-    #         select_font_alignment_dropdown().click()
-    #         select_random_alignment(driver)
-    #         select_font_alignment_dropdown().click()
-    #         time.sleep(1)
-    #         banner = select_font_banner_background_dropdown()
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-    #         banner.click()
-    #         color = select_banner_color_picker_btn()
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", color)
-    #         color.click()
-    #         select_random_preset_color(driver, wait)
-    #
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-    #         driver.execute_script("arguments[0].click();", banner)
-    #
-    #         background = background_color_dropdown()
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", background)
-    #         background.click()
-    #         select_background_color_picker_btn().click()
-    #         select_random_preset_color(driver, wait)
-    #
-    #         select_no_color_background_btn().click()
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", background)
-    #         driver.execute_script("arguments[0].click();", background)
-    #         thumbnail = thumbnail_image_dropdown()
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-    #         thumbnail.click()
-    #         select_background_image_btn().click()
-    #         upload_random_image("image")
-    #         logger.info("Uploaded random image from 'image' folder")
-    #         next_image_btn()
-    #         logger.info("Clicked 'Next' button after image upload")
-    #         zoomin_image_btn()
-    #         logger.info("Zoomed in image")
-    #         zoom_out_image_btn()
-    #         logger.info("Zoomed out image")
-    #         save_crop_image_btn().click()
-    #         save_screenshot("Background_image")
-    #         wait_for_overlay_to_disappear(driver)
-    #         select_no_thumbnail_background_btn().click()
-    #         select_icon_btn().click()
-    #         select_random_icon()
-    #         logger.info("Selected random icon")
-    #         logger.info("Cancelled thumbnail icon selection")
-    #         thumbnail.click()
-    #         save_as_template_btn_branch()
-    #         wait_for_overlay_to_disappear(driver)
-    #         driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-    #         save_new_branch_btn().click()
-    #         logger.info("Branch created successfully")
-    #     upload_view_btn().click()
-    #     upload_files_orange_btn().click()
-#     upload_files_orange_btn().click()
-#     logger.info("Branch created successfully")
-#     logger.info("Starting 'My Computer' image upload and crop flow")
-#     wait_time()
-#     # select_thumbnail_image_btn().click()
-#     logger.info("Clicked 'Thumbnail Image' button")
-#     upload_random_image("image")
-#     logger.info("Uploaded random image from 'image' folder")
-#     next_image_btn()
-#     logger.info("Clicked 'Next' button after image upload")
-#     zoomin_image_btn()
-#     logger.info("Zoomed in image")
-#     wait_for_spinner_to_disappear(driver)
-#     zoom_out_image_btn()
-#     logger.info("Zoomed out image")
-#     save_crop_image_btn().click()
