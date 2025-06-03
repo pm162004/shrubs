@@ -1300,3 +1300,32 @@
 2025-05-26 17:29:38,290 - INFO - Running test_login
 2025-05-26 17:30:04,421 - INFO - Launching browser and navigating to URL
 2025-05-26 17:30:06,003 - INFO - Running test_login
+2025-06-03 11:44:05,521 - INFO - Launching login page
+2025-06-03 11:44:09,971 - INFO - Running test: Valid login flow
+2025-06-03 11:44:09,972 - INFO - Refreshing page
+2025-06-03 11:44:10,279 - INFO - Refreshing page completed
+2025-06-03 11:44:10,279 - INFO - Entering email
+2025-06-03 11:44:12,288 - INFO - Entering password
+2025-06-03 11:44:12,439 - INFO - Clicking password visibility toggle
+2025-06-03 11:44:12,651 - INFO - Clicking login button
+2025-06-03 11:44:17,442 - INFO - Valid login passed, 'My Files' is visible
+2025-06-03 11:44:17,444 - INFO - Navigating to 'My Shrubs'
+2025-06-03 11:44:19,847 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-03 11:44:22,384 - INFO - Testing valid shrub creation
+2025-06-03 11:44:23,325 - INFO - Entered shrub title: union
+2025-06-03 11:44:23,327 - INFO - Entered shrub title: union
+2025-06-03 11:44:23,597 - INFO - Entered shrub sub-header: Test Header
+2025-06-03 11:44:23,977 - INFO - Entered shrub description
+2025-06-03 11:44:24,136 - INFO - Selected 'View Only' permission (first click)
+2025-06-03 11:44:24,264 - INFO - Selected 'View Only' permission (second click)
+2025-06-03 11:44:24,416 - INFO - Selected 'Allow Resharing' permission
+2025-06-03 11:44:24,551 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-03 11:44:24,890 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-03 11:44:27,057 - INFO - Selected random icon
+2025-06-03 11:44:27,059 - INFO - Cancelled thumbnail icon selection
+2025-06-03 11:44:27,069 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-03 11:44:29,359 - INFO - Clicked 'Thumbnail Image' button
+2025-06-03 11:44:29,476 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-03 11:44:29,528 - INFO - Overlay spinner disappeared
+2025-06-03 11:44:30,804 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-03 11:44:32,009 - INFO - Testing shrub styling

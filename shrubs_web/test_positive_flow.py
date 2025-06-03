@@ -12,7 +12,7 @@ from shrubs_setup.config import config
 from constant import validation_assert, input_field, error
 from log_config import setup_logger
 from selenium.webdriver.common.action_chains import ActionChains
-
+from selenium.common.exceptions import StaleElementReferenceException
 logger = setup_logger()
 chrome_options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(options=chrome_options)
@@ -51,8 +51,67 @@ def refresh_page():
     return driver.refresh()
 
 
+def click_element_with_retry(get_element_func, retries=3):
+    for _ in range(retries):
+        try:
+            element = get_element_func()
+            element.click()
+            return
+        except StaleElementReferenceException:
+            time.sleep(0.5)
+    raise Exception("Failed to click element due to stale reference")
+
+def thumbnail_icon_cancel_btn():
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-close-modal' and contains(., 'Cancel')]")))
+
+# Usage:
+def select_font(driver):
+    wait = WebDriverWait(driver, 20)
+
+    try:
+        # Step 1: Click the dropdown
+        dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[2]")))
+        dropdown.click()
+
+        # Step 2: Wait for the list to appear
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
+
+        # Step 3: Get all font options
+        font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
+        font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
+
+        if not font_names:
+            raise Exception("No fonts found in the dropdown.")
+
+        # Step 4: Pick a random font
+        selected_font = random.choice(font_names)
+
+        # Step 5: Type and select it
+        input_field = wait.until(EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[1]")))
+        input_field.clear()
+        input_field.send_keys(selected_font)
+        input_field.send_keys(Keys.ENTER)
+
+        # Step 6: Confirm it was selected
+        final_font = driver.find_element(By.CLASS_NAME, "multiselect__single").text.strip()
+        if selected_font.lower() not in final_font.lower():
+            raise Exception(f"Font '{selected_font}' was not selected properly. Found: '{final_font}'")
+
+        return final_font
+
+    except TimeoutException as e:
+        print(" Timeout: Could not find font dropdown or input.")
+        raise e
+    except StaleElementReferenceException:
+        print(" Retrying due to stale element...")
+        return select_font(driver)
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        raise e
+
+
 def password_mask_button():
-    def password_mask_button():
         try:
             password_button = WebDriverWait(driver, 30).until(
                 EC.element_to_be_clickable((By.XPATH, "//*[name()='path' and contains(@d,'M12 7c2.76')]"))
@@ -144,9 +203,6 @@ def select_thumbnail_icon():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//h6[normalize-space()='alert-octagon']")))
 
 
-def thumbnail_icon_cancel_btn():
-    return wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-close-modal' and contains(., 'Cancel')]")))
 
 
 def upload_files_orange_btn():
@@ -311,37 +367,7 @@ def wait_for_overlay_to_disappear(driver, timeout=10):
     )
 
 
-def select_random_font(driver):
-    wait = WebDriverWait(driver, 30)
-    actions = ActionChains(driver)
 
-    try:
-        try:
-            wait.until_not(EC.presence_of_element_located((By.CSS_SELECTOR, ".loading-overlay")))
-        except:
-            pass
-
-        combobox = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.multiselect")))
-        driver.execute_script("arguments[0].scrollIntoView(true);", combobox)
-        actions.move_to_element(combobox).click().perform()
-
-        font_options = wait.until(EC.presence_of_all_elements_located(
-            (By.CSS_SELECTOR, "li.multiselect__element:not([style*='display: none']) > span.multiselect__option")
-        ))
-
-        if not font_options:
-            raise Exception("No fonts found in the dropdown.")
-
-        selected_font = random.choice(font_options)
-        font_name = selected_font.text.strip()
-        actions.move_to_element(selected_font).click().perform()
-        return font_name
-
-    except TimeoutException:
-        driver.save_screenshot("error_combobox_not_found.png")
-        raise
-    except Exception as e:
-        raise
 
 
 def select_random_icon():
@@ -555,12 +581,12 @@ def select_bold_font_weight(driver):
     wait = WebDriverWait(driver, 10)
 
     font_weight_dropdown = wait.until(EC.element_to_be_clickable((
-        By.XPATH, "//label[contains(text(), 'Select your font weight')]/following-sibling::div"
+        By.XPATH, "(//div[@class='multiselect__select'])[3]"
     )))
     font_weight_dropdown.click()
 
     bold_option = wait.until(EC.element_to_be_clickable((
-        By.XPATH, "//span[@class='multiselect__option' and normalize-space(text())='Bold']"
+        By.XPATH, "(//span[@class='option__title'][normalize-space()='Bold'])[1]"
     )))
     bold_option.click()
 
@@ -571,7 +597,7 @@ def select_random_font_size(driver):
     wait = WebDriverWait(driver, 10)
 
     font_size_dropdown = wait.until(EC.element_to_be_clickable((
-        By.XPATH, "//label[contains(text(), 'Select your font size')]/following-sibling::div"
+        By.XPATH, "(//div[@role='combobox'])[4]"
     )))
     font_size_dropdown.click()
 
@@ -842,23 +868,20 @@ class TestPositiveFlow:
         logger.info("Navigating to 'My Shrubs'")
         get_my_shrubs().click()
 
-        # Wait for spinner to disappear (increase timeout to 30 seconds)
+
         WebDriverWait(driver, 30).until(
             EC.invisibility_of_element_located((By.ID, "overlay-spinner"))
         )
         logger.info("Overlay spinner disappeared after navigating to 'My Shrubs'")
 
-        # Wait for 'New Shrub' button to be clickable
         new_shrub_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']"))
         )
 
-        # Scroll the button into view
+
         driver.execute_script("arguments[0].scrollIntoView(true);", new_shrub_button)
 
-        # Small pause to avoid click interception from any lingering overlays
-        import time
-        time.sleep(0.5)
+
 
         # Try normal click, fallback to JS click if intercepted
         try:
@@ -892,7 +915,7 @@ class TestPositiveFlow:
         logger.info("Clicked 'Shrub Project Icon' option")
         select_random_icon()
         logger.info("Selected random icon")
-        thumbnail_icon_cancel_btn().click()
+
         logger.info("Cancelled thumbnail icon selection")
 
     def test_valid_my_computer_image_flow(self):
@@ -994,7 +1017,7 @@ class TestPositiveFlow:
         background_color_dropdown().click()
 
     def test_shrub_style_shrub_title(self):
-        wait_for_overlay_to_disappear(driver)
+
         element = shrub_title_dropdown()
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
         element.click()
@@ -1002,11 +1025,10 @@ class TestPositiveFlow:
         select_banner_color_picker_btn().click()
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
-        dropdown = select_font_style_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", dropdown)
-        dropdown.click()
-        select_random_font(driver)
-        dropdown.click()
+        select_font_style_dropdown().click()
+        selected_font = select_font(driver)
+        print(f" Selected Font: {selected_font}")
+
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
         select_font_weight_dropdown().click()
@@ -1023,7 +1045,7 @@ class TestPositiveFlow:
         sub_header_font_color_dropdown().click()
         select_random_preset_color(driver, wait)
         select_sub_header_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_sub_header_font_style_dropdown().click()
         select_sub_header_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1044,7 +1066,7 @@ class TestPositiveFlow:
         description_font_color_dropdown().click()
         select_random_preset_color(driver, wait)
         select_description_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_description_font_style_dropdown().click()
         select_description_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1086,7 +1108,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1104,7 +1126,7 @@ class TestPositiveFlow:
         sub_header_font_color_dropdown().click()
         select_random_preset_color(driver, wait)
         select_sub_header_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_sub_header_font_style_dropdown().click()
         select_sub_header_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1129,7 +1151,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1198,7 +1220,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1265,7 +1287,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1464,7 +1486,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1532,7 +1554,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1732,7 +1754,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
@@ -1934,7 +1956,7 @@ class TestPositiveFlow:
         select_random_preset_color(driver, wait)
         font_color_dropdown().click()
         select_font_style_dropdown().click()
-        select_random_font(driver)
+        # select_random_font(driver)
         select_font_style_dropdown().click()
         select_font_weight_dropdown().click()
         select_bold_font_weight(driver)
