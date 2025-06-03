@@ -602,7 +602,7 @@ def select_random_font_size(driver):
     font_size_dropdown.click()
 
     font_size_options = wait.until(EC.presence_of_all_elements_located((
-        By.XPATH, "//span[@class='multiselect__option']"
+        By.XPATH, "//span[@class='multiselect__single']"
     )))
 
     random_option = random.choice(font_size_options)
