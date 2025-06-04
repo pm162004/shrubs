@@ -24,7 +24,7 @@ password = config.CORRECT_PASSWORD
 logger.info("Launching login page")
 driver.get(config.WEB_URL)
 time.sleep(3)
-wait = WebDriverWait(driver, 120)
+wait = WebDriverWait(driver, 60)
 # driver.implicitly_wait(5)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
@@ -74,35 +74,35 @@ def select_font(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-
+        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[2]")))
         dropdown.click()
 
-
+        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-
+        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-
+        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-
+        # Step 5: Wait for the input field and type the font name
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[1]")))
 
+        # Ensure input field is cleared before typing
 
-
-
+        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
-
+        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -113,35 +113,42 @@ def select_font(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e
+        raise e  # Re-raise the exception for further debugging
 
 
 def select_font_branch(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-
+        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[3]")))
         dropdown.click()
 
-
+        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
+        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
+        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
+        # Step 5: Wait for the input field and type the font name
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[1]")))
 
+        # Ensure input field is cleared before typing
+
+        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
+        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -152,41 +159,42 @@ def select_font_branch(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e
+        raise e  # Re-raise the exception for further debugging
 
 
 def select_font_header(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-
+        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[5]")))
         dropdown.click()
 
-
+        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-
+        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-
+        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-
+        # Step 5: Wait for the input field and type the font name
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[2]")))
 
+        # Ensure input field is cleared before typing
 
-
-
+        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
+        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -197,28 +205,28 @@ def select_font_header(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e
+        raise e  # Re-raise the exception for further debugging
 
 
 def select_font_description(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-
+        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[8]")))
         dropdown.click()
 
-
+        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-
+        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-
+        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
@@ -355,42 +363,21 @@ def upload_audio_orange_btn():
         EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-view' and contains(., 'Upload Audios')]")))
 
 def save_new_shrub_btn():
+    time.sleep(2)
     logger.info("Waiting for save shrub button to be clickable")
-    try:
-        overlay = driver.find_element(By.CSS_SELECTOR, ".md-overlay")
-        logger.info("Overlay found, waiting for it to disappear.")
-        wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".md-overlay")))
-    except NoSuchElementException:
-        logger.info("No overlay found, proceeding with the click.")
-
-    try:
-        save_button = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@name='btn-save']"))
-        )
-        logger.info("Save button is clickable.")
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_button)
-        return save_button
-    except TimeoutException:
-        logger.error("Timeout waiting for save button to become clickable.")
-        return None
-
-
+    overlay_spinner()
+    new_shrub_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btn-save")))
+    return new_shrub_btn.click()
 
 
 def next_image_btn():
-
+    wait = WebDriverWait(driver, 20)
 
     try:
+        wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
 
-
-        # Scroll the element into view to ensure it's visible
         next_button = wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
-
-        # Scroll the element into view if necessary
-        driver.execute_script("arguments[0].scrollIntoView(true);", next_button)
-
-        # Click on the "Next" button
+            EC.visibility_of_element_located((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
         next_button.click()
         logger.info("Clicked 'Next' button")
     except TimeoutException:
@@ -479,13 +466,12 @@ def select_random_image(driver):
 
 def zoomin_image_btn():
     overlay_spinner()
-    zoom_in_button = wait.until(
+    zoom_in_button = zoom_in_button = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-in')]"))
     )
-
+    driver.execute_script("arguments[0].click();", zoom_in_button)
     driver.execute_script("arguments[0].scrollIntoView(true);", zoom_in_button)
-    return driver.execute_script("arguments[0].click();", zoom_in_button)
-
+    return zoom_in_button.click()
 
 
 def ok_btn():
@@ -499,13 +485,12 @@ def ok_btn():
 
 def zoom_out_image_btn():
     overlay_spinner()
-    zoom_out_button = wait.until(
+    zoom_out_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-out')]"))
     )
     assert zoom_out_button.is_displayed()
     assert zoom_out_button.is_enabled()
-    driver.execute_script("arguments[0].scrollIntoView(true);", zoom_out_button)
-    return driver.execute_script("arguments[0].click();", zoom_out_button)
+    return zoom_out_button.click()
 
 
 def wait_for_spinner_to_disappear(driver, timeout=10, short_wait=2):
@@ -725,10 +710,8 @@ def font_color_dropdown():
 
 
 def sub_header_font_color_dropdown():
-    shrub_header = wait.until(
+    return wait.until(
         EC.element_to_be_clickable((By.XPATH, "(//span[@class='md-list-item-text' and text()='Font Color'])[2]")))
-    driver.execute_script("arguments[0].scrollIntoView(true);", shrub_header)
-    return shrub_header
 
 
 def description_font_color_dropdown():
@@ -1266,6 +1249,92 @@ def switch_to_window(driver, window_index=0):
     else:
         raise Exception("No windows are open.")
 
+shrub_name = ""
+def random_select_and_click_image_and_delete(driver, image_selector, delete_button_xpath, shrub_xpath, scroll_by=300):
+    WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, image_selector)))
+    images = driver.find_elements(By.CSS_SELECTOR, image_selector)
+    if not images:
+        raise Exception(f"No images found with the selector: {image_selector}")
+
+    random_image = random.choice(images)
+    driver.execute_script("arguments[0].scrollIntoView();", random_image)
+    time.sleep(1)
+    ActionChains(driver).move_to_element(random_image).click().perform()
+    driver.execute_script(f"window.scrollBy(0, {scroll_by});")
+
+    # Find all shrub names using the dynamic XPath
+    shrub_elements = driver.find_elements(By.XPATH, shrub_xpath)
+    if not shrub_elements:
+        raise Exception("No shrub names found.")
+
+    # Randomly select a shrub name
+    random_shrub = random.choice(shrub_elements)
+    shrub_name = random_shrub.text.strip()
+    print(f"Randomly selected shrub name: {shrub_name}")
+
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, delete_button_xpath)))
+    delete_button = driver.find_element(By.XPATH, delete_button_xpath)
+    delete_button.click()
+
+def random_select_search_and_click_shrub(driver, image_selector, search_input_selector, shrub_xpath,scroll_by=300):
+    # Wait for images to load and get all the image elements
+    WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, image_selector)))
+    images = driver.find_elements(By.CSS_SELECTOR, image_selector)
+    if not images:
+        raise Exception(f"No images found with the selector: {image_selector}")
+
+    # Select a random image and perform an action on it
+    random_image = random.choice(images)
+    driver.execute_script("arguments[0].scrollIntoView();", random_image)
+    time.sleep(1)
+    ActionChains(driver).move_to_element(random_image).click().perform()
+    driver.execute_script(f"window.scrollBy(0, {scroll_by});")
+
+    # Find all shrub elements after the search
+    shrub_elements = driver.find_elements(By.XPATH, shrub_xpath)
+    if not shrub_elements:
+        raise Exception("No shrubs found after searching.")
+
+    # Randomly select a shrub from the search results
+    random_shrub = random.choice(shrub_elements)
+    shrub_name = random_shrub.text.strip()
+    print(f"Randomly selected shrub name: {shrub_name}")
+    # Search for the shrub using the provided search query
+    search_input = driver.find_element(By.XPATH, search_input_selector)
+    search_input.send_keys(shrub_name)
+    time.sleep(2)  # Wait for the results to load
+
+
+
+    # Scroll to the selected shrub and click it
+    driver.execute_script("arguments[0].scrollIntoView();", random_shrub)
+    time.sleep(1)
+    ActionChains(driver).move_to_element(random_shrub).click().perform()
+    # time.sleep(3)
+    # select_btn = driver.find_element(By.XPATH, shrub_xpath)
+    # ActionChains(driver).move_to_element(select_btn).click().perform()
+
+
+    print(f"Action performed on shrub: {shrub_name}")
+
+def three_dots_button():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[ @class ='flex justify-end three-dots'] / img[@ class ='action-icon-color']")))
+
+def share_shrub_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Share')]")))
+
+def share_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[@class ='multiselect__select']")))
+
+def select_input_field():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@name='users' and @type='text' and @class='multiselect__input']")))
+def checkbox_select():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__option multiselect__option--highlight multiselect__option--selected']")))
+
+def send_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Send')]")))
+
+
 
 # ============================== TEST CASES ==============================
 
@@ -1284,7 +1353,7 @@ class TestPositiveFlow:
             password_mask_button()
             logger.info("Clicking login button")
             login_button().click()
-
+            wait_time()
             WebDriverWait(driver, 30).until(EC.url_contains("analytics"))
 
             assert "analytics" in driver.current_url, f"Login failed! Current URL is: {driver.current_url}"
@@ -1302,6 +1371,8 @@ class TestPositiveFlow:
 
     def test_my_shrubs(self):
         logger.info("Navigating to 'My Shrubs'")
+        overlay_spinner()
+        wait_time()
         get_my_shrubs().click()
 
         WebDriverWait(driver, 30).until(
@@ -1309,893 +1380,26 @@ class TestPositiveFlow:
         )
         logger.info("Overlay spinner disappeared after navigating to 'My Shrubs'")
 
-        new_shrub_button = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, "//div[@class='md-button-content' and text()='New Shrub']"))
-        )
 
-        driver.execute_script("arguments[0].scrollIntoView(true);", new_shrub_button)
-
-        # Try normal click, fallback to JS click if intercepted
-        try:
-            new_shrub_button.click()
-        except selenium.common.exceptions.ElementClickInterceptedException:
-            logger.warning("Normal click intercepted, trying JS click")
-            driver.execute_script("arguments[0].click();", new_shrub_button)
-
-    def test_valid_shrubs(self):
-        logger.info("Testing valid shrub creation")
-        WebDriverWait(driver, 30).until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-        shrub_title_input_field = WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@name='shrub-name']")))
-        driver.execute_script("arguments[0].scrollIntoView(true);", shrub_title_input_field)
-        shrub_title_input_field.send_keys(input_field.VALID_SHRUBS)
-        logger.info(f"Entered shrub title: {input_field.VALID_SHRUBS}")
-        logger.info(f"Entered shrub title: {input_field.VALID_SHRUBS}")
-        shrub_sub_header_input_field().send_keys(input_field.SUB_HEADER_SHRUBS)
-        logger.info(f"Entered shrub sub-header: {input_field.SUB_HEADER_SHRUBS}")
-        shrub_description_textbox().send_keys(input_field.SHRUBS_DESCRIPTION)
-        logger.info(f"Entered shrub description")
+    def test_search_shrubs(self):
+        wait_time()
+        # Define the selectors
+        image_selector = 'img.action-icon-color'  # Update to the correct image selector
+        search_input_selector = "//input[@placeholder='Search' and @class='md-input']"
+        shrub_xpath = "//h5[contains(@class, 'title')]"  # XPath for shrub names
+        random_select_search_and_click_shrub(driver, image_selector, search_input_selector, shrub_xpath)
+        wait_time()
+        three_dots_button().click()
+        share_shrub_btn().click()
+        share_dropdown().click()
+        select_input_field().send_keys("testp567@yopmail.com")
         select_view_only_permissions().click()
-        logger.info("Selected 'View Only' permission (first click)")
         select_view_only_permissions().click()
-        logger.info("Selected 'View Only' permission (second click)")
         select_allow_resharing_permissions().click()
-        logger.info("Selected 'Allow Resharing' permission")
         select_download_save_permissions().click()
-        logger.info("Selected 'Download and save to Shrubdrive' permission")
-        shrub_project_icon_btn().click()
-        logger.info("Clicked 'Shrub Project Icon' option")
-        select_random_icon()
-        logger.info("Selected random icon")
-
-        logger.info("Cancelled thumbnail icon selection")
-
-    def test_valid_my_computer_image_flow(self):
-            logger.info("Starting 'My Computer' image upload and crop flow")
-            wait_time()
-            select_thumbnail_image_btn().click()
-            logger.info("Clicked 'Thumbnail Image' button")
-            upload_random_image("image")
-            logger.info("Uploaded random image from 'image' folder")
-            next_image_btn()
-            logger.info("Clicked 'Next' button after image upload")
-            zoomin_image_btn()
-            logger.info("Zoomed in image")
-            wait_for_spinner_to_disappear(driver)
-            zoom_out_image_btn()
-            logger.info("Zoomed out image")
-            save_crop_image_btn().click()
-            logger.info("Clicked 'Save' button to save cropped image")
-
-    def test_valid_my_shrubs_image_flow(self):
-        wait_time()
-        logger.info("Starting 'My Shrubs' image upload and crop flow")
-
-        # Click the 'Thumbnail Image' button
-        select_thumbnail_image_btn().click()
-        logger.info("Clicked 'Thumbnail Image' button")
-
-        # Click the 'My Shrubs' folder upload button
-        upload_image_my_shrubs_btn().click()
-        logger.info("Clicked 'My Shrubs' folder upload button")
-
-        # Select a random shrub from 'My Shrubs'
-        select_random_my_shrub(driver, wait)
-        logger.info("Selected a random shrub from 'My Shrubs'")
-
-        # Wait for the 'thumbnail' span to appear and log if it's visible
-        try:
-            wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']")))
-            logger.info("Thumbnail span appeared after shrub selection")
-        except Exception as e:
-            logger.warning(f"Thumbnail label not found: {e}")
-            driver.save_screenshot("error_thumbnail_label_missing.png")
-            raise
-
-        # Select the thumbnail folder and image
-        select_thumbnail_folder()
-        wait_time()
-        select_random_image(driver)
-        logger.info("Selected a random image from the thumbnail folder")
-
-        try:
-            spinner = driver.find_element(By.ID, "overlay-spinner")
-            if spinner.is_displayed():
-                logger.info("Spinner is visible, waiting for it to disappear...")
-                # Increase the timeout here if needed
-                wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-            else:
-                logger.info("Spinner is already invisible.")
-        except NoSuchElementException:
-            logger.info("Spinner not found, continuing without waiting.")
-
-        try:
-            # Check if the 'Next' button for image cropping exists
-            next_image_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
-
-            if not next_image_button.is_displayed():
-                logger.info("'Next' button not found, clicking 'Cancel' button instead.")
-                # Use ActionChains to click 'Cancel' button
-                cancel_button = wait.until(
-                    EC.element_to_be_clickable((By.XPATH, ".//button//div[contains(text(),'Cancel')]"))
-                )
-                ActionChains(driver).move_to_element(cancel_button).click().perform()
-                logger.info("Clicked 'Cancel' button using ActionChain.")
-                return  # Exit the test case flow if 'Next' is not found
-
-            logger.info("Clicked 'Next' button for image cropping")
-            next_image_btn()
-
-            zoomin_image_btn()
-            logger.info("Zoomed in image")
-
-            zoom_out_image_btn()
-            logger.info("Zoomed out image")
-
-            # Save the cropped image
-            save_crop_image_btn().click()
-            logger.info("Clicked 'Save' button to save cropped image")
-
-            # Finalize the shrub creation
-            logger.info("Valid shrub created in 'My Shrubs' image flow")
-
-            # Handle the 'OK' button or finalize creation with 'Save New Shrub'
-            try:
-                ok_btn()
-                logger.info("Clicked 'OK' button to confirm shrub creation")
-            except TimeoutException:
-                logger.info("[INFO] OK button not found or not clickable — skipping.")
-
-
-        except TimeoutException:
-            logger.warning("'Next' button not found or failed to load.")
-            # If 'Next' button is not found, attempt to click Cancel using ActionChain
-            cancel_button = wait.until(
-                EC.element_to_be_clickable((By.XPATH, ".//button//div[contains(text(),'Cancel')]"))
-            )
-            ActionChains(driver).move_to_element(cancel_button).click().perform()
-            logger.info("Clicked 'Cancel' button using ActionChain to exit the flow.")
-            driver.save_screenshot("error_next_button_missing.png")
-    def test_valid_my_files_image_flow(self):
-
-            logger.info("Starting 'My Files' image upload and crop flow")
-            overlay_spinner()
-            logger.info("Overlay spinner disappeared")
-            wait_time()
-            select_thumbnail_image_btn().click()
-            logger.info("Clicked 'Thumbnail Image' button")
-            upload_image_my_files_btn(driver, wait)
-            logger.info("Clicked 'My Files' folder upload button")
-            logger.info("Thumbnail images loaded in 'My Files' folder")
-            wait_time()
-            select_random_image(driver)
-            logger.info("Selected a random image from 'My Files'")
-            # try:
-            #     spinner = driver.find_element(By.ID, "overlay-spinner")
-            #     if spinner.is_displayed():
-            #         logger.info("Spinner is visible, waiting for it to disappear...")
-            #         # Increase the timeout here if needed
-            #         wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-            #
-            #     else:
-            #         logger.info("Spinner is already invisible.")
-            # except NoSuchElementException:
-            #     logger.info("Spinner not found, continuing without waiting.")
-            next_image_btn()
-            logger.info("Clicked 'Next' button")
-            zoomin_image_btn()
-            logger.info("Zoomed in image")
-            zoom_out_image_btn()
-            logger.info("Zoomed out image")
-            save_crop_image_btn().click()
-            logger.info("Clicked 'Save' button for cropped image")
-            logger.info("Valid shrub created in 'My Files' image flow")
-             # Click 'Save New Shrub' button to finalize creation
-            logger.info("Clicked 'Save New Shrub' button to finalize creation")
+        checkbox_select().click()
+        send_btn().click()
 
 
 
-    def test_shrub_style_background(self):
-        wait_time()
-        save_new_shrub_btn().click()
-        logger.info("Testing shrub styling")
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        wait_time()
-        background_color_dropdown().click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        wait_time()
-        logger.info("Uploaded random image from 'image' folder")
-
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_background_btn().click()
-        select_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        save_screenshot("Color_pick")
-        select_no_background_btn().click()
-        background_color_dropdown().click()
-        wait_time()
-
-    def test_shrub_style_shrub_title(self):
-            wait_time()
-            shrub_title = shrub_title_dropdown()
-            driver.execute_script("arguments[0].scrollIntoView(true);", shrub_title)
-            shrub_title.click()
-            font_color_dropdown().click()
-            select_banner_color_picker_btn().click()
-            select_random_preset_color(driver, wait)
-            font_color_dropdown().click()
-            select_font_style_dropdown().click()
-            selected_font = select_font(driver)
-            print(f" Selected Font: {selected_font}")
-            select_font_style_dropdown().click()
-            select_font_weight_dropdown().click()
-            select_bold_font_weight(driver)
-            select_font_weight_dropdown().click()
-            select_font_size_dropdown().click()
-            select_random_font_size(driver)
-            select_font_size_dropdown().click()
-            select_font_alignment_dropdown().click()
-            select_random_alignment(driver)
-            select_font_alignment_dropdown().click()
-            shrub_title.click()
-            wait_time()
-            logger.info("Shrub styling applied successfully")
-
-    def test_shrub_style_header(self):
-            wait_time()
-            shrub_header = shrub_header_dropdown()
-            driver.execute_script("arguments[0].scrollIntoView(true);", shrub_header)
-            shrub_header.click()
-            sub_header_font_color_dropdown().click()
-            select_background_color_picker_btn().click()
-            select_random_preset_color(driver, wait)
-            sub_header_font_color_dropdown().click()
-            wait_time()
-            select_sub_header_font_style_dropdown().click()
-            selected_font = select_font_header(driver)
-            print(f" Selected Font: {selected_font}")
-            select_sub_header_font_style_dropdown().click()
-            select_sub_header_font_weight_dropdown().click()
-            select_bold_font_weight_header(driver)
-            select_sub_header_font_weight_dropdown().click()
-            select_sub_header_font_size_dropdown().click()
-            select_random_header_font_size(driver)
-            select_sub_header_font_size_dropdown().click()
-            select_sub_header_font_alignment_dropdown().click()
-            select_random_alignment(driver)
-            select_sub_header_font_alignment_dropdown().click()
-            wait_time()
-            shrub_header.click()
-            logger.info("Shrub styling applied successfully")
-
-    def test_shrub_description_style(self):
-            wait_time()
-            shrub_description = shrub_description_dropdown()
-            driver.execute_script("arguments[0].scrollIntoView(true);", shrub_description)
-            shrub_description.click()
-            wait_time()
-            description_font_color_dropdown().click()
-            select_description_color_picker_btn().click()
-            select_random_preset_color(driver, wait)
-            description_font_color_dropdown().click()
-            select_description_font_style_dropdown().click()
-            selected_font = select_font_description(driver)
-            print(f" Selected Font: {selected_font}")
-            select_description_font_style_dropdown().click()
-            select_description_font_weight_dropdown().click()
-            select_bold_font_weight_description(driver)
-            select_description_font_weight_dropdown().click()
-            select_description_font_size_dropdown().click()
-            select_random_description_font_size(driver)
-            select_description_font_size_dropdown().click()
-            select_description_font_alignment_dropdown().click()
-            select_random_alignment(driver)
-            select_description_font_alignment_dropdown().click()
-            wait_time()
-            shrub_description.click()
-            wait_time()
-            save_as_template_btn()
-            wait_time()
-            save_style_btn().click()
-            logger.info("Shrub styling applied successfully")
-
-    def test_shrub_header_style(self):
-        wait_time()
-        header_dropdown().click()
-        header_background_dropdown().click()
-        overlay_spinner()
-        select_header_background_image_btn().click()
-        upload_random_image("image")
-        try:
-            spinner = driver.find_element(By.ID, "overlay-spinner")
-            if spinner.is_displayed():
-                logger.info("Spinner is visible, waiting for it to disappear...")
-                # Increase the timeout here if needed
-                wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-            else:
-                logger.info("Spinner is already invisible.")
-        except NoSuchElementException:
-            logger.info("Spinner not found, continuing without waiting.")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Header Background_image")
-        element = select_no_header_background_btn()
-        actions = ActionChains(driver)
-        actions.move_to_element(element).perform()
-        wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "md-overlay")))
-        select_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        save_screenshot("Color_pick")
-        element = select_no_header_background_btn()
-        actions = ActionChains(driver)
-        actions.move_to_element(element).perform()
-        element = header_background_dropdown()
-        actions = ActionChains(driver)
-        actions.move_to_element(element).perform()
-        element = shrub_title_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        element.click()
-        font_color_dropdown().click()
-        select_banner_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        selected_font = select_font(driver)
-        print(f" Selected Font: {selected_font}")
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        element = shrub_header_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        element.click()
-        sub_header_font_color_dropdown().click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        sub_header_font_color_dropdown().click()
-        wait_time()
-        select_sub_header_font_style_dropdown().click()
-        selected_font = select_font_header(driver)
-        print(f" Selected Font: {selected_font}")
-        select_sub_header_font_style_dropdown().click()
-        select_sub_header_font_weight_dropdown().click()
-        select_bold_font_weight_header(driver)
-        select_sub_header_font_weight_dropdown().click()
-        select_sub_header_font_size_dropdown().click()
-        select_random_header_font_size(driver)
-        select_sub_header_font_size_dropdown().click()
-        select_sub_header_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_sub_header_font_alignment_dropdown().click()
-        shrub_header_dropdown().click()
-        time.sleep(3)
-        save_style_btn().click()
-
-        logger.info("Shrub styling applied successfully")
-
-    def test_new_branch_create_links_style(self):
-        wait_time()
-        new_branch_btn().click()
-        create_links_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        font_color_dropdown().click()
-        select_header_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        select_font_branch(driver)
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight_branch(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size_branch(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        time.sleep(1)
-        banner = select_font_banner_background_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        banner.click()
-        color = select_banner_color_picker_btn()
-        driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        color.click()
-        select_random_preset_color(driver, wait)
-
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        driver.execute_script("arguments[0].click();", banner)
-
-
-        background = background_color_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        background.click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-
-        select_no_color_background_btn().click()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        driver.execute_script("arguments[0].click();", background)
-        thumbnail = thumbnail_image_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        thumbnail.click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        try:
-            spinner = driver.find_element(By.ID, "overlay-spinner")
-            if spinner.is_displayed():
-                logger.info("Spinner is visible, waiting for it to disappear...")
-                # Increase the timeout here if needed
-                wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-            else:
-                logger.info("Spinner is already invisible.")
-        except NoSuchElementException:
-            logger.info("Spinner not found, continuing without waiting.")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_thumbnail_background_btn().click()
-        select_icon_btn().click()
-        select_random_icon()
-        logger.info("Selected random icon")
-        logger.info("Cancelled thumbnail icon selection")
-        thumbnail.click()
-        save_as_template_btn_branch()
-        wait_for_overlay_to_disappear(driver)
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        save_new_branch_btn().click()
-        logger.info("Branch created successfully")
-        branch_add_link_btn().click()
-        add_link_input_field().send_keys(Keys.CONTROL, 'a')
-        add_link_input_field().send_keys(Keys.DELETE)
-        add_link_input_field().send_keys(input_field.LINK)
-
-        link_save_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_branch_link_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_link_btn().click()
-        logger.info("Link added successfully")
-
-    def test_new_branch_embedded_code(self):
-        wait_time()
-        new_branch_btn().click()
-        embedded_code_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        font_color_dropdown().click()
-        select_header_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        select_font_branch(driver)
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight_branch(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size_branch(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        time.sleep(1)
-        banner = select_font_banner_background_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        banner.click()
-        color = select_banner_color_picker_btn()
-        driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        color.click()
-        select_random_preset_color(driver, wait)
-
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        driver.execute_script("arguments[0].click();", banner)
-
-
-        background = background_color_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        background.click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-
-        select_no_color_background_btn().click()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        driver.execute_script("arguments[0].click();", background)
-        thumbnail = thumbnail_image_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        thumbnail.click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_thumbnail_background_btn().click()
-        select_icon_btn().click()
-        select_random_icon()
-        logger.info("Selected random icon")
-        logger.info("Cancelled thumbnail icon selection")
-        thumbnail.click()
-        save_as_template_btn_branch()
-        wait_for_overlay_to_disappear(driver)
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        save_new_branch_btn().click()
-        logger.info("Branch created successfully")
-        branch_add_code_btn().click()
-        logger.info("Branch created successfully")
-        add_code_textarea().send_keys(input_field.VALID_SHRUBS)
-        embedded_website_url_btn().click()
-        time.sleep(1)
-        code_save_btn().click()
-        add_code_textarea().send_keys(Keys.CONTROL, "a")
-        add_code_textarea().send_keys(Keys.DELETE)
-        add_code_textarea().send_keys(input_field.LINK)
-        add_code_textarea().send_keys(Keys.ENTER)
-        time.sleep(2)
-        code_save_btn().click()
-        back_code_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_link_btn().click()
-        logger.info("Link added successfully")
-
-    def test_new_branch_upload_files(self):
-        new_branch_btn().click()
-        upload_files_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        font_color_dropdown().click()
-        select_header_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        select_font_branch(driver)
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight_branch(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size_branch(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        time.sleep(1)
-        banner = select_font_banner_background_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        banner.click()
-        color = select_banner_color_picker_btn()
-        driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        color.click()
-        select_random_preset_color(driver, wait)
-
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        driver.execute_script("arguments[0].click();", banner)
-
-
-        background = background_color_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        background.click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-
-        select_no_color_background_btn().click()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        driver.execute_script("arguments[0].click();", background)
-        thumbnail = thumbnail_image_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        thumbnail.click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_thumbnail_background_btn().click()
-        select_icon_btn().click()
-        select_random_icon()
-        logger.info("Selected random icon")
-        logger.info("Cancelled thumbnail icon selection")
-        thumbnail.click()
-        save_as_template_btn_branch()
-        wait_for_overlay_to_disappear(driver)
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        save_new_branch_btn().click()
-        logger.info("Branch created successfully")
-        upload_view_btn().click()
-        upload_files_orange_btn().click()
-        logger.info("Branch created successfully")
-        logger.info("Starting 'My Computer' image upload and crop flow")
-        wait_time()
-        logger.info("Clicked 'Thumbnail Image' button")
-        upload_random_files("files")
-        logger.info("Uploaded random image from 'image' folder")
-        back_link_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_link_btn().click()
-
-    def test_new_branch_upload_images(self):
-        new_branch_btn().click()
-        upload_images_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        font_color_dropdown().click()
-        select_header_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        select_font_branch(driver)
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight_branch(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size_branch(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        time.sleep(1)
-        banner = select_font_banner_background_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        banner.click()
-        color = select_banner_color_picker_btn()
-        driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        color.click()
-        select_random_preset_color(driver, wait)
-
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        driver.execute_script("arguments[0].click();", banner)
-
-        background = background_color_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        background.click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-
-        select_no_color_background_btn().click()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        driver.execute_script("arguments[0].click();", background)
-        thumbnail = thumbnail_image_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        thumbnail.click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_thumbnail_background_btn().click()
-        select_icon_btn().click()
-        select_random_icon()
-        logger.info("Selected random icon")
-        logger.info("Cancelled thumbnail icon selection")
-        thumbnail.click()
-        save_as_template_btn_branch()
-        wait_for_overlay_to_disappear(driver)
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        save_new_branch_btn().click()
-        logger.info("Branch created successfully")
-        upload_view_btn().click()
-        upload_image_orange_btn().click()
-        logger.info("Branch created successfully")
-        logger.info("Starting 'My Computer' image upload and crop flow")
-        wait_time()
-        logger.info("Clicked 'Thumbnail Image' button")
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        back_link_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_link_btn().click()
-
-    def test_new_branch_upload_videos(self):
-        new_branch_btn().click()
-        upload_videos_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        font_color_dropdown().click()
-        select_header_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        select_font_branch(driver)
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight_branch(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size_branch(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        time.sleep(1)
-        banner = select_font_banner_background_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        banner.click()
-        color = select_banner_color_picker_btn()
-        driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        color.click()
-        select_random_preset_color(driver, wait)
-
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        driver.execute_script("arguments[0].click();", banner)
-
-        background = background_color_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        background.click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-
-        select_no_color_background_btn().click()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        driver.execute_script("arguments[0].click();", background)
-        thumbnail = thumbnail_image_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        thumbnail.click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_thumbnail_background_btn().click()
-        select_icon_btn().click()
-        select_random_icon()
-        logger.info("Selected random icon")
-        logger.info("Cancelled thumbnail icon selection")
-        thumbnail.click()
-        save_as_template_btn_branch()
-        wait_for_overlay_to_disappear(driver)
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        save_new_branch_btn().click()
-        logger.info("Branch created successfully")
-        upload_view_btn().click()
-        upload_video_orange_btn().click()
-        logger.info("Branch created successfully")
-        wait_time()
-        logger.info("Clicked 'Thumbnail Image' button")
-        upload_random_video("video")
-        back_link_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_link_btn().click()
-
-    def test_new_branch_upload_audios(self):
-        new_branch_btn().click()
-        upload_audio_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
-        font_color_dropdown().click()
-        select_header_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-        font_color_dropdown().click()
-        select_font_style_dropdown().click()
-        select_font_branch(driver)
-        select_font_style_dropdown().click()
-        select_font_weight_dropdown().click()
-        select_bold_font_weight_branch(driver)
-        select_font_weight_dropdown().click()
-        select_font_size_dropdown().click()
-        select_random_font_size_branch(driver)
-        select_font_size_dropdown().click()
-        select_font_alignment_dropdown().click()
-        select_random_alignment(driver)
-        select_font_alignment_dropdown().click()
-        time.sleep(1)
-        banner = select_font_banner_background_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        banner.click()
-        color = select_banner_color_picker_btn()
-        driver.execute_script("arguments[0].scrollIntoView(true);", color)
-        color.click()
-        select_random_preset_color(driver, wait)
-
-        driver.execute_script("arguments[0].scrollIntoView(true);", banner)
-        driver.execute_script("arguments[0].click();", banner)
-
-        background = background_color_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        background.click()
-        select_background_color_picker_btn().click()
-        select_random_preset_color(driver, wait)
-
-        select_no_color_background_btn().click()
-        driver.execute_script("arguments[0].scrollIntoView(true);", background)
-        driver.execute_script("arguments[0].click();", background)
-        thumbnail = thumbnail_image_dropdown()
-        driver.execute_script("arguments[0].scrollIntoView(true);", thumbnail)
-        thumbnail.click()
-        select_background_image_btn().click()
-        upload_random_image("image")
-        logger.info("Uploaded random image from 'image' folder")
-        next_image_btn()
-        logger.info("Clicked 'Next' button after image upload")
-        zoomin_image_btn()
-        logger.info("Zoomed in image")
-        zoom_out_image_btn()
-        logger.info("Zoomed out image")
-        save_crop_image_btn().click()
-        save_screenshot("Background_image")
-        wait_for_overlay_to_disappear(driver)
-        select_no_thumbnail_background_btn().click()
-        select_icon_btn().click()
-        select_random_icon()
-        logger.info("Selected random icon")
-        logger.info("Cancelled thumbnail icon selection")
-        thumbnail.click()
-        save_as_template_btn_branch()
-        wait_for_overlay_to_disappear(driver)
-        driver.execute_script("arguments[0].scrollIntoView(true);", save_new_branch_btn())
-        save_new_branch_btn().click()
-        logger.info("Branch created successfully")
-        upload_view_btn().click()
-        upload_audio_orange_btn().click()
-        wait_time()
-
-        logger.info("Clicked 'Thumbnail Image' button")
-        upload_random_audio("audio")
-        back_link_btn().click()
-        wait_for_overlay_to_disappear(driver)
-        wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
-        back_link_btn().click()
 

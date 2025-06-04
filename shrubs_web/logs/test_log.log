@@ -18995,3 +18995,913 @@ Stacktrace:
 2025-06-04 19:08:25,042 - INFO - Waiting for 'No Background' button
 2025-06-04 19:11:06,301 - INFO - Shrub styling applied successfully
 2025-06-04 19:12:08,082 - INFO - Shrub styling applied successfully
+2025-06-05 10:20:22,339 - INFO - Launching login page
+2025-06-05 10:20:27,501 - INFO - Running test: Valid login flow
+2025-06-05 10:20:27,501 - INFO - Refreshing page
+2025-06-05 10:20:27,935 - INFO - Refreshing page completed
+2025-06-05 10:20:27,935 - INFO - Entering email
+2025-06-05 10:20:29,064 - INFO - Entering password
+2025-06-05 10:20:29,288 - INFO - Clicking password visibility toggle
+2025-06-05 10:20:29,543 - INFO - Clicking login button
+2025-06-05 10:20:34,281 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:20:34,291 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:20:36,559 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:20:38,806 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:20:38,940 - INFO - Testing valid shrub creation
+2025-06-05 10:20:39,919 - INFO - Entered shrub title: moderate
+2025-06-05 10:20:39,919 - INFO - Entered shrub title: moderate
+2025-06-05 10:20:40,166 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:20:40,492 - INFO - Entered shrub description
+2025-06-05 10:20:40,646 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:20:40,780 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:20:41,012 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:20:41,183 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:20:41,547 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:20:44,280 - INFO - Selected random icon
+2025-06-05 10:20:44,280 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:20:44,284 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:20:51,548 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:20:57,058 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:20:57,172 - INFO - Clicked 'Next' button
+2025-06-05 10:20:57,172 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:20:58,923 - INFO - Zoomed in image
+2025-06-05 10:21:01,433 - INFO - Zoomed out image
+2025-06-05 10:21:01,656 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:21:06,672 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:21:09,019 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:21:09,297 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:21:17,185 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:21:17,205 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:21:42,651 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:21:42,748 - INFO - Found 1 images
+2025-06-05 10:21:43,378 - INFO - Random image selected successfully
+2025-06-05 10:21:43,378 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:21:43,454 - INFO - Spinner is already invisible.
+2025-06-05 10:21:44,031 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:21:44,168 - INFO - Clicked 'Next' button
+2025-06-05 10:21:45,406 - INFO - Zoomed in image
+2025-06-05 10:21:45,549 - INFO - Zoomed out image
+2025-06-05 10:21:45,702 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:21:45,702 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:21:47,054 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:21:47,057 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:21:47,134 - INFO - Overlay spinner disappeared
+2025-06-05 10:21:54,486 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:21:54,893 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:21:54,893 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:22:20,299 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:22:20,311 - INFO - Found 22 images
+2025-06-05 10:22:20,801 - INFO - Random image selected successfully
+2025-06-05 10:22:20,801 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:22:21,511 - INFO - Clicked 'Next' button
+2025-06-05 10:22:21,511 - INFO - Clicked 'Next' button
+2025-06-05 10:22:22,215 - INFO - Zoomed in image
+2025-06-05 10:22:22,372 - INFO - Zoomed out image
+2025-06-05 10:22:22,478 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:22:22,479 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:22:22,479 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:22:32,480 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:25:48,419 - INFO - Launching login page
+2025-06-05 10:25:53,189 - INFO - Running test: Valid login flow
+2025-06-05 10:25:53,189 - INFO - Refreshing page
+2025-06-05 10:25:53,549 - INFO - Refreshing page completed
+2025-06-05 10:25:53,549 - INFO - Entering email
+2025-06-05 10:25:54,772 - INFO - Entering password
+2025-06-05 10:25:54,934 - INFO - Clicking password visibility toggle
+2025-06-05 10:26:25,609 - ERROR - Exception during valid login flow: Message: 
+
+2025-06-05 10:26:25,917 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:26:39,896 - INFO - Launching login page
+2025-06-05 10:26:44,276 - INFO - Running test: Valid login flow
+2025-06-05 10:26:44,276 - INFO - Refreshing page
+2025-06-05 10:26:44,711 - INFO - Refreshing page completed
+2025-06-05 10:26:44,711 - INFO - Entering email
+2025-06-05 10:26:45,615 - INFO - Entering password
+2025-06-05 10:26:45,939 - INFO - Clicking password visibility toggle
+2025-06-05 10:26:46,311 - INFO - Clicking login button
+2025-06-05 10:26:51,040 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:26:51,058 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:26:53,263 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:26:55,034 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:26:55,147 - INFO - Testing valid shrub creation
+2025-06-05 10:26:55,904 - INFO - Entered shrub title: synesis
+2025-06-05 10:26:55,904 - INFO - Entered shrub title: synesis
+2025-06-05 10:26:56,103 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:26:56,334 - INFO - Entered shrub description
+2025-06-05 10:26:56,456 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:26:56,560 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:26:56,696 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:26:56,827 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:26:57,139 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:26:59,423 - INFO - Selected random icon
+2025-06-05 10:26:59,423 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:26:59,427 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:27:06,734 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:27:12,170 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:27:12,385 - INFO - Clicked 'Next' button
+2025-06-05 10:27:12,386 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:27:13,622 - INFO - Zoomed in image
+2025-06-05 10:27:15,927 - INFO - Zoomed out image
+2025-06-05 10:27:16,057 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:27:21,059 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:27:23,317 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:27:23,618 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:27:31,680 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:27:31,719 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:27:57,500 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:27:57,511 - INFO - Found 1 images
+2025-06-05 10:27:58,163 - INFO - Random image selected successfully
+2025-06-05 10:27:58,164 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:27:58,195 - INFO - Spinner is already invisible.
+2025-06-05 10:27:58,736 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:27:58,833 - INFO - Clicked 'Next' button
+2025-06-05 10:28:00,048 - INFO - Zoomed in image
+2025-06-05 10:28:00,131 - INFO - Zoomed out image
+2025-06-05 10:28:00,232 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:28:00,232 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:28:02,326 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:28:02,329 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:28:02,418 - INFO - Overlay spinner disappeared
+2025-06-05 10:28:09,644 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:28:10,027 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:28:10,028 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:28:35,275 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:28:35,303 - INFO - Found 22 images
+2025-06-05 10:28:35,845 - INFO - Random image selected successfully
+2025-06-05 10:28:35,845 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:28:36,597 - INFO - Clicked 'Next' button
+2025-06-05 10:28:36,597 - INFO - Clicked 'Next' button
+2025-06-05 10:28:37,211 - INFO - Zoomed in image
+2025-06-05 10:28:37,294 - INFO - Zoomed out image
+2025-06-05 10:28:37,419 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:28:37,419 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:28:37,419 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:28:47,429 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:29:55,807 - INFO - Launching login page
+2025-06-05 10:30:00,428 - INFO - Running test: Valid login flow
+2025-06-05 10:30:00,429 - INFO - Refreshing page
+2025-06-05 10:30:00,876 - INFO - Refreshing page completed
+2025-06-05 10:30:00,876 - INFO - Entering email
+2025-06-05 10:30:02,785 - INFO - Entering password
+2025-06-05 10:30:03,044 - INFO - Clicking password visibility toggle
+2025-06-05 10:30:03,403 - INFO - Clicking login button
+2025-06-05 10:30:10,080 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:30:10,091 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:30:12,274 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:30:14,262 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:30:14,318 - INFO - Testing valid shrub creation
+2025-06-05 10:30:15,370 - INFO - Entered shrub title: aspect
+2025-06-05 10:30:15,370 - INFO - Entered shrub title: aspect
+2025-06-05 10:30:15,584 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:30:16,034 - INFO - Entered shrub description
+2025-06-05 10:30:16,254 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:30:16,481 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:30:16,694 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:30:16,887 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:30:17,282 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:30:20,064 - INFO - Selected random icon
+2025-06-05 10:30:20,065 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:30:20,070 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:30:27,243 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:30:29,515 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:30:33,626 - INFO - Clicked 'Next' button
+2025-06-05 10:30:33,626 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:30:34,899 - INFO - Zoomed in image
+2025-06-05 10:30:37,250 - INFO - Zoomed out image
+2025-06-05 10:30:37,432 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:30:42,436 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:30:44,810 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:30:44,966 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:30:53,219 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:30:53,270 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:31:19,188 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:31:19,232 - INFO - Found 1 images
+2025-06-05 10:31:19,757 - INFO - Random image selected successfully
+2025-06-05 10:31:19,757 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:31:19,826 - INFO - Spinner is already invisible.
+2025-06-05 10:31:20,454 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:31:20,703 - INFO - Clicked 'Next' button
+2025-06-05 10:31:21,932 - INFO - Zoomed in image
+2025-06-05 10:31:22,017 - INFO - Zoomed out image
+2025-06-05 10:31:22,167 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:31:22,167 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:31:24,020 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:31:24,022 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:31:24,379 - INFO - Overlay spinner disappeared
+2025-06-05 10:31:31,616 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:31:32,001 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:31:32,001 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:31:57,301 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:31:57,336 - INFO - Found 22 images
+2025-06-05 10:31:57,881 - INFO - Random image selected successfully
+2025-06-05 10:31:57,881 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:31:58,769 - INFO - Clicked 'Next' button
+2025-06-05 10:31:58,769 - INFO - Clicked 'Next' button
+2025-06-05 10:31:59,511 - INFO - Zoomed in image
+2025-06-05 10:31:59,678 - INFO - Zoomed out image
+2025-06-05 10:31:59,864 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:31:59,864 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:31:59,864 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:32:09,870 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:32:10,459 - INFO - Testing shrub styling
+2025-06-05 10:32:25,121 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:32:25,431 - INFO - Clicked 'Next' button
+2025-06-05 10:32:25,432 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:32:26,147 - INFO - Zoomed in image
+2025-06-05 10:32:26,248 - INFO - Zoomed out image
+2025-06-05 10:32:27,925 - INFO - Waiting for 'No Background' button
+2025-06-05 10:32:31,988 - INFO - Waiting for 'No Background' button
+2025-06-05 10:33:15,002 - INFO - Shrub styling applied successfully
+2025-06-05 10:38:02,009 - INFO - Launching login page
+2025-06-05 10:38:06,476 - INFO - Running test: Valid login flow
+2025-06-05 10:38:06,477 - INFO - Refreshing page
+2025-06-05 10:38:07,004 - INFO - Refreshing page completed
+2025-06-05 10:38:07,004 - INFO - Entering email
+2025-06-05 10:38:07,872 - INFO - Entering password
+2025-06-05 10:38:08,011 - INFO - Clicking password visibility toggle
+2025-06-05 10:38:08,158 - INFO - Clicking login button
+2025-06-05 10:38:13,393 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:38:13,401 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:38:15,793 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:38:17,969 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:38:18,123 - INFO - Testing valid shrub creation
+2025-06-05 10:38:19,182 - INFO - Entered shrub title: rhyming slang
+2025-06-05 10:38:19,182 - INFO - Entered shrub title: rhyming slang
+2025-06-05 10:38:19,446 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:38:19,705 - INFO - Entered shrub description
+2025-06-05 10:38:19,866 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:38:19,980 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:38:20,122 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:38:20,243 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:38:20,553 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:38:22,784 - INFO - Selected random icon
+2025-06-05 10:38:22,784 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:38:22,790 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:38:30,269 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:38:31,887 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:38:36,135 - INFO - Clicked 'Next' button
+2025-06-05 10:38:36,136 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:38:37,431 - INFO - Zoomed in image
+2025-06-05 10:38:39,778 - INFO - Zoomed out image
+2025-06-05 10:38:39,981 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:38:44,989 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:38:47,288 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:38:47,459 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:38:55,665 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:38:55,741 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:39:21,195 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:39:21,223 - INFO - Found 1 images
+2025-06-05 10:39:21,942 - INFO - Random image selected successfully
+2025-06-05 10:39:21,942 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:39:21,964 - INFO - Spinner is already invisible.
+2025-06-05 10:39:22,540 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:39:22,882 - INFO - Clicked 'Next' button
+2025-06-05 10:39:24,099 - INFO - Zoomed in image
+2025-06-05 10:39:24,313 - INFO - Zoomed out image
+2025-06-05 10:39:24,648 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:39:24,648 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:39:26,060 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:39:26,067 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:39:26,196 - INFO - Overlay spinner disappeared
+2025-06-05 10:39:33,395 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:39:33,737 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:39:33,737 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:39:59,067 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:39:59,102 - INFO - Found 22 images
+2025-06-05 10:39:59,606 - INFO - Random image selected successfully
+2025-06-05 10:39:59,606 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:40:00,359 - INFO - Clicked 'Next' button
+2025-06-05 10:40:00,360 - INFO - Clicked 'Next' button
+2025-06-05 10:40:01,505 - INFO - Zoomed in image
+2025-06-05 10:40:01,596 - INFO - Zoomed out image
+2025-06-05 10:40:01,754 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:40:01,754 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:40:01,754 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:40:11,761 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:40:12,161 - INFO - Testing shrub styling
+2025-06-05 10:43:31,958 - INFO - Launching login page
+2025-06-05 10:44:09,475 - INFO - Launching login page
+2025-06-05 10:44:14,043 - INFO - Running test: Valid login flow
+2025-06-05 10:44:14,043 - INFO - Refreshing page
+2025-06-05 10:44:14,475 - INFO - Refreshing page completed
+2025-06-05 10:44:14,475 - INFO - Entering email
+2025-06-05 10:44:15,842 - INFO - Entering password
+2025-06-05 10:44:16,018 - INFO - Clicking password visibility toggle
+2025-06-05 10:44:16,201 - INFO - Clicking login button
+2025-06-05 10:44:20,464 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:44:20,466 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:44:22,707 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:44:24,498 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:44:24,557 - INFO - Testing valid shrub creation
+2025-06-05 10:44:25,242 - INFO - Entered shrub title: impure
+2025-06-05 10:44:25,243 - INFO - Entered shrub title: impure
+2025-06-05 10:44:25,492 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:44:25,890 - INFO - Entered shrub description
+2025-06-05 10:44:26,031 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:44:26,146 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:44:26,289 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:44:26,392 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:44:26,772 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:44:29,505 - INFO - Selected random icon
+2025-06-05 10:44:29,507 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:44:29,520 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:44:37,023 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:44:38,604 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:44:44,092 - INFO - Clicked 'Next' button
+2025-06-05 10:44:44,092 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:44:45,220 - INFO - Zoomed in image
+2025-06-05 10:44:47,526 - INFO - Zoomed out image
+2025-06-05 10:44:47,660 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:44:52,663 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:44:55,003 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:44:55,184 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:45:02,448 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:45:02,487 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:45:28,030 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:45:28,075 - INFO - Found 1 images
+2025-06-05 10:45:28,736 - INFO - Random image selected successfully
+2025-06-05 10:45:28,736 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:45:28,839 - INFO - Spinner is already invisible.
+2025-06-05 10:45:29,459 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:45:29,658 - INFO - Clicked 'Next' button
+2025-06-05 10:45:30,826 - INFO - Zoomed in image
+2025-06-05 10:45:30,933 - INFO - Zoomed out image
+2025-06-05 10:45:31,104 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:45:31,105 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:45:32,382 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:45:32,385 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:45:32,473 - INFO - Overlay spinner disappeared
+2025-06-05 10:45:39,757 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:45:40,175 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:45:40,175 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:46:05,473 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:46:05,512 - INFO - Found 22 images
+2025-06-05 10:46:06,052 - INFO - Random image selected successfully
+2025-06-05 10:46:06,053 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:46:06,718 - INFO - Clicked 'Next' button
+2025-06-05 10:46:06,718 - INFO - Clicked 'Next' button
+2025-06-05 10:46:07,593 - INFO - Zoomed in image
+2025-06-05 10:46:07,690 - INFO - Zoomed out image
+2025-06-05 10:46:07,827 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:46:07,827 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:46:07,827 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:46:12,829 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:46:13,106 - INFO - Testing shrub styling
+2025-06-05 10:46:28,042 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:46:28,218 - INFO - Clicked 'Next' button
+2025-06-05 10:46:28,219 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:46:29,156 - INFO - Zoomed in image
+2025-06-05 10:46:29,228 - INFO - Zoomed out image
+2025-06-05 10:46:31,538 - INFO - Waiting for 'No Background' button
+2025-06-05 10:46:34,873 - INFO - Waiting for 'No Background' button
+2025-06-05 10:50:01,002 - INFO - Launching login page
+2025-06-05 10:50:05,461 - INFO - Running test: Valid login flow
+2025-06-05 10:50:05,461 - INFO - Refreshing page
+2025-06-05 10:50:05,696 - INFO - Refreshing page completed
+2025-06-05 10:50:05,696 - INFO - Entering email
+2025-06-05 10:50:07,171 - INFO - Entering password
+2025-06-05 10:50:07,468 - INFO - Clicking password visibility toggle
+2025-06-05 10:50:07,649 - INFO - Clicking login button
+2025-06-05 10:50:12,067 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:50:12,068 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:50:14,298 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:50:15,988 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:50:16,084 - INFO - Testing valid shrub creation
+2025-06-05 10:50:17,005 - INFO - Entered shrub title: acerbity
+2025-06-05 10:50:17,005 - INFO - Entered shrub title: acerbity
+2025-06-05 10:50:17,495 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:50:17,842 - INFO - Entered shrub description
+2025-06-05 10:50:17,997 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:50:18,121 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:50:18,243 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:50:18,352 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:50:18,669 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:50:20,604 - INFO - Selected random icon
+2025-06-05 10:50:20,604 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:50:20,607 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:50:27,876 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:50:29,957 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:50:33,360 - INFO - Clicked 'Next' button
+2025-06-05 10:50:33,360 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:50:35,616 - INFO - Zoomed in image
+2025-06-05 10:50:37,824 - INFO - Zoomed out image
+2025-06-05 10:50:37,958 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:50:42,963 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:50:45,181 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:50:45,333 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:50:52,710 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:50:52,808 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:51:18,459 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:51:18,474 - INFO - Found 1 images
+2025-06-05 10:51:19,177 - INFO - Random image selected successfully
+2025-06-05 10:51:19,178 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:51:19,197 - INFO - Spinner is already invisible.
+2025-06-05 10:51:19,782 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:51:19,890 - INFO - Clicked 'Next' button
+2025-06-05 10:51:21,136 - INFO - Zoomed in image
+2025-06-05 10:51:21,201 - INFO - Zoomed out image
+2025-06-05 10:51:21,291 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:51:21,291 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:51:23,068 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:51:23,074 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:51:23,216 - INFO - Overlay spinner disappeared
+2025-06-05 10:51:30,376 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:51:30,771 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:51:30,772 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:51:56,056 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:51:56,088 - INFO - Found 22 images
+2025-06-05 10:51:56,604 - INFO - Random image selected successfully
+2025-06-05 10:51:56,604 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:51:57,316 - INFO - Clicked 'Next' button
+2025-06-05 10:51:57,316 - INFO - Clicked 'Next' button
+2025-06-05 10:51:58,469 - INFO - Zoomed in image
+2025-06-05 10:51:58,541 - INFO - Zoomed out image
+2025-06-05 10:51:58,687 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:51:58,687 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:51:58,687 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:52:03,692 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:52:04,104 - INFO - Testing shrub styling
+2025-06-05 10:52:18,221 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:52:18,323 - INFO - Clicked 'Next' button
+2025-06-05 10:52:18,323 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:52:19,053 - INFO - Zoomed in image
+2025-06-05 10:52:19,115 - INFO - Zoomed out image
+2025-06-05 10:52:20,751 - INFO - Waiting for 'No Background' button
+2025-06-05 10:52:23,982 - INFO - Waiting for 'No Background' button
+2025-06-05 10:53:05,945 - INFO - Shrub styling applied successfully
+2025-06-05 10:54:12,910 - INFO - Launching login page
+2025-06-05 10:54:17,375 - INFO - Running test: Valid login flow
+2025-06-05 10:54:17,375 - INFO - Refreshing page
+2025-06-05 10:54:17,649 - INFO - Refreshing page completed
+2025-06-05 10:54:17,649 - INFO - Entering email
+2025-06-05 10:54:18,334 - INFO - Entering password
+2025-06-05 10:54:18,440 - INFO - Clicking password visibility toggle
+2025-06-05 10:54:18,558 - INFO - Clicking login button
+2025-06-05 10:54:23,475 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 10:54:23,477 - INFO - Navigating to 'My Shrubs'
+2025-06-05 10:54:25,662 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 10:54:27,522 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 10:54:27,647 - INFO - Testing valid shrub creation
+2025-06-05 10:54:28,320 - INFO - Entered shrub title: core
+2025-06-05 10:54:28,321 - INFO - Entered shrub title: core
+2025-06-05 10:54:28,535 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 10:54:28,798 - INFO - Entered shrub description
+2025-06-05 10:54:28,928 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 10:54:29,017 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 10:54:29,141 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 10:54:29,241 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 10:54:29,507 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 10:54:31,331 - INFO - Selected random icon
+2025-06-05 10:54:31,331 - INFO - Cancelled thumbnail icon selection
+2025-06-05 10:54:31,334 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 10:54:38,611 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:54:40,651 - INFO - Uploaded random image from 'image' folder
+2025-06-05 10:54:44,728 - INFO - Clicked 'Next' button
+2025-06-05 10:54:44,728 - INFO - Clicked 'Next' button after image upload
+2025-06-05 10:54:45,921 - INFO - Zoomed in image
+2025-06-05 10:54:48,244 - INFO - Zoomed out image
+2025-06-05 10:54:48,366 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:54:53,368 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 10:54:55,610 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:54:55,756 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 10:55:03,807 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 10:55:03,831 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 10:55:29,525 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:55:29,563 - INFO - Found 1 images
+2025-06-05 10:55:30,081 - INFO - Random image selected successfully
+2025-06-05 10:55:30,081 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 10:55:30,143 - INFO - Spinner is already invisible.
+2025-06-05 10:55:30,729 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 10:55:31,031 - INFO - Clicked 'Next' button
+2025-06-05 10:55:31,682 - INFO - Zoomed in image
+2025-06-05 10:55:31,783 - INFO - Zoomed out image
+2025-06-05 10:55:31,876 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 10:55:31,877 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 10:55:33,760 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 10:55:33,761 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 10:55:33,822 - INFO - Overlay spinner disappeared
+2025-06-05 10:55:41,179 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 10:55:41,530 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 10:55:41,530 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 10:56:06,675 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 10:56:06,706 - INFO - Found 22 images
+2025-06-05 10:56:07,245 - INFO - Random image selected successfully
+2025-06-05 10:56:07,245 - INFO - Selected a random image from 'My Files'
+2025-06-05 10:56:07,895 - INFO - Clicked 'Next' button
+2025-06-05 10:56:07,895 - INFO - Clicked 'Next' button
+2025-06-05 10:56:09,675 - INFO - Zoomed in image
+2025-06-05 10:56:09,760 - INFO - Zoomed out image
+2025-06-05 10:56:09,850 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 10:56:09,850 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 10:56:09,850 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 10:56:14,852 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 10:56:15,091 - INFO - Testing shrub styling
+2025-06-05 11:02:25,635 - INFO - Launching login page
+2025-06-05 11:02:30,333 - INFO - Running test: Valid login flow
+2025-06-05 11:02:30,333 - INFO - Refreshing page
+2025-06-05 11:02:30,727 - INFO - Refreshing page completed
+2025-06-05 11:02:30,727 - INFO - Entering email
+2025-06-05 11:02:31,659 - INFO - Entering password
+2025-06-05 11:02:31,790 - INFO - Clicking password visibility toggle
+2025-06-05 11:03:02,701 - ERROR - Exception during valid login flow: Message: 
+
+2025-06-05 11:03:02,985 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:03:11,033 - INFO - Launching login page
+2025-06-05 11:03:15,323 - INFO - Running test: Valid login flow
+2025-06-05 11:03:15,323 - INFO - Refreshing page
+2025-06-05 11:03:15,969 - INFO - Refreshing page completed
+2025-06-05 11:03:15,972 - INFO - Entering email
+2025-06-05 11:03:16,696 - INFO - Entering password
+2025-06-05 11:03:16,828 - INFO - Clicking password visibility toggle
+2025-06-05 11:03:47,659 - ERROR - Exception during valid login flow: Message: 
+
+2025-06-05 11:03:47,963 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:04:10,911 - INFO - Launching login page
+2025-06-05 11:04:15,221 - INFO - Running test: Valid login flow
+2025-06-05 11:04:15,221 - INFO - Refreshing page
+2025-06-05 11:04:15,859 - INFO - Refreshing page completed
+2025-06-05 11:04:15,859 - INFO - Entering email
+2025-06-05 11:04:16,446 - INFO - Entering password
+2025-06-05 11:04:16,614 - INFO - Clicking password visibility toggle
+2025-06-05 11:04:16,775 - INFO - Clicking login button
+2025-06-05 11:04:21,910 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:04:21,912 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:04:29,266 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:05:50,251 - INFO - Testing valid shrub creation
+2025-06-05 11:06:20,841 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 11:07:56,190 - INFO - Launching login page
+2025-06-05 11:08:33,118 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 11:08:59,248 - INFO - Launching login page
+2025-06-05 11:09:03,639 - INFO - Running test: Valid login flow
+2025-06-05 11:09:03,639 - INFO - Refreshing page
+2025-06-05 11:09:04,340 - INFO - Refreshing page completed
+2025-06-05 11:09:04,341 - INFO - Entering email
+2025-06-05 11:09:05,271 - INFO - Entering password
+2025-06-05 11:09:05,430 - INFO - Clicking password visibility toggle
+2025-06-05 11:09:05,563 - INFO - Clicking login button
+2025-06-05 11:09:10,031 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:09:10,033 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:09:12,403 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:10:19,998 - INFO - Testing valid shrub creation
+2025-06-05 11:10:20,650 - INFO - Entered shrub title: 
+2025-06-05 11:10:20,650 - INFO - Entered shrub title: 
+2025-06-05 11:10:20,898 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:10:21,167 - INFO - Entered shrub description
+2025-06-05 11:10:21,324 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:10:21,439 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:10:21,589 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:10:21,690 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:10:21,985 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:10:23,878 - INFO - Selected random icon
+2025-06-05 11:10:25,879 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:10:35,254 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 11:10:35,270 - INFO - Overlay spinner disappeared
+2025-06-05 11:12:47,470 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:12:47,528 - INFO - No overlay found, proceeding with the click.
+2025-06-05 11:13:07,938 - ERROR - Timeout waiting for save button to become clickable.
+2025-06-05 11:15:24,839 - INFO - Launching login page
+2025-06-05 11:15:29,077 - INFO - Running test: Valid login flow
+2025-06-05 11:15:29,077 - INFO - Refreshing page
+2025-06-05 11:15:29,290 - INFO - Refreshing page completed
+2025-06-05 11:15:29,290 - INFO - Entering email
+2025-06-05 11:15:30,301 - INFO - Entering password
+2025-06-05 11:15:30,405 - INFO - Clicking password visibility toggle
+2025-06-05 11:15:30,518 - INFO - Clicking login button
+2025-06-05 11:15:34,802 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:15:34,804 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:15:37,061 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:15:52,327 - INFO - Testing valid shrub creation
+2025-06-05 11:15:52,934 - INFO - Entered shrub title: 
+2025-06-05 11:15:52,934 - INFO - Entered shrub title: 
+2025-06-05 11:15:53,158 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:15:53,393 - INFO - Entered shrub description
+2025-06-05 11:15:53,507 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:15:53,596 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:15:53,713 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:15:53,810 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:15:54,083 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:15:55,946 - INFO - Selected random icon
+2025-06-05 11:15:57,946 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:21:09,679 - INFO - Launching login page
+2025-06-05 11:21:15,454 - INFO - Launching login page
+2025-06-05 11:21:19,705 - INFO - Running test: Valid login flow
+2025-06-05 11:21:19,705 - INFO - Refreshing page
+2025-06-05 11:21:20,262 - INFO - Refreshing page completed
+2025-06-05 11:21:20,262 - INFO - Entering email
+2025-06-05 11:21:20,772 - INFO - Entering password
+2025-06-05 11:21:20,916 - INFO - Clicking password visibility toggle
+2025-06-05 11:21:21,029 - INFO - Clicking login button
+2025-06-05 11:21:25,867 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:21:25,869 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:21:28,249 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:21:42,632 - INFO - Testing valid shrub creation
+2025-06-05 11:23:24,116 - INFO - Launching login page
+2025-06-05 11:23:29,365 - INFO - Launching login page
+2025-06-05 11:23:34,148 - INFO - Running test: Valid login flow
+2025-06-05 11:23:34,148 - INFO - Refreshing page
+2025-06-05 11:23:34,711 - INFO - Refreshing page completed
+2025-06-05 11:23:34,712 - INFO - Entering email
+2025-06-05 11:23:36,398 - INFO - Entering password
+2025-06-05 11:23:36,722 - INFO - Clicking password visibility toggle
+2025-06-05 11:23:37,028 - INFO - Clicking login button
+2025-06-05 11:23:40,988 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:23:40,990 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:23:43,159 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:23:57,735 - INFO - Testing valid shrub creation
+2025-06-05 11:24:58,676 - INFO - Launching login page
+2025-06-05 11:25:03,046 - INFO - Running test: Valid login flow
+2025-06-05 11:25:03,046 - INFO - Refreshing page
+2025-06-05 11:25:03,357 - INFO - Refreshing page completed
+2025-06-05 11:25:03,358 - INFO - Entering email
+2025-06-05 11:25:04,368 - INFO - Entering password
+2025-06-05 11:25:04,497 - INFO - Clicking password visibility toggle
+2025-06-05 11:25:04,644 - INFO - Clicking login button
+2025-06-05 11:25:09,409 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:25:09,414 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:25:11,598 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:25:26,544 - INFO - Testing valid shrub creation
+2025-06-05 11:27:31,500 - INFO - Launching login page
+2025-06-05 11:28:01,007 - INFO - Launching login page
+2025-06-05 11:29:34,860 - INFO - Launching login page
+2025-06-05 11:29:39,325 - INFO - Running test: Valid login flow
+2025-06-05 11:29:39,325 - INFO - Refreshing page
+2025-06-05 11:29:39,991 - INFO - Refreshing page completed
+2025-06-05 11:29:39,991 - INFO - Entering email
+2025-06-05 11:29:40,606 - INFO - Entering password
+2025-06-05 11:29:40,714 - INFO - Clicking password visibility toggle
+2025-06-05 11:29:40,825 - INFO - Clicking login button
+2025-06-05 11:29:45,076 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:29:45,083 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:29:47,276 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:30:01,848 - INFO - Testing valid shrub creation
+2025-06-05 11:30:02,447 - INFO - Entered shrub title: 
+2025-06-05 11:30:02,447 - INFO - Entered shrub title: 
+2025-06-05 11:30:02,660 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:30:02,889 - INFO - Entered shrub description
+2025-06-05 11:30:03,007 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:30:03,104 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:30:03,241 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:30:03,343 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:30:03,603 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:30:05,491 - INFO - Selected random icon
+2025-06-05 11:30:07,491 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:30:16,169 - INFO - Launching login page
+2025-06-05 11:30:20,519 - INFO - Running test: Valid login flow
+2025-06-05 11:30:20,519 - INFO - Refreshing page
+2025-06-05 11:30:21,070 - INFO - Refreshing page completed
+2025-06-05 11:30:21,071 - INFO - Entering email
+2025-06-05 11:30:21,534 - INFO - Entering password
+2025-06-05 11:30:21,643 - INFO - Clicking password visibility toggle
+2025-06-05 11:30:21,758 - INFO - Clicking login button
+2025-06-05 11:30:27,772 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:30:27,774 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:30:29,900 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:30:46,423 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 11:30:46,539 - INFO - Testing valid shrub creation
+2025-06-05 11:30:47,177 - INFO - Entered shrub title: 
+2025-06-05 11:30:47,177 - INFO - Entered shrub title: 
+2025-06-05 11:30:47,402 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:30:47,653 - INFO - Entered shrub description
+2025-06-05 11:30:47,806 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:30:47,894 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:30:48,009 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:30:48,107 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:30:48,368 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:30:50,136 - INFO - Selected random icon
+2025-06-05 11:30:52,137 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:31:10,704 - INFO - Launching login page
+2025-06-05 11:31:15,147 - INFO - Running test: Valid login flow
+2025-06-05 11:31:15,147 - INFO - Refreshing page
+2025-06-05 11:31:15,333 - INFO - Refreshing page completed
+2025-06-05 11:31:15,334 - INFO - Entering email
+2025-06-05 11:31:16,483 - INFO - Entering password
+2025-06-05 11:31:16,587 - INFO - Clicking password visibility toggle
+2025-06-05 11:31:16,695 - INFO - Clicking login button
+2025-06-05 11:31:20,941 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:31:20,943 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:31:23,084 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:31:37,491 - INFO - Testing valid shrub creation
+2025-06-05 11:31:38,102 - INFO - Entered shrub title: 
+2025-06-05 11:31:38,102 - INFO - Entered shrub title: 
+2025-06-05 11:31:38,326 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:31:38,561 - INFO - Entered shrub description
+2025-06-05 11:31:38,671 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:31:38,771 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:31:38,889 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:31:38,990 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:31:39,268 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:31:41,083 - INFO - Selected random icon
+2025-06-05 11:31:43,084 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:35:15,587 - INFO - Launching login page
+2025-06-05 11:35:20,207 - INFO - Running test: Valid login flow
+2025-06-05 11:35:20,207 - INFO - Refreshing page
+2025-06-05 11:35:20,488 - INFO - Refreshing page completed
+2025-06-05 11:35:20,489 - INFO - Entering email
+2025-06-05 11:35:21,824 - INFO - Entering password
+2025-06-05 11:35:22,017 - INFO - Clicking password visibility toggle
+2025-06-05 11:35:22,129 - INFO - Clicking login button
+2025-06-05 11:35:26,348 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:35:26,353 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:35:28,567 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:35:43,389 - INFO - Testing valid shrub creation
+2025-06-05 11:35:44,027 - INFO - Entered shrub title: 
+2025-06-05 11:35:44,027 - INFO - Entered shrub title: 
+2025-06-05 11:35:44,239 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:35:44,488 - INFO - Entered shrub description
+2025-06-05 11:35:44,603 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:35:44,700 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:35:44,830 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:35:44,945 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:35:45,241 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:35:47,049 - INFO - Selected random icon
+2025-06-05 11:35:49,049 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:36:12,438 - INFO - Launching login page
+2025-06-05 11:36:16,782 - INFO - Running test: Valid login flow
+2025-06-05 11:36:16,782 - INFO - Refreshing page
+2025-06-05 11:36:17,122 - INFO - Refreshing page completed
+2025-06-05 11:36:17,123 - INFO - Entering email
+2025-06-05 11:36:18,046 - INFO - Entering password
+2025-06-05 11:36:18,179 - INFO - Clicking password visibility toggle
+2025-06-05 11:36:18,285 - INFO - Clicking login button
+2025-06-05 11:36:22,715 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:36:22,716 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:36:24,916 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:36:39,809 - INFO - Testing valid shrub creation
+2025-06-05 11:36:40,469 - INFO - Entered shrub title: 
+2025-06-05 11:36:40,469 - INFO - Entered shrub title: 
+2025-06-05 11:36:40,687 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:36:40,929 - INFO - Entered shrub description
+2025-06-05 11:36:41,089 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:36:41,182 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:36:41,296 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:36:41,394 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:36:41,663 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:36:43,435 - INFO - Selected random icon
+2025-06-05 11:36:45,436 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:40:18,541 - INFO - Launching login page
+2025-06-05 11:40:23,487 - INFO - Running test: Valid login flow
+2025-06-05 11:40:23,488 - INFO - Refreshing page
+2025-06-05 11:40:24,025 - INFO - Refreshing page completed
+2025-06-05 11:40:24,026 - INFO - Entering email
+2025-06-05 11:40:24,951 - INFO - Entering password
+2025-06-05 11:40:25,114 - INFO - Clicking password visibility toggle
+2025-06-05 11:40:25,325 - INFO - Clicking login button
+2025-06-05 11:40:31,428 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:40:31,431 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:40:33,601 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:41:12,759 - INFO - Launching login page
+2025-06-05 11:41:18,297 - INFO - Running test: Valid login flow
+2025-06-05 11:41:18,298 - INFO - Refreshing page
+2025-06-05 11:41:18,872 - INFO - Refreshing page completed
+2025-06-05 11:41:18,872 - INFO - Entering email
+2025-06-05 11:41:19,357 - INFO - Entering password
+2025-06-05 11:41:19,473 - INFO - Clicking password visibility toggle
+2025-06-05 11:41:19,581 - INFO - Clicking login button
+2025-06-05 11:41:26,390 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:41:26,395 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:41:33,602 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:41:58,892 - INFO - Launching login page
+2025-06-05 11:42:03,219 - INFO - Running test: Valid login flow
+2025-06-05 11:42:03,219 - INFO - Refreshing page
+2025-06-05 11:42:03,830 - INFO - Refreshing page completed
+2025-06-05 11:42:03,830 - INFO - Entering email
+2025-06-05 11:42:04,590 - INFO - Entering password
+2025-06-05 11:42:04,699 - INFO - Clicking password visibility toggle
+2025-06-05 11:42:04,818 - INFO - Clicking login button
+2025-06-05 11:42:23,822 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:42:23,824 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:42:31,064 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:43:09,070 - INFO - Launching login page
+2025-06-05 11:43:18,607 - INFO - Launching login page
+2025-06-05 11:43:23,659 - INFO - Running test: Valid login flow
+2025-06-05 11:43:23,659 - INFO - Refreshing page
+2025-06-05 11:43:24,127 - INFO - Refreshing page completed
+2025-06-05 11:43:24,127 - INFO - Entering email
+2025-06-05 11:43:25,288 - INFO - Entering password
+2025-06-05 11:43:25,403 - INFO - Clicking password visibility toggle
+2025-06-05 11:43:25,514 - INFO - Clicking login button
+2025-06-05 11:43:36,080 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:43:36,085 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:43:43,554 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:46:59,958 - INFO - Launching login page
+2025-06-05 11:47:05,877 - INFO - Running test: Valid login flow
+2025-06-05 11:47:05,877 - INFO - Refreshing page
+2025-06-05 11:47:06,428 - INFO - Refreshing page completed
+2025-06-05 11:47:06,428 - INFO - Entering email
+2025-06-05 11:47:07,132 - INFO - Entering password
+2025-06-05 11:47:07,248 - INFO - Clicking password visibility toggle
+2025-06-05 11:47:07,361 - INFO - Clicking login button
+2025-06-05 11:47:15,286 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:47:15,305 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:47:17,685 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:47:34,914 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 11:47:34,973 - INFO - Testing valid shrub creation
+2025-06-05 11:47:35,580 - INFO - Entered shrub title: 
+2025-06-05 11:47:35,580 - INFO - Entered shrub title: 
+2025-06-05 11:47:35,784 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:47:36,022 - INFO - Entered shrub description
+2025-06-05 11:47:36,144 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:47:36,236 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:47:36,348 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:47:36,484 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:47:36,746 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:47:38,516 - INFO - Selected random icon
+2025-06-05 11:47:40,516 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:53:22,344 - INFO - Launching login page
+2025-06-05 11:53:26,694 - INFO - Running test: Valid login flow
+2025-06-05 11:53:26,694 - INFO - Refreshing page
+2025-06-05 11:53:27,135 - INFO - Refreshing page completed
+2025-06-05 11:53:27,135 - INFO - Entering email
+2025-06-05 11:53:28,325 - INFO - Entering password
+2025-06-05 11:53:28,503 - INFO - Clicking password visibility toggle
+2025-06-05 11:53:28,637 - INFO - Clicking login button
+2025-06-05 11:53:36,230 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:53:36,232 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:53:38,362 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:53:56,026 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 11:53:56,087 - INFO - Testing valid shrub creation
+2025-06-05 11:53:56,796 - INFO - Entered shrub title: 
+2025-06-05 11:53:56,797 - INFO - Entered shrub title: 
+2025-06-05 11:53:56,996 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:53:57,215 - INFO - Entered shrub description
+2025-06-05 11:53:57,320 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:53:57,417 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:53:57,537 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:53:57,649 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:53:57,916 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:53:59,704 - INFO - Selected random icon
+2025-06-05 11:54:01,704 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:57:02,958 - INFO - Launching login page
+2025-06-05 11:57:07,580 - INFO - Running test: Valid login flow
+2025-06-05 11:57:07,581 - INFO - Refreshing page
+2025-06-05 11:57:08,040 - INFO - Refreshing page completed
+2025-06-05 11:57:08,041 - INFO - Entering email
+2025-06-05 11:57:09,454 - INFO - Entering password
+2025-06-05 11:57:09,623 - INFO - Clicking password visibility toggle
+2025-06-05 11:57:09,741 - INFO - Clicking login button
+2025-06-05 11:57:22,860 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:57:22,867 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:57:25,018 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 11:57:47,470 - INFO - Testing valid shrub creation
+2025-06-05 11:57:48,317 - INFO - Entered shrub title: 
+2025-06-05 11:57:48,317 - INFO - Entered shrub title: 
+2025-06-05 11:57:48,600 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 11:57:48,851 - INFO - Entered shrub description
+2025-06-05 11:57:48,985 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 11:57:49,089 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 11:57:49,219 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 11:57:49,325 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 11:57:49,625 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 11:57:51,605 - INFO - Selected random icon
+2025-06-05 11:57:53,605 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 11:58:10,766 - INFO - Launching login page
+2025-06-05 11:59:15,019 - INFO - Launching login page
+2025-06-05 11:59:19,562 - INFO - Running test: Valid login flow
+2025-06-05 11:59:19,562 - INFO - Refreshing page
+2025-06-05 11:59:20,207 - INFO - Refreshing page completed
+2025-06-05 11:59:20,207 - INFO - Entering email
+2025-06-05 11:59:21,172 - INFO - Entering password
+2025-06-05 11:59:21,341 - INFO - Clicking password visibility toggle
+2025-06-05 11:59:21,476 - INFO - Clicking login button
+2025-06-05 11:59:30,433 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 11:59:30,435 - INFO - Navigating to 'My Shrubs'
+2025-06-05 11:59:32,814 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 12:05:04,643 - INFO - Launching login page
+2025-06-05 12:05:09,916 - INFO - Running test: Valid login flow
+2025-06-05 12:05:09,916 - INFO - Refreshing page
+2025-06-05 12:05:10,311 - INFO - Refreshing page completed
+2025-06-05 12:05:10,314 - INFO - Entering email
+2025-06-05 12:05:11,722 - INFO - Entering password
+2025-06-05 12:05:11,911 - INFO - Clicking password visibility toggle
+2025-06-05 12:05:12,100 - INFO - Clicking login button
+2025-06-05 12:05:19,228 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 12:05:19,235 - INFO - Navigating to 'My Shrubs'
+2025-06-05 12:05:21,659 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 12:06:36,009 - INFO - Uploaded random image from 'image' folder
+2025-06-05 12:06:36,150 - INFO - Spinner is already invisible.
+2025-06-05 12:06:49,493 - INFO - Clicked 'Next' button
+2025-06-05 12:06:49,493 - INFO - Clicked 'Next' button after image upload
+2025-06-05 12:06:50,932 - INFO - Zoomed in image
+2025-06-05 12:06:51,295 - INFO - Zoomed out image
+2025-06-05 12:08:15,582 - INFO - Launching login page
+2025-06-05 12:08:20,065 - INFO - Running test: Valid login flow
+2025-06-05 12:08:20,065 - INFO - Refreshing page
+2025-06-05 12:08:20,476 - INFO - Refreshing page completed
+2025-06-05 12:08:20,476 - INFO - Entering email
+2025-06-05 12:08:22,055 - INFO - Entering password
+2025-06-05 12:08:22,325 - INFO - Clicking password visibility toggle
+2025-06-05 12:08:22,545 - INFO - Clicking login button
+2025-06-05 12:08:52,930 - ERROR - Exception during valid login flow: Message: 
+
+2025-06-05 12:08:53,370 - INFO - Navigating to 'My Shrubs'
+2025-06-05 12:12:15,011 - INFO - Launching login page
+2025-06-05 12:12:19,519 - INFO - Running test: Valid login flow
+2025-06-05 12:12:19,519 - INFO - Refreshing page
+2025-06-05 12:12:19,996 - INFO - Refreshing page completed
+2025-06-05 12:12:19,996 - INFO - Entering email
+2025-06-05 12:12:22,166 - INFO - Entering password
+2025-06-05 12:12:22,371 - INFO - Clicking password visibility toggle
+2025-06-05 12:12:22,699 - INFO - Clicking login button
+2025-06-05 12:12:32,212 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 12:12:32,217 - INFO - Navigating to 'My Shrubs'
+2025-06-05 12:12:39,802 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'

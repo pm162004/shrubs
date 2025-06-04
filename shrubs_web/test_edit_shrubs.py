@@ -1,7 +1,7 @@
 import random
 import time, os, datetime
 
-import selenium
+
 from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
@@ -1249,7 +1249,7 @@ def switch_to_window(driver, window_index=0):
     else:
         raise Exception("No windows are open.")
 
-shrub_name = ""
+global_shrub_name = ""
 def random_select_and_click_image_and_delete(driver, image_selector, delete_button_xpath, shrub_xpath, scroll_by=300):
     WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, image_selector)))
     images = driver.find_elements(By.CSS_SELECTOR, image_selector)
@@ -1291,14 +1291,13 @@ def random_select_and_click_image_and_edit(driver, image_selector, edit_button_x
     ActionChains(driver).move_to_element(random_image).click().perform()
     driver.execute_script(f"window.scrollBy(0, {scroll_by});")
 
-    # Find all shrub names using the dynamic XPath
+
     shrub_elements = driver.find_elements(By.XPATH, shrub_xpath)
     if not shrub_elements:
         raise Exception("No shrub names found.")
 
-    # Randomly select a shrub name and update the global variable
     random_shrub = random.choice(shrub_elements)
-    global_shrub_name = random_shrub.text.strip()  # Update the global variable with the shrub name
+    global_shrub_name = random_shrub.text.strip()
     print(f"Randomly selected shrub name: {global_shrub_name}")
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, edit_button_xpath)))
@@ -1311,10 +1310,66 @@ image_selector = 'img.action-icon-color'
 edit_button_xpath = "//button[contains(@class, 'md-list-item-button') and contains(., 'Edit')]"
 shrub_xpath = "//h5[contains(@class, 'title')]"  # XPath for shrub names
 
-random_select_and_click_image_and_edit(driver, image_selector, edit_button_xpath, shrub_xpath)
 
-# You can now use the global variable `global_shrub_name` here
-print(f"Globally accessed shrub name: {shrub_name}")
+def random_select_search_and_click_shrub(driver, image_selector, search_input_selector, shrub_xpath,scroll_by=300):
+    # Wait for images to load and get all the image elements
+    WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, image_selector)))
+    images = driver.find_elements(By.CSS_SELECTOR, image_selector)
+    if not images:
+        raise Exception(f"No images found with the selector: {image_selector}")
+
+    # Select a random image and perform an action on it
+    random_image = random.choice(images)
+    driver.execute_script("arguments[0].scrollIntoView();", random_image)
+    time.sleep(1)
+    ActionChains(driver).move_to_element(random_image).click().perform()
+    driver.execute_script(f"window.scrollBy(0, {scroll_by});")
+
+    # Find all shrub elements after the search
+    shrub_elements = driver.find_elements(By.XPATH, shrub_xpath)
+    if not shrub_elements:
+        raise Exception("No shrubs found after searching.")
+
+    # Randomly select a shrub from the search results
+    random_shrub = random.choice(shrub_elements)
+    shrub_name = random_shrub.text.strip()
+    print(f"Randomly selected shrub name: {shrub_name}")
+    # Search for the shrub using the provided search query
+    search_input = driver.find_element(By.XPATH, search_input_selector)
+    search_input.send_keys(shrub_name)
+    time.sleep(2)  # Wait for the results to load
+
+
+
+    # Scroll to the selected shrub and click it
+    driver.execute_script("arguments[0].scrollIntoView();", random_shrub)
+    time.sleep(1)
+    ActionChains(driver).move_to_element(random_shrub).click().perform()
+    # time.sleep(3)
+    # select_btn = driver.find_element(By.XPATH, shrub_xpath)
+    # ActionChains(driver).move_to_element(select_btn).click().perform()
+
+
+    print(f"Action performed on shrub: {shrub_name}")
+
+def three_dots_button():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[ @class ='flex justify-end three-dots'] / img[@ class ='action-icon-color']")))
+
+def share_shrub_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Share')]")))
+
+def share_dropdown():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[@class ='multiselect__select']")))
+
+def select_input_field():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@name='users' and @type='text' and @class='multiselect__input']")))
+def checkbox_select():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__option multiselect__option--highlight multiselect__option--selected']")))
+
+def send_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Send')]")))
+def edit_btn():
+    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Edit']")))
 
 
 # ============================== TEST CASES ==============================
@@ -1359,13 +1414,15 @@ class TestPositiveFlow:
         )
         logger.info("Overlay spinner disappeared after navigating to 'My Shrubs'")
 
-
-    def test_edit_shrubs(self):
-        image_selector = 'img.action-icon-color'
-        edit_button_xpath = "//button[contains(@class, 'md-list-item-button') and contains(., 'Edit')]"
+    def test_search_edit_shrubs(self):
+        wait_time()
+        image_selector = 'img.action-icon-color'  # Update to the correct image selector
+        search_input_selector = "//input[@placeholder='Search' and @class='md-input']"
         shrub_xpath = "//h5[contains(@class, 'title')]"  # XPath for shrub names
-
-        random_select_and_click_image_and_edit(driver, image_selector, edit_button_xpath, shrub_xpath)
+        random_select_search_and_click_shrub(driver, image_selector, search_input_selector, shrub_xpath)
+        wait_time()
+        three_dots_button().click()
+        edit_btn().click()
 
     def test_new_branch_create_links_style(self):
         wait_time()

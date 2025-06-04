@@ -1,7 +1,5 @@
 import random
 import time, os, datetime
-
-import selenium
 from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
@@ -9,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from shrubs_setup.config import config
-from constant import validation_assert, input_field, error
+from constant import input_field
 from log_config import setup_logger
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
@@ -25,7 +23,6 @@ logger.info("Launching login page")
 driver.get(config.WEB_URL)
 time.sleep(3)
 wait = WebDriverWait(driver, 60)
-# driver.implicitly_wait(5)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
 
@@ -74,35 +71,26 @@ def select_font(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[2]")))
         dropdown.click()
 
-        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-        # Step 5: Wait for the input field and type the font name
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[1]")))
 
-        # Ensure input field is cleared before typing
-
-        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
-        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -113,42 +101,35 @@ def select_font(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e  # Re-raise the exception for further debugging
+        raise e
 
 
 def select_font_branch(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-        # Step 1: Click the dropdown
+
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[3]")))
         dropdown.click()
 
-        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-        # Step 3: Get all font options
+
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-        # Step 5: Wait for the input field and type the font name
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[1]")))
 
-        # Ensure input field is cleared before typing
-
-        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
-        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -159,42 +140,33 @@ def select_font_branch(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e  # Re-raise the exception for further debugging
+        raise e
 
 
 def select_font_header(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[5]")))
         dropdown.click()
 
-        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-        # Step 5: Wait for the input field and type the font name
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[2]")))
 
-        # Ensure input field is cleared before typing
-
-        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
-        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -205,42 +177,36 @@ def select_font_header(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e  # Re-raise the exception for further debugging
+        raise e
 
 
 def select_font_description(driver):
     wait = WebDriverWait(driver, 20)
 
     try:
-        # Step 1: Click the dropdown
         dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='multiselect__select'])[8]")))
         dropdown.click()
 
-        # Step 2: Wait for the list to appear
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "multiselect__content")))
 
-        # Step 3: Get all font options
         font_elements = driver.find_elements(By.CSS_SELECTOR, ".multiselect__element .option__title")
         font_names = [elem.text.strip() for elem in font_elements if elem.text.strip()]
 
         if not font_names:
             raise Exception("No fonts found in the dropdown.")
 
-        # Step 4: Pick a random font
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-        # Step 5: Wait for the input field and type the font name
+
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[3]")))
 
-        # Ensure input field is cleared before typing
 
-        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
-        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
+
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -251,7 +217,7 @@ def select_font_description(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e  # Re-raise the exception for further debugging
+        raise e
 
 
 def password_mask_button():
@@ -399,7 +365,7 @@ def upload_image_my_files_btn(driver, wait):
         (By.XPATH,
          "//div[contains(@class, 'sidebar-card') and .//p[normalize-space(text())='My Files']]//a[contains(@class, 'menu-list-item')]")))
 
-    # Scroll into view and click using ActionChains
+
     ActionChains(driver).move_to_element(element).click().perform()
     return element
 
@@ -443,15 +409,12 @@ def select_random_image(driver):
 
         logger.info(f"Found {len(images)} images")
 
-        # Randomly select an image
         selected_image = random.choice(images)
 
-        # Scroll to the selected image to bring it into view
         driver.execute_script(
             "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", selected_image
         )
 
-        # Click on the image using ActionChains or JS click
         try:
             ActionChains(driver).move_to_element(selected_image).pause(0.2).click().perform()
         except Exception as e:
@@ -466,7 +429,7 @@ def select_random_image(driver):
 
 def zoomin_image_btn():
     overlay_spinner()
-    zoom_in_button = zoom_in_button = WebDriverWait(driver, 20).until(
+    zoom_in_button = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-in')]"))
     )
     driver.execute_script("arguments[0].click();", zoom_in_button)
@@ -623,22 +586,21 @@ def upload_random_video(relative_folder):
 
 def select_random_my_shrub(driver, wait):
     try:
-        # Wait for all shrub cards to be present
         shrub_cards = wait.until(EC.presence_of_all_elements_located((
             By.CSS_SELECTOR,
             "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg"
         )))
 
-        # Randomly select a shrub
+
         selected_shrub = random.choice(shrub_cards)
 
-        # Scroll the selected shrub into view
+
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_shrub)
 
-        # Wait until the shrub is clickable
+
         wait.until(EC.element_to_be_clickable(selected_shrub))
 
-        # Perform the double-click action
+
         actions = ActionChains(driver)
         actions.move_to_element(selected_shrub).double_click().perform()
 
@@ -772,32 +734,25 @@ def select_description_font_size_dropdown():
 def select_random_alignment(driver):
     wait = WebDriverWait(driver, 20)
 
-    # Wait until the alignment buttons are visible
     alignment_buttons = wait.until(EC.presence_of_all_elements_located((
         By.XPATH,
         "//h5[contains(text(),'Horizontal font alignment')]/following::div[contains(@class,'justify-around')]/span"
     )))
 
-    # Filter out any elements that are hidden or not enabled
     visible_buttons = [button for button in alignment_buttons if button.is_displayed() and button.is_enabled()]
 
     if not visible_buttons:
         print("No visible and enabled alignment buttons found.")
         return
 
-    # Randomly select a button from the visible ones
     random_button = random.choice(visible_buttons)
 
-    # Scroll the button into view
     driver.execute_script("arguments[0].scrollIntoView(true);", random_button)
 
-    # Wait until the button is clickable
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable(random_button))
 
-    # Click the button
     random_button.click()
 
-    # Log the selected alignment
     print(f"Random alignment selected: {random_button.text}")
 
 
@@ -1277,36 +1232,31 @@ def random_select_and_click_image_and_delete(driver, image_selector, delete_butt
     delete_button.click()
 
 def random_select_search_and_click_shrub(driver, image_selector, search_input_selector, shrub_xpath,scroll_by=300):
-    # Wait for images to load and get all the image elements
+
     WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, image_selector)))
     images = driver.find_elements(By.CSS_SELECTOR, image_selector)
     if not images:
         raise Exception(f"No images found with the selector: {image_selector}")
 
-    # Select a random image and perform an action on it
+
     random_image = random.choice(images)
     driver.execute_script("arguments[0].scrollIntoView();", random_image)
     time.sleep(1)
     ActionChains(driver).move_to_element(random_image).click().perform()
     driver.execute_script(f"window.scrollBy(0, {scroll_by});")
 
-    # Find all shrub elements after the search
     shrub_elements = driver.find_elements(By.XPATH, shrub_xpath)
     if not shrub_elements:
         raise Exception("No shrubs found after searching.")
 
-    # Randomly select a shrub from the search results
     random_shrub = random.choice(shrub_elements)
     shrub_name = random_shrub.text.strip()
     print(f"Randomly selected shrub name: {shrub_name}")
-    # Search for the shrub using the provided search query
+
     search_input = driver.find_element(By.XPATH, search_input_selector)
     search_input.send_keys(shrub_name)
-    time.sleep(2)  # Wait for the results to load
+    time.sleep(2)
 
-
-
-    # Scroll to the selected shrub and click it
     driver.execute_script("arguments[0].scrollIntoView();", random_shrub)
     time.sleep(1)
     ActionChains(driver).move_to_element(random_shrub).click().perform()
@@ -1367,9 +1317,9 @@ class TestPositiveFlow:
     def test_search_shrubs(self):
         wait_time()
         # Define the selectors
-        image_selector = 'img.action-icon-color'  # Update to the correct image selector
+        image_selector = 'img.action-icon-color'
         search_input_selector = "//input[@placeholder='Search' and @class='md-input']"
-        shrub_xpath = "//h5[contains(@class, 'title')]"  # XPath for shrub names
+        shrub_xpath = "//h5[contains(@class, 'title')]"
         random_select_search_and_click_shrub(driver, image_selector, search_input_selector, shrub_xpath)
 
 
