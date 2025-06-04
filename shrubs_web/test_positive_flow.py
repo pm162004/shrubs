@@ -497,12 +497,13 @@ def ok_btn():
 
 def zoom_out_image_btn():
     overlay_spinner()
-    zoom_out_button = WebDriverWait(driver, 10).until(
+    zoom_out_button = wait.until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'icons')]//img[contains(@src, 'zoom-out')]"))
     )
     assert zoom_out_button.is_displayed()
     assert zoom_out_button.is_enabled()
-    return zoom_out_button.click()
+    driver.execute_script("arguments[0].scrollIntoView(true);", zoom_out_button)
+    return driver.execute_script("arguments[0].click();", zoom_out_button)
 
 
 def wait_for_spinner_to_disappear(driver, timeout=10, short_wait=2):
