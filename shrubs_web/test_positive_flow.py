@@ -1671,6 +1671,7 @@ class TestPositiveFlow:
         select_background_color_picker_btn().click()
         select_random_preset_color(driver, wait)
         sub_header_font_color_dropdown().click()
+        wait_time()
         select_sub_header_font_style_dropdown().click()
         selected_font = select_font_header(driver)
         print(f" Selected Font: {selected_font}")
