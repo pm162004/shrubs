@@ -21209,3 +21209,140 @@ Stacktrace:
 2025-06-05 17:28:20,306 - INFO - Entering password
 2025-06-05 17:28:20,501 - INFO - Clicking password visibility toggle
 2025-06-05 17:28:20,640 - INFO - Clicking login button
+2025-06-05 17:28:38,836 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 17:28:38,838 - INFO - Navigating to 'My Shrubs'
+2025-06-05 17:28:41,426 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 17:28:43,626 - WARNING - Normal click intercepted, trying JS click
+2025-06-05 17:28:43,704 - INFO - Testing valid shrub creation
+2025-06-05 17:28:45,483 - INFO - Entered shrub title: read
+2025-06-05 17:28:45,485 - INFO - Entered shrub title: read
+2025-06-05 17:28:46,116 - INFO - Entered shrub sub-header: Test Header
+2025-06-05 17:28:46,625 - INFO - Entered shrub description
+2025-06-05 17:28:46,874 - INFO - Selected 'View Only' permission (first click)
+2025-06-05 17:28:47,057 - INFO - Selected 'View Only' permission (second click)
+2025-06-05 17:28:47,346 - INFO - Selected 'Allow Resharing' permission
+2025-06-05 17:28:47,545 - INFO - Selected 'Download and save to Shrubdrive' permission
+2025-06-05 17:28:47,942 - INFO - Clicked 'Shrub Project Icon' option
+2025-06-05 17:28:50,571 - INFO - Selected random icon
+2025-06-05 17:28:50,571 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:28:50,573 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 17:28:57,770 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 17:29:01,163 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:29:09,970 - INFO - Clicked 'Next' button
+2025-06-05 17:29:09,970 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:29:12,428 - INFO - Zoomed in image
+2025-06-05 17:29:14,787 - INFO - Zoomed out image
+2025-06-05 17:29:14,932 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 17:29:19,934 - INFO - Starting 'My Shrubs' image upload and crop flow
+2025-06-05 17:29:22,425 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 17:29:22,616 - INFO - Clicked 'My Shrubs' folder upload button
+2025-06-05 17:29:32,087 - INFO - Selected a random shrub from 'My Shrubs'
+2025-06-05 17:29:32,118 - INFO - Thumbnail span appeared after shrub selection
+2025-06-05 17:29:57,966 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 17:29:58,002 - INFO - Found 1 images
+2025-06-05 17:29:58,490 - INFO - Random image selected successfully
+2025-06-05 17:29:58,490 - INFO - Selected a random image from the thumbnail folder
+2025-06-05 17:29:58,508 - INFO - Spinner is already invisible.
+2025-06-05 17:29:59,082 - INFO - Clicked 'Next' button for image cropping
+2025-06-05 17:29:59,286 - INFO - Clicked 'Next' button
+2025-06-05 17:29:59,887 - INFO - Zoomed in image
+2025-06-05 17:29:59,958 - INFO - Zoomed out image
+2025-06-05 17:30:00,069 - INFO - Clicked 'Save' button to save cropped image
+2025-06-05 17:30:00,069 - INFO - Valid shrub created in 'My Shrubs' image flow
+2025-06-05 17:30:04,405 - INFO - Clicked 'OK' button to confirm shrub creation
+2025-06-05 17:30:04,420 - INFO - Starting 'My Files' image upload and crop flow
+2025-06-05 17:30:04,528 - INFO - Overlay spinner disappeared
+2025-06-05 17:30:11,939 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 17:30:12,416 - INFO - Clicked 'My Files' folder upload button
+2025-06-05 17:30:12,417 - INFO - Thumbnail images loaded in 'My Files' folder
+2025-06-05 17:30:37,908 - WARNING - Overlay did not disappear – continuing anyway
+2025-06-05 17:30:37,940 - INFO - Found 22 images
+2025-06-05 17:30:38,466 - INFO - Random image selected successfully
+2025-06-05 17:30:38,466 - INFO - Selected a random image from 'My Files'
+2025-06-05 17:30:39,248 - INFO - Clicked 'Next' button
+2025-06-05 17:30:39,248 - INFO - Clicked 'Next' button
+2025-06-05 17:30:40,349 - INFO - Zoomed in image
+2025-06-05 17:30:40,431 - INFO - Zoomed out image
+2025-06-05 17:30:40,568 - INFO - Clicked 'Save' button for cropped image
+2025-06-05 17:30:40,568 - INFO - Valid shrub created in 'My Files' image flow
+2025-06-05 17:30:40,568 - INFO - Clicked 'Save New Shrub' button to finalize creation
+2025-06-05 17:30:45,570 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 17:30:45,642 - INFO - Overlay found, waiting for it to disappear.
+2025-06-05 17:30:46,481 - INFO - Save button is clickable.
+2025-06-05 17:30:46,583 - INFO - Testing shrub styling
+2025-06-05 17:31:16,661 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:31:20,822 - INFO - Clicked 'Next' button
+2025-06-05 17:31:20,823 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:31:21,403 - INFO - Zoomed in image
+2025-06-05 17:31:21,484 - INFO - Zoomed out image
+2025-06-05 17:31:24,372 - INFO - Waiting for 'No Background' button
+2025-06-05 17:31:27,878 - INFO - Waiting for 'No Background' button
+2025-06-05 17:32:11,204 - INFO - Shrub styling applied successfully
+2025-06-05 17:33:08,617 - INFO - Shrub styling applied successfully
+2025-06-05 17:34:15,260 - INFO - Shrub styling applied successfully
+2025-06-05 17:34:28,563 - INFO - Spinner is already invisible.
+2025-06-05 17:34:28,564 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:34:35,249 - INFO - Clicked 'Next' button
+2025-06-05 17:34:35,249 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:34:36,511 - INFO - Zoomed in image
+2025-06-05 17:34:36,746 - INFO - Zoomed out image
+2025-06-05 17:35:40,533 - INFO - Shrub styling applied successfully
+2025-06-05 17:36:29,540 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:36:29,611 - INFO - Spinner is already invisible.
+2025-06-05 17:36:33,233 - INFO - Clicked 'Next' button
+2025-06-05 17:36:33,233 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:36:34,472 - INFO - Zoomed in image
+2025-06-05 17:36:34,633 - INFO - Zoomed out image
+2025-06-05 17:36:42,340 - INFO - Selected random icon
+2025-06-05 17:36:42,340 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:36:51,543 - INFO - Branch created successfully
+2025-06-05 17:37:23,551 - INFO - Link added successfully
+2025-06-05 17:38:11,961 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:38:18,933 - INFO - Clicked 'Next' button
+2025-06-05 17:38:18,935 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:38:19,560 - INFO - Zoomed in image
+2025-06-05 17:38:19,635 - INFO - Zoomed out image
+2025-06-05 17:38:31,213 - INFO - Selected random icon
+2025-06-05 17:38:31,214 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:38:38,137 - INFO - Branch created successfully
+2025-06-05 17:38:48,512 - INFO - Branch created successfully
+2025-06-05 17:39:20,654 - INFO - Link added successfully
+2025-06-05 17:40:09,113 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:40:14,457 - INFO - Clicked 'Next' button
+2025-06-05 17:40:14,457 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:40:15,620 - INFO - Zoomed in image
+2025-06-05 17:40:15,746 - INFO - Zoomed out image
+2025-06-05 17:40:22,414 - INFO - Selected random icon
+2025-06-05 17:40:22,414 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:40:29,028 - INFO - Branch created successfully
+2025-06-05 17:41:29,823 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:41:35,381 - INFO - Clicked 'Next' button
+2025-06-05 17:41:35,381 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:41:36,143 - INFO - Zoomed in image
+2025-06-05 17:41:36,241 - INFO - Zoomed out image
+2025-06-05 17:41:42,343 - INFO - Selected random icon
+2025-06-05 17:41:42,343 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:41:50,218 - INFO - Branch created successfully
+2025-06-05 17:41:58,355 - INFO - Branch created successfully
+2025-06-05 17:41:58,355 - INFO - Starting 'My Computer' image upload and crop flow
+2025-06-05 17:42:03,355 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 17:42:08,596 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:42:58,483 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:43:06,732 - INFO - Clicked 'Next' button
+2025-06-05 17:43:06,732 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:43:07,349 - INFO - Zoomed in image
+2025-06-05 17:43:07,418 - INFO - Zoomed out image
+2025-06-05 17:43:15,101 - INFO - Selected random icon
+2025-06-05 17:43:15,101 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:43:21,833 - INFO - Branch created successfully
+2025-06-05 17:43:30,567 - INFO - Branch created successfully
+2025-06-05 17:43:35,568 - INFO - Clicked 'Thumbnail Image' button
+2025-06-05 17:44:29,615 - INFO - Uploaded random image from 'image' folder
+2025-06-05 17:44:35,329 - INFO - Clicked 'Next' button
+2025-06-05 17:44:35,329 - INFO - Clicked 'Next' button after image upload
+2025-06-05 17:44:36,011 - INFO - Zoomed in image
+2025-06-05 17:44:36,089 - INFO - Zoomed out image
+2025-06-05 17:44:42,983 - INFO - Selected random icon
+2025-06-05 17:44:42,983 - INFO - Cancelled thumbnail icon selection
+2025-06-05 17:44:52,122 - INFO - Branch created successfully
+2025-06-05 17:45:06,865 - INFO - Clicked 'Thumbnail Image' button
