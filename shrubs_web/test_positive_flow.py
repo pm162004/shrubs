@@ -14,6 +14,8 @@ from log_config import setup_logger
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 
+from shrubs_setup.randomeString import random_username
+
 logger = setup_logger()
 chrome_options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(options=chrome_options)
@@ -1141,7 +1143,7 @@ def save_as_template_btn_branch():
 
     input = wait.until(
         EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[1]")))
-    input.send_keys(input_field.VALID_SHRUBS)
+    input.send_keys(random.choice(input_field.VALID_SHRUBS))
 
     save = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[3]")))
     save.click()
@@ -1686,7 +1688,7 @@ class TestPositiveFlow:
         wait_time()
         new_branch_btn().click()
         create_links_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -1765,15 +1767,15 @@ class TestPositiveFlow:
         add_link_input_field().send_keys(Keys.CONTROL, 'a')
         add_link_input_field().send_keys(Keys.DELETE)
         add_link_input_field().send_keys(input_field.LINK)
-
+        wait_time()
         link_save_btn().click()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_branch_link_btn().click()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_link_btn().click()
         logger.info("Link added successfully")
 
@@ -1781,7 +1783,7 @@ class TestPositiveFlow:
         wait_time()
         new_branch_btn().click()
         embedded_code_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -1836,6 +1838,7 @@ class TestPositiveFlow:
         save_screenshot("Background_image")
         wait_for_overlay_to_disappear(driver)
         select_no_thumbnail_background_btn().click()
+        wait_time()
         select_icon_btn().click()
         select_random_icon()
         logger.info("Selected random icon")
@@ -1856,19 +1859,21 @@ class TestPositiveFlow:
         add_code_textarea().send_keys(Keys.DELETE)
         add_code_textarea().send_keys(input_field.LINK)
         add_code_textarea().send_keys(Keys.ENTER)
-        time.sleep(2)
+        wait_time()
         code_save_btn().click()
+        wait_time()
         back_code_btn().click()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_link_btn().click()
         logger.info("Link added successfully")
 
     def test_new_branch_upload_files(self):
+        wait_time()
         new_branch_btn().click()
         upload_files_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -1951,7 +1956,7 @@ class TestPositiveFlow:
     def test_new_branch_upload_images(self):
         new_branch_btn().click()
         upload_images_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -2024,15 +2029,16 @@ class TestPositiveFlow:
         upload_random_image("image")
         logger.info("Uploaded random image from 'image' folder")
         back_link_btn().click()
+        wait_time()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_link_btn().click()
 
     def test_new_branch_upload_videos(self):
         new_branch_btn().click()
         upload_videos_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -2105,13 +2111,13 @@ class TestPositiveFlow:
         back_link_btn().click()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_link_btn().click()
 
     def test_new_branch_upload_audios(self):
         new_branch_btn().click()
         upload_audio_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -2184,6 +2190,6 @@ class TestPositiveFlow:
         back_link_btn().click()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_link_btn().click()
 

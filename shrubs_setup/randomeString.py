@@ -13,7 +13,8 @@ def random_username_generator(length=8):
     if username[0].isdigit():
         username = random.choice(string.ascii_letters) + username[1:]
     return username
-random_username = random_username_generator(10)
+random_username = random_username_generator(3)
+print(random_username)
 
 def get_random_word_from_api():
     try:

@@ -1,3 +1,6 @@
+import random
+
+
 from shrubs_setup import randomeString
 INCORRECT_EMAIL = "abc"
 NON_EXIST_EMAIL = "modip89@gmail.com"
@@ -13,6 +16,7 @@ ALREADY_REGISTERED_USERNAME2 = "admin"
 VALID_EMAIL = "testp5@yopmail.com"
 VALID_UNAME = "Admin34"
 VALID_SHRUBS = randomeString.get_random_word_from_api()
+random.choice(VALID_SHRUBS)
 SUB_HEADER_SHRUBS = "Test Header"
 SHRUBS_DESCRIPTION = "Test Description"
 EXISTING_SHRUBS = "NEWS 3"

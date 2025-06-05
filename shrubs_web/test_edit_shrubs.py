@@ -1524,7 +1524,7 @@ class TestPositiveFlow:
         wait_time()
         new_branch_btn().click()
         embedded_code_btn().click()
-        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS)
+        link_branch_title_input_field().send_keys(input_field.VALID_SHRUBS+random)
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
