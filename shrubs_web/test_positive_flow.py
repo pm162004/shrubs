@@ -24,7 +24,7 @@ password = config.CORRECT_PASSWORD
 logger.info("Launching login page")
 driver.get(config.WEB_URL)
 time.sleep(3)
-wait = WebDriverWait(driver, 120)
+wait = WebDriverWait(driver, 300)
 # driver.implicitly_wait(5)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
@@ -699,6 +699,7 @@ def thumbnail_image_dropdown():
 
 def header_dropdown():
     overlay_spinner()
+    wait_time()
     wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Header']")))
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Header']")))
 
@@ -1940,10 +1941,11 @@ class TestPositiveFlow:
         logger.info("Clicked 'Thumbnail Image' button")
         upload_random_files("files")
         logger.info("Uploaded random image from 'image' folder")
+        wait_time()
         back_link_btn().click()
         wait_for_overlay_to_disappear(driver)
         wait_for_spinner_to_disappear(driver)
-        time.sleep(5)
+        wait_time()
         back_link_btn().click()
 
     def test_new_branch_upload_images(self):
