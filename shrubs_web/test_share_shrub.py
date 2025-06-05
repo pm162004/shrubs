@@ -24,7 +24,7 @@ password = config.CORRECT_PASSWORD
 logger.info("Launching login page")
 driver.get(config.WEB_URL)
 time.sleep(3)
-wait = WebDriverWait(driver, 60)
+wait = WebDriverWait(driver, 200)
 # driver.implicitly_wait(5)
 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body")))
@@ -1321,15 +1321,24 @@ def three_dots_button():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[ @class ='flex justify-end three-dots'] / img[@ class ='action-icon-color']")))
 
 def share_shrub_btn():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Share')]")))
+
+    return wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Share')]"))
+    )
+
 
 def share_dropdown():
-    return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[@class ='multiselect__select']")))
+   return wait.until(EC.element_to_be_clickable((By.XPATH, "// div[@class ='multiselect__select']")))
+
+
 
 def select_input_field():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@name='users' and @type='text' and @class='multiselect__input']")))
 def checkbox_select():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__option multiselect__option--highlight multiselect__option--selected']")))
+
+
+
 
 def send_btn():
     return wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(),'Send')]")))
@@ -1391,13 +1400,14 @@ class TestPositiveFlow:
         wait_time()
         three_dots_button().click()
         share_shrub_btn().click()
+        wait_time()
         share_dropdown().click()
         select_input_field().send_keys("testp567@yopmail.com")
+        select_input_field().send_keys(Keys.ENTER)
         select_view_only_permissions().click()
         select_view_only_permissions().click()
         select_allow_resharing_permissions().click()
         select_download_save_permissions().click()
-        checkbox_select().click()
         send_btn().click()
 
 
