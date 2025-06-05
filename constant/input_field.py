@@ -2,6 +2,8 @@ import random
 
 
 from shrubs_setup import randomeString
+from shrubs_setup.randomeString import get_random_word
+
 INCORRECT_EMAIL = "abc"
 NON_EXIST_EMAIL = "modip89@gmail.com"
 INVALID_PASSWORD = "modi"
@@ -18,6 +20,8 @@ VALID_UNAME = "Admin34"
 VALID_SHRUBS = randomeString.get_random_word_from_api()
 random.choice(VALID_SHRUBS)
 VALID_BRANCH = randomeString.get_random_word()
+print(randomeString.get_random_word())
+print(get_random_word())
 SUB_HEADER_SHRUBS = "Test Header"
 SHRUBS_DESCRIPTION = "Test Description"
 EXISTING_SHRUBS = "NEWS 3"

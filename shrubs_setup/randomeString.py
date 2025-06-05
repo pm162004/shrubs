@@ -87,8 +87,7 @@ def get_random_word():
         print("No more words left to choose from!")
 
 get_random_word()  # Call the function multiple times to get different words
-get_random_word()
-get_random_word()
+
 def random_password_generator(length=12):
     if length < 8:
         raise ValueError("Password length must be at least 8 characters.")
