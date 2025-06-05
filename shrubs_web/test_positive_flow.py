@@ -1143,7 +1143,7 @@ def save_as_template_btn_branch():
 
     input = wait.until(
         EC.element_to_be_clickable((By.XPATH, "(//div[contains(@class, 'md-field')]//input[@class='md-input'])[1]")))
-    input.send_keys(random.choice(input_field.VALID_SHRUBS))
+    input.send_keys(random.choice(input_field.VALID_BRANCH))
 
     save = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(., 'Save')])[3]")))
     save.click()
@@ -1688,7 +1688,7 @@ class TestPositiveFlow:
         wait_time()
         new_branch_btn().click()
         create_links_btn().click()
-        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_BRANCH))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -1783,7 +1783,7 @@ class TestPositiveFlow:
         wait_time()
         new_branch_btn().click()
         embedded_code_btn().click()
-        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_BRANCH))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -1873,7 +1873,7 @@ class TestPositiveFlow:
         wait_time()
         new_branch_btn().click()
         upload_files_btn().click()
-        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_BRANCH))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -1956,7 +1956,7 @@ class TestPositiveFlow:
     def test_new_branch_upload_images(self):
         new_branch_btn().click()
         upload_images_btn().click()
-        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_BRANCH))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -2038,7 +2038,7 @@ class TestPositiveFlow:
     def test_new_branch_upload_videos(self):
         new_branch_btn().click()
         upload_videos_btn().click()
-        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_BRANCH))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
@@ -2117,7 +2117,7 @@ class TestPositiveFlow:
     def test_new_branch_upload_audios(self):
         new_branch_btn().click()
         upload_audio_btn().click()
-        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_SHRUBS))
+        link_branch_title_input_field().send_keys(random.choice(input_field.VALID_BRANCH))
         font_color_dropdown().click()
         select_header_color_picker_btn().click()
         select_random_preset_color(driver, wait)
