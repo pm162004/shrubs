@@ -19928,3 +19928,14 @@ Stacktrace:
 2025-06-05 12:20:05,587 - INFO - Clicked 'Shrub Project Icon' option
 2025-06-05 12:20:07,836 - INFO - Selected random icon
 2025-06-05 12:20:09,837 - INFO - Waiting for save shrub button to be clickable
+2025-06-05 12:24:13,118 - INFO - Launching login page
+2025-06-05 12:24:17,582 - INFO - Running test: Valid login flow
+2025-06-05 12:24:17,583 - INFO - Refreshing page
+2025-06-05 12:24:18,067 - INFO - Refreshing page completed
+2025-06-05 12:24:18,068 - INFO - Entering email
+2025-06-05 12:24:19,239 - INFO - Entering password
+2025-06-05 12:24:19,386 - INFO - Clicking password visibility toggle
+2025-06-05 12:24:19,748 - INFO - Clicking login button
+2025-06-05 12:24:31,739 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 12:24:31,741 - INFO - Navigating to 'My Shrubs'
+2025-06-05 12:24:39,020 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
