@@ -222,17 +222,15 @@ def select_font_description(driver):
         selected_font = random.choice(font_names)
         print(f"Randomly selected font: {selected_font}")
 
-        # Step 5: Wait for the input field and type the font name
+
         input_field = wait.until(
             EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Select your font'])[3]")))
 
-        # Ensure input field is cleared before typing
 
-        # Type and select the font
         input_field.send_keys(selected_font)
         input_field.send_keys(Keys.ENTER)
 
-        # Step 6: Close the dropdown (this might help trigger the font selection correctly)
+
         try:
             close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='multiselect__close']")))
             close_button.click()
@@ -243,7 +241,7 @@ def select_font_description(driver):
 
     except Exception as e:
         print(f"Error occurred while selecting font: {e}")
-        raise e  # Re-raise the exception for further debugging
+        raise e
 
 
 def password_mask_button():
@@ -412,7 +410,7 @@ def upload_image_my_files_btn(driver, wait):
         (By.XPATH,
          "//div[contains(@class, 'sidebar-card') and .//p[normalize-space(text())='My Files']]//a[contains(@class, 'menu-list-item')]")))
 
-    # Scroll into view and click using ActionChains
+
     ActionChains(driver).move_to_element(element).click().perform()
     return element
 
@@ -441,7 +439,7 @@ def select_thumbnail_folder():
 
 def select_random_image(driver):
     try:
-        # Wait for overlay to disappear (if any)
+
         try:
             WebDriverWait(driver, 20).until(
                 EC.invisibility_of_element_located((By.CLASS_NAME, "md-overlay"))
@@ -449,22 +447,22 @@ def select_random_image(driver):
         except TimeoutException:
             logger.warning("Overlay did not disappear – continuing anyway")
 
-        # Wait for images to load
+
         images = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "img.object-cover"))
         )
 
         logger.info(f"Found {len(images)} images")
 
-        # Randomly select an image
+
         selected_image = random.choice(images)
 
-        # Scroll to the selected image to bring it into view
+
         driver.execute_script(
             "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", selected_image
         )
 
-        # Click on the image using ActionChains or JS click
+
         try:
             ActionChains(driver).move_to_element(selected_image).pause(0.2).click().perform()
         except Exception as e:
@@ -638,22 +636,22 @@ def upload_random_video(relative_folder):
 
 def select_random_my_shrub(driver, wait):
     try:
-        # Wait for all shrub cards to be present
+
         shrub_cards = wait.until(EC.presence_of_all_elements_located((
             By.CSS_SELECTOR,
             "div.cursor-pointer.flex.flex-wrap.items-center.justify-center.rounded-lg"
         )))
 
-        # Randomly select a shrub
+
         selected_shrub = random.choice(shrub_cards)
 
-        # Scroll the selected shrub into view
+
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", selected_shrub)
 
-        # Wait until the shrub is clickable
+
         wait.until(EC.element_to_be_clickable(selected_shrub))
 
-        # Perform the double-click action
+
         actions = ActionChains(driver)
         actions.move_to_element(selected_shrub).double_click().perform()
 
@@ -789,32 +787,30 @@ def select_description_font_size_dropdown():
 def select_random_alignment(driver):
     wait = WebDriverWait(driver, 20)
 
-    # Wait until the alignment buttons are visible
+
     alignment_buttons = wait.until(EC.presence_of_all_elements_located((
         By.XPATH,
         "//h5[contains(text(),'Horizontal font alignment')]/following::div[contains(@class,'justify-around')]/span"
     )))
 
-    # Filter out any elements that are hidden or not enabled
     visible_buttons = [button for button in alignment_buttons if button.is_displayed() and button.is_enabled()]
 
     if not visible_buttons:
         print("No visible and enabled alignment buttons found.")
         return
 
-    # Randomly select a button from the visible ones
     random_button = random.choice(visible_buttons)
 
-    # Scroll the button into view
+
     driver.execute_script("arguments[0].scrollIntoView(true);", random_button)
 
-    # Wait until the button is clickable
+
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable(random_button))
 
-    # Click the button
+
     random_button.click()
 
-    # Log the selected alignment
+
     print(f"Random alignment selected: {random_button.text}")
 
 
@@ -1371,19 +1367,19 @@ class TestPositiveFlow:
         wait_time()
         logger.info("Starting 'My Shrubs' image upload and crop flow")
 
-        # Click the 'Thumbnail Image' button
+
         select_thumbnail_image_btn().click()
         logger.info("Clicked 'Thumbnail Image' button")
 
-        # Click the 'My Shrubs' folder upload button
+
         upload_image_my_shrubs_btn().click()
         logger.info("Clicked 'My Shrubs' folder upload button")
 
-        # Select a random shrub from 'My Shrubs'
+
         select_random_my_shrub(driver, wait)
         logger.info("Selected a random shrub from 'My Shrubs'")
 
-        # Wait for the 'thumbnail' span to appear and log if it's visible
+
         try:
             wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='thumbnail']")))
             logger.info("Thumbnail span appeared after shrub selection")
@@ -1392,7 +1388,7 @@ class TestPositiveFlow:
             driver.save_screenshot("error_thumbnail_label_missing.png")
             raise
 
-        # Select the thumbnail folder and image
+
         select_thumbnail_folder()
         wait_time()
         select_random_image(driver)
@@ -1402,7 +1398,7 @@ class TestPositiveFlow:
             spinner = driver.find_element(By.ID, "overlay-spinner")
             if spinner.is_displayed():
                 logger.info("Spinner is visible, waiting for it to disappear...")
-                # Increase the timeout here if needed
+
                 wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
             else:
                 logger.info("Spinner is already invisible.")
@@ -1410,18 +1406,18 @@ class TestPositiveFlow:
             logger.info("Spinner not found, continuing without waiting.")
 
         try:
-            # Check if the 'Next' button for image cropping exists
+
             next_image_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[.//div[normalize-space(text())='Next']]")))
 
             if not next_image_button.is_displayed():
                 logger.info("'Next' button not found, clicking 'Cancel' button instead.")
-                # Use ActionChains to click 'Cancel' button
+
                 cancel_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, ".//button//div[contains(text(),'Cancel')]"))
                 )
                 ActionChains(driver).move_to_element(cancel_button).click().perform()
                 logger.info("Clicked 'Cancel' button using ActionChain.")
-                return  # Exit the test case flow if 'Next' is not found
+                return
 
             logger.info("Clicked 'Next' button for image cropping")
             next_image_btn()
@@ -1432,14 +1428,14 @@ class TestPositiveFlow:
             zoom_out_image_btn()
             logger.info("Zoomed out image")
 
-            # Save the cropped image
+
             save_crop_image_btn().click()
             logger.info("Clicked 'Save' button to save cropped image")
 
-            # Finalize the shrub creation
+
             logger.info("Valid shrub created in 'My Shrubs' image flow")
 
-            # Handle the 'OK' button or finalize creation with 'Save New Shrub'
+
             try:
                 ok_btn()
                 logger.info("Clicked 'OK' button to confirm shrub creation")
@@ -1449,7 +1445,7 @@ class TestPositiveFlow:
 
         except TimeoutException:
             logger.warning("'Next' button not found or failed to load.")
-            # If 'Next' button is not found, attempt to click Cancel using ActionChain
+
             cancel_button = wait.until(
                 EC.element_to_be_clickable((By.XPATH, ".//button//div[contains(text(),'Cancel')]"))
             )
@@ -1470,17 +1466,7 @@ class TestPositiveFlow:
             wait_time()
             select_random_image(driver)
             logger.info("Selected a random image from 'My Files'")
-            # try:
-            #     spinner = driver.find_element(By.ID, "overlay-spinner")
-            #     if spinner.is_displayed():
-            #         logger.info("Spinner is visible, waiting for it to disappear...")
-            #         # Increase the timeout here if needed
-            #         wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
-            #
-            #     else:
-            #         logger.info("Spinner is already invisible.")
-            # except NoSuchElementException:
-            #     logger.info("Spinner not found, continuing without waiting.")
+
             next_image_btn()
             logger.info("Clicked 'Next' button")
             zoomin_image_btn()
@@ -1490,7 +1476,7 @@ class TestPositiveFlow:
             save_crop_image_btn().click()
             logger.info("Clicked 'Save' button for cropped image")
             logger.info("Valid shrub created in 'My Files' image flow")
-             # Click 'Save New Shrub' button to finalize creation
+
             logger.info("Clicked 'Save New Shrub' button to finalize creation")
 
 
@@ -1620,7 +1606,7 @@ class TestPositiveFlow:
             spinner = driver.find_element(By.ID, "overlay-spinner")
             if spinner.is_displayed():
                 logger.info("Spinner is visible, waiting for it to disappear...")
-                # Increase the timeout here if needed
+
                 wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
             else:
                 logger.info("Spinner is already invisible.")
@@ -1748,7 +1734,7 @@ class TestPositiveFlow:
             spinner = driver.find_element(By.ID, "overlay-spinner")
             if spinner.is_displayed():
                 logger.info("Spinner is visible, waiting for it to disappear...")
-                # Increase the timeout here if needed
+
                 wait.until(EC.invisibility_of_element_located((By.ID, "overlay-spinner")))
             else:
                 logger.info("Spinner is already invisible.")
