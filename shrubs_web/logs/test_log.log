@@ -20189,3 +20189,55 @@ Stacktrace:
 2025-06-05 13:11:29,861 - INFO - Valid login passed, 'My Files' is visible
 2025-06-05 13:11:29,864 - INFO - Navigating to 'My Shrubs'
 2025-06-05 13:11:37,223 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 13:13:16,278 - INFO - Launching login page
+2025-06-05 13:13:23,014 - INFO - Running test: Valid login flow
+2025-06-05 13:13:23,014 - INFO - Refreshing page
+2025-06-05 13:13:23,686 - INFO - Refreshing page completed
+2025-06-05 13:13:23,686 - INFO - Entering email
+2025-06-05 13:13:26,962 - INFO - Entering password
+2025-06-05 13:13:27,317 - INFO - Clicking password visibility toggle
+2025-06-05 13:13:27,495 - INFO - Clicking login button
+2025-06-05 13:13:35,464 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 13:13:35,466 - INFO - Navigating to 'My Shrubs'
+2025-06-05 13:13:37,707 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 13:14:40,946 - INFO - Uploaded random image from 'image' folder
+2025-06-05 13:14:40,980 - INFO - Spinner is already invisible.
+2025-06-05 13:14:45,689 - INFO - Clicked 'Next' button
+2025-06-05 13:14:45,690 - INFO - Clicked 'Next' button after image upload
+2025-06-05 13:14:47,152 - INFO - Zoomed in image
+2025-06-05 13:14:47,429 - INFO - Zoomed out image
+2025-06-05 13:14:54,188 - INFO - Selected random icon
+2025-06-05 13:14:54,188 - INFO - Cancelled thumbnail icon selection
+2025-06-05 13:15:05,135 - INFO - Branch created successfully
+2025-06-05 13:16:30,907 - INFO - Launching login page
+2025-06-05 13:16:36,227 - INFO - Running test: Valid login flow
+2025-06-05 13:16:36,227 - INFO - Refreshing page
+2025-06-05 13:16:36,673 - INFO - Refreshing page completed
+2025-06-05 13:16:36,673 - INFO - Entering email
+2025-06-05 13:16:37,942 - INFO - Entering password
+2025-06-05 13:16:38,173 - INFO - Clicking password visibility toggle
+2025-06-05 13:16:38,560 - INFO - Clicking login button
+2025-06-05 13:16:48,719 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 13:16:48,725 - INFO - Navigating to 'My Shrubs'
+2025-06-05 13:16:50,956 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 13:17:13,327 - INFO - Launching login page
+2025-06-05 13:17:18,457 - INFO - Running test: Valid login flow
+2025-06-05 13:17:18,457 - INFO - Refreshing page
+2025-06-05 13:17:19,002 - INFO - Refreshing page completed
+2025-06-05 13:17:19,002 - INFO - Entering email
+2025-06-05 13:17:20,152 - INFO - Entering password
+2025-06-05 13:17:20,302 - INFO - Clicking password visibility toggle
+2025-06-05 13:17:20,433 - INFO - Clicking login button
+2025-06-05 13:17:28,428 - INFO - Valid login passed, 'My Files' is visible
+2025-06-05 13:17:28,429 - INFO - Navigating to 'My Shrubs'
+2025-06-05 13:17:30,624 - INFO - Overlay spinner disappeared after navigating to 'My Shrubs'
+2025-06-05 13:19:07,397 - INFO - Uploaded random image from 'image' folder
+2025-06-05 13:19:07,502 - INFO - Spinner is already invisible.
+2025-06-05 13:19:13,789 - INFO - Clicked 'Next' button
+2025-06-05 13:19:13,789 - INFO - Clicked 'Next' button after image upload
+2025-06-05 13:19:15,543 - INFO - Zoomed in image
+2025-06-05 13:19:15,715 - INFO - Zoomed out image
+2025-06-05 13:19:20,778 - INFO - Selected random icon
+2025-06-05 13:19:20,778 - INFO - Cancelled thumbnail icon selection
+2025-06-05 13:19:27,052 - INFO - Branch created successfully
+2025-06-05 13:20:00,696 - INFO - Link added successfully
